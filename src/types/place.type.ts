@@ -5,4 +5,6 @@ export type Place = {
     rating: number;
     name: string;
     type: string;
+    isPremium: boolean;
+    isFavorite: boolean;
 };
