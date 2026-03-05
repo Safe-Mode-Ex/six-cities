@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import { Place } from '../../types/place.type';
+import { AppRoute } from '../../types/app-route.type';
 
 type PlaceCardProps = {
   place: Place;
@@ -42,7 +44,7 @@ function PlaceCard({place}: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{place.name}</a>
+          <Link to={`${AppRoute.Offer}/${place.id}`}>{place.name}</Link>
         </h2>
         <p className="place-card__type">{place.type}</p>
       </div>
