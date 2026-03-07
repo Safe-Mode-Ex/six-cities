@@ -1,5 +1,5 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { Place } from '../../types/place.type';
+import { Offer } from '../../types/offer.type';
 import MainScreen from './../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { AuthorizationStatus } from '../../types/authorization-status';
@@ -8,17 +8,23 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import PrivateRoute from '../private-route/private-route';
 import { AppRoute } from '../../types/app-route.type';
+import { Review } from '../../types/review.type';
 
 type AppProps = {
-  places: Place[];
+  places: Offer[];
+  reviews: Review[];
+  cities: string[];
 };
 
-function App({places}: AppProps): JSX.Element {
+function App({places, reviews, cities}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<MainScreen places={places} />} />
-        <Route path={`${AppRoute.Offer}/:id`} element={<OfferScreen />} />
+        <Route path={AppRoute.Main} element={
+          <MainScreen places={places} cities={cities} />
+        }
+        />
+        <Route path={`${AppRoute.Offer}/:id`} element={<OfferScreen reviews={reviews} />} />
         <Route path={AppRoute.Login} element={<LoginScreen />} />
         <Route
           path={AppRoute.Favorites}

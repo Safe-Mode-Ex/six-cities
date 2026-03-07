@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { Place } from '../../types/place.type';
+import { Offer } from '../../types/offer.type';
 import { AppRoute } from '../../types/app-route.type';
 
 type PlaceCardProps = {
-  place: Place;
+  place: Offer;
 };
 
 const RATING_STARS_WIDTH = 20;
@@ -46,7 +46,7 @@ function PlaceCard({place}: PlaceCardProps): JSX.Element {
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${place.id}`}>{place.name}</Link>
         </h2>
-        <p className="place-card__type">{place.type}</p>
+        <p className="place-card__type">{place.features.type}</p>
       </div>
     </article>
   );

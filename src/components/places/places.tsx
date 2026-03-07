@@ -1,9 +1,9 @@
-import { Place } from '../../types/place.type';
+import { Offer } from '../../types/offer.type';
 import PlaceCard from '../place-card/place-card';
 import Sort from '../sort/sort';
 
 type PlacesProps = {
-  places: Place[];
+  places: Offer[];
 };
 
 function Places({places}: PlacesProps): JSX.Element {
