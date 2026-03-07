@@ -22,8 +22,10 @@ function App({offers, reviews, cities}: AppProps): JSX.Element {
   offers
     .filter(({isFavorite}) => isFavorite)
     .forEach((offer) => {
-      if (favorites.has(offer.city)) {
-        favorites.get(offer.city)?.push(offer);
+      const cityOffers = favorites.get(offer.city);
+
+      if (cityOffers) {
+        cityOffers.push(offer);
       } else {
         favorites.set(offer.city, [offer]);
       }
