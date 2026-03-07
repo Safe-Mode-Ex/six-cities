@@ -17,6 +17,18 @@ type AppProps = {
 };
 
 function App({offers, reviews, cities}: AppProps): JSX.Element {
+  const favorites = new Map<string, Offer[]>();
+
+  offers
+    .filter(({isFavorite}) => isFavorite)
+    .forEach((offer) => {
+      if (favorites.has(offer.city)) {
+        favorites.get(offer.city)?.push(offer);
+      } else {
+        favorites.set(offer.city, [offer]);
+      }
+    });
+
   return (
     <BrowserRouter>
       <Routes>
@@ -29,8 +41,8 @@ function App({offers, reviews, cities}: AppProps): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <FavoritesScreen />
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <FavoritesScreen favorites={favorites} />
             </PrivateRoute>
           }
         />

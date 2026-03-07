@@ -15,4 +15,5 @@ export type Offer = {
     features: Offerfeatures;
     amenities: string[];
     description: string[];
+    city: string;
 };

@@ -1,7 +1,7 @@
 import Locations from '../../components/locations/locations';
 import Logo from '../../components/logo/logo';
 import Map from '../../components/map/map';
-import OffersList from '../../components/offers-list/offers-list';
+import Places from '../../components/places/places';
 import { Offer } from '../../types/offer.type';
 
 type MainScreenProps = {
@@ -46,7 +46,7 @@ function MainScreen({offers, cities}: MainScreenProps): JSX.Element {
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <OffersList offers={offers} />
+            <Places offers={offers} />
             <div className="cities__right-section">
               <Map />
             </div>

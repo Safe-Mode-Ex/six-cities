@@ -5,28 +5,35 @@ import { AppRoute } from '../../types/app-route.type';
 type OfferCardProps = {
   offer: Offer;
   onHover: (offerId: number | null) => void;
+  isFavoritesScreen: boolean;
 };
 
 const RATING_STARS_WIDTH = 20;
 
-function OfferCard({offer, onHover}: OfferCardProps): JSX.Element {
+function OfferCard({offer, onHover, isFavoritesScreen}: OfferCardProps): JSX.Element {
   return (
-    <article className="cities__card place-card">
+    <article className={`${isFavoritesScreen ? 'favorites__card' : 'cities__card'} place-card`}>
       {offer.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${isFavoritesScreen ? 'favorites__image-wrapper' : 'cities__image-wrapper'} place-card__image-wrapper`}>
         <a
           href="#"
           onMouseEnter={() => onHover(offer.id)}
           onMouseLeave={() => onHover(null)}
         >
-          <img className="place-card__image" src={offer.image} width="260" height="200" alt="Place image" />
+          <img
+            className="place-card__image"
+            src={offer.image}
+            width={isFavoritesScreen ? 150 : 260}
+            height={isFavoritesScreen ? 110 : 200}
+            alt="Place image"
+          />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={`${isFavoritesScreen && 'favorites__card-info '}place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}&nbsp;</b>
