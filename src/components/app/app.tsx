@@ -11,17 +11,17 @@ import { AppRoute } from '../../types/app-route.type';
 import { Review } from '../../types/review.type';
 
 type AppProps = {
-  places: Offer[];
+  offers: Offer[];
   reviews: Review[];
   cities: string[];
 };
 
-function App({places, reviews, cities}: AppProps): JSX.Element {
+function App({offers, reviews, cities}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main} element={
-          <MainScreen places={places} cities={cities} />
+          <MainScreen offers={offers} cities={cities} />
         }
         />
         <Route path={`${AppRoute.Offer}/:id`} element={<OfferScreen reviews={reviews} />} />

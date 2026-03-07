@@ -1,15 +1,15 @@
 import Locations from '../../components/locations/locations';
 import Logo from '../../components/logo/logo';
 import Map from '../../components/map/map';
-import Places from '../../components/places/places';
+import OffersList from '../../components/offers-list/offers-list';
 import { Offer } from '../../types/offer.type';
 
 type MainScreenProps = {
-  places: Offer[];
+  offers: Offer[];
   cities: string[];
 };
 
-function MainScreen({places, cities}: MainScreenProps): JSX.Element {
+function MainScreen({offers, cities}: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -46,7 +46,7 @@ function MainScreen({places, cities}: MainScreenProps): JSX.Element {
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <Places places={places} />
+            <OffersList offers={offers} />
             <div className="cities__right-section">
               <Map />
             </div>
