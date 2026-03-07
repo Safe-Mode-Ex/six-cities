@@ -4,11 +4,12 @@ import { AppRoute } from '../../types/app-route.type';
 
 type OfferCardProps = {
   offer: Offer;
+  onHover: (offerId: number | null) => void;
 };
 
 const RATING_STARS_WIDTH = 20;
 
-function OfferCard({offer}: OfferCardProps): JSX.Element {
+function OfferCard({offer, onHover}: OfferCardProps): JSX.Element {
   return (
     <article className="cities__card place-card">
       {offer.isPremium && (
@@ -17,7 +18,11 @@ function OfferCard({offer}: OfferCardProps): JSX.Element {
         </div>
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <a
+          href="#"
+          onMouseEnter={() => onHover(offer.id)}
+          onMouseLeave={() => onHover(null)}
+        >
           <img className="place-card__image" src={offer.image} width="260" height="200" alt="Place image" />
         </a>
       </div>
