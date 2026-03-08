@@ -1,0 +1,2 @@
+export const REVIEW_COMMENT_MIN_LENGTH = 50;
+export const REVIEW_COMMENT_MAX_LENGTH = 300;

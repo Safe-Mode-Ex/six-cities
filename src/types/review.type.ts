@@ -10,3 +10,8 @@ export type Review = {
     rating: number;
     date: string;
 }
+
+export type NewReview = {
+    rating: number;
+    text: string;
+}

@@ -2,21 +2,23 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { Offer } from '../../types/offer.type';
 import MainScreen from './../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import { AuthorizationStatus } from '../../types/authorization-status';
+import { AuthorizationStatus } from '../../types/authorization-status.type';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import PrivateRoute from '../private-route/private-route';
 import { AppRoute } from '../../types/app-route.type';
 import { Review } from '../../types/review.type';
+import { Settings } from '../../types/settings';
 
 type AppProps = {
   offers: Offer[];
   reviews: Review[];
   cities: string[];
+  settings: Settings;
 };
 
-function App({offers, reviews, cities}: AppProps): JSX.Element {
+function App({offers, reviews, cities, settings}: AppProps): JSX.Element {
   const favorites = new Map<string, Offer[]>();
 
   offers
@@ -38,7 +40,16 @@ function App({offers, reviews, cities}: AppProps): JSX.Element {
           <MainScreen offers={offers} cities={cities} />
         }
         />
-        <Route path={`${AppRoute.Offer}/:id`} element={<OfferScreen reviews={reviews} />} />
+        <Route
+          path={`${AppRoute.Offer}/:id`}
+          element={
+            <OfferScreen
+              reviews={reviews}
+              reviewMinLength={settings.REVIEW_COMMENT_MIN_LENGTH}
+              reviewMaxLength={settings.REVIEW_COMMENT_MAX_LENGTH}
+            />
+          }
+        />
         <Route path={AppRoute.Login} element={<LoginScreen />} />
         <Route
           path={AppRoute.Favorites}
