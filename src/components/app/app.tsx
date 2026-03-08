@@ -1,30 +1,58 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { Place } from '../../types/place.type';
+import { Offer } from '../../types/offer.type';
 import MainScreen from './../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import { AuthorizationStatus } from '../../types/authorization-status';
+import { AuthorizationStatus } from '../../types/authorization-status.type';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import PrivateRoute from '../private-route/private-route';
 import { AppRoute } from '../../types/app-route.type';
+import { Settings } from '../../types/settings';
 
 type AppProps = {
-  places: Place[];
+  offers: Offer[];
+  cities: string[];
+  settings: Settings;
 };
 
-function App({places}: AppProps): JSX.Element {
+function App({offers, cities, settings}: AppProps): JSX.Element {
+  const favorites = new Map<string, Offer[]>();
+
+  offers
+    .filter(({isFavorite}) => isFavorite)
+    .forEach((offer) => {
+      const cityOffers = favorites.get(offer.city);
+
+      if (cityOffers) {
+        cityOffers.push(offer);
+      } else {
+        favorites.set(offer.city, [offer]);
+      }
+    });
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<MainScreen places={places} />} />
-        <Route path={`${AppRoute.Offer}/:id`} element={<OfferScreen />} />
+        <Route path={AppRoute.Main} element={
+          <MainScreen offers={offers} cities={cities} />
+        }
+        />
+        <Route
+          path={`${AppRoute.Offer}/:id`}
+          element={
+            <OfferScreen
+              reviewMinLength={settings.REVIEW_COMMENT_MIN_LENGTH}
+              reviewMaxLength={settings.REVIEW_COMMENT_MAX_LENGTH}
+            />
+          }
+        />
         <Route path={AppRoute.Login} element={<LoginScreen />} />
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <FavoritesScreen />
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <FavoritesScreen favorites={favorites} />
             </PrivateRoute>
           }
         />
