@@ -4,18 +4,31 @@ import OfferCard from '../offer-card/offer-card';
 
 type OffersListProps = {
     offers: Offer[];
-    isFavoritesScreen: boolean;
+    isFavoritesScreen?: boolean;
+    isOfferScreen?: boolean;
 };
 
-function OffersList({ offers, isFavoritesScreen }: OffersListProps): JSX.Element {
+function OffersList({ offers, isFavoritesScreen = false, isOfferScreen = false }: OffersListProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<number | null>(null);
+
+  const getClassName = () => {
+    if (isFavoritesScreen) {
+      return 'favorites__places';
+    }
+
+    if (isOfferScreen) {
+      return 'near-places__list places__list';
+    }
+
+    return 'cities__places-list places__list tabs__content';
+  };
 
   const handleOfferHover = (offerId: number | null) => {
     setActiveOfferId(offerId);
   };
 
   return (
-    <div className={isFavoritesScreen ? 'favorites__places' : 'cities__places-list places__list tabs__content'}>
+    <div className={getClassName()}>
       {offers.map((offer) => (
         <OfferCard
           key={`${offer.id}`}
