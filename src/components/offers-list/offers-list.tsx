@@ -10,6 +10,7 @@ type OffersListProps = {
 
 function OffersList({ offers, isFavoritesScreen = false, isOfferScreen = false }: OffersListProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<number | null>(null);
+  console.log(activeOfferId);
 
   const getClassName = () => {
     if (isFavoritesScreen) {
