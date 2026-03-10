@@ -8,7 +8,7 @@ import { URL_MARKER_ACTIVE, URL_MARKER_DEFAULT } from '../../settings';
 type MapProps = {
   mapTemplate: string;
   points: OfferMapPoint[];
-  activeOfferId: number | null;
+  activeOfferId?: number | null;
 };
 
 const defaultCustomIcon = new Icon({
@@ -23,7 +23,7 @@ const activeCustomUrl = new Icon({
   iconAnchor: [20, 40],
 });
 
-function Map({ mapTemplate, points, activeOfferId }: MapProps): JSX.Element {
+function Map({ mapTemplate, points, activeOfferId = null }: MapProps): JSX.Element {
   const cityLocation = points[0].location;
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityLocation, mapTemplate);
