@@ -1,13 +1,13 @@
 import { Map, TileLayer } from 'leaflet';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { OfferCity } from '../types/offer.type';
+import { OfferLocation } from '../types/offer.type';
 
 const LEAFLET_ATTRIBUTION =
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
-  city: OfferCity,
+  location: OfferLocation,
   mapTemplate: string
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
@@ -17,10 +17,10 @@ function useMap(
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
-          lat: city.location.latitude,
-          lng: city.location.longitude,
+          lat: location.latitude,
+          lng: location.longitude,
         },
-        zoom: city.location.zoom,
+        zoom: location.zoom,
       });
 
       const tileLayer = new TileLayer(
@@ -34,7 +34,7 @@ function useMap(
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, city, mapTemplate]);
+  }, [mapRef, location, mapTemplate]);
 
   return map;
 }

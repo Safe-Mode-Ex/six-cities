@@ -3,7 +3,7 @@ import Locations from '../../components/locations/locations';
 import Logo from '../../components/logo/logo';
 import Map from '../../components/map/map';
 import Places from '../../components/places/places';
-import { Offer } from '../../types/offer.type';
+import { Offer, OfferMapPoint } from '../../types/offer.type';
 
 type MainScreenProps = {
   offers: Offer[];
@@ -14,11 +14,14 @@ type MainScreenProps = {
 function MainScreen({offers, cities, mapTemplate}: MainScreenProps): JSX.Element {
   const activeCityName = cities[3];
   const [activeOfferId, setActiveOfferId] = useState<number | null>(null);
-  const activeOffer = offers.find(({ id }) => id === activeOfferId);
-  const points = offers.filter(({ city }) => city.name === activeCityName).map(({ city, id }) => ({
-    ...city,
-    id,
-  }));
+  const points: OfferMapPoint[] = offers
+    .filter(({ city }) => city.name === activeCityName)
+    .map(({ city, id }) => ({
+      ...city,
+      id,
+    }));
+
+  const handleActiveOfferIdSet = (id: number | null) => setActiveOfferId(id);
 
   return (
     <div className="page page--gray page--main">
@@ -56,12 +59,12 @@ function MainScreen({offers, cities, mapTemplate}: MainScreenProps): JSX.Element
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <Places offers={offers} setActiveOfferId={(id: number | null) => setActiveOfferId(id)} />
+            <Places offers={offers} setActiveOfferId={handleActiveOfferIdSet} />
             <div className="cities__right-section">
               <Map
                 points={points}
+                activeOfferId={activeOfferId}
                 mapTemplate={mapTemplate}
-                activeOffer={activeOffer}
               />
             </div>
           </div>
