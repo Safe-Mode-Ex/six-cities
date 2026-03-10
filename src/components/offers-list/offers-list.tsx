@@ -5,7 +5,7 @@ type OffersListProps = {
     offers: Offer[];
     isFavoritesScreen?: boolean;
     isOfferScreen?: boolean;
-    setActiveOfferId: (offerId: number | null) => void;
+    setActiveOfferId?: (offerId: number | null) => void;
 };
 
 function OffersList({ offers, setActiveOfferId, isFavoritesScreen = false, isOfferScreen = false }: OffersListProps): JSX.Element {
@@ -22,7 +22,7 @@ function OffersList({ offers, setActiveOfferId, isFavoritesScreen = false, isOff
   };
 
   const handleOfferHover = (offerId: number | null) => {
-    setActiveOfferId(offerId);
+    setActiveOfferId?.(offerId);
   };
 
   return (
