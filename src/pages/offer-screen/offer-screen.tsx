@@ -1,4 +1,5 @@
 import Logo from '../../components/logo/logo';
+import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
 import Reviews from '../../components/reviews/reviews';
 import { OFFERS } from '../../mocks/offers';
@@ -6,9 +7,16 @@ import { OFFERS } from '../../mocks/offers';
 type OfferScreenProps = {
   reviewMinLength: number;
   reviewMaxLength: number;
+  mapTemplate: string;
 };
 
-function OfferScreen({reviewMinLength, reviewMaxLength}: OfferScreenProps): JSX.Element {
+function OfferScreen({reviewMinLength, reviewMaxLength, mapTemplate}: OfferScreenProps): JSX.Element {
+  const activeOfferId = 1;
+  const mapPoints = OFFERS.slice(0, 4).map(({ city, id }) => ({
+    ...city,
+    id,
+  }));
+
   return (
     <div className="page">
       <header className="header">
@@ -160,7 +168,7 @@ function OfferScreen({reviewMinLength, reviewMaxLength}: OfferScreenProps): JSX.
               <Reviews reviewMinLength={reviewMinLength} reviewMaxLength={reviewMaxLength} />
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <Map points={mapPoints} activeOfferId={activeOfferId} mapTemplate={mapTemplate} extraClass='offer__map' />
         </section>
         <div className="container">
           <section className="near-places places">

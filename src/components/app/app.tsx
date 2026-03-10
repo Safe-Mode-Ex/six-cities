@@ -48,6 +48,7 @@ function App({offers, cities, settings}: AppProps): JSX.Element {
             <OfferScreen
               reviewMinLength={settings.REVIEW_COMMENT_MIN_LENGTH}
               reviewMaxLength={settings.REVIEW_COMMENT_MAX_LENGTH}
+              mapTemplate={settings.LEAFLET_VOYAGER_URL_TEMPLATE}
             />
           }
         />

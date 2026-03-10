@@ -65,6 +65,7 @@ function MainScreen({offers, cities, mapTemplate}: MainScreenProps): JSX.Element
                 points={points}
                 activeOfferId={activeOfferId}
                 mapTemplate={mapTemplate}
+                extraClass='cities__map'
               />
             </div>
           </div>
