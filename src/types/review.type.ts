@@ -1,14 +1,15 @@
 type ReviewAuthor ={
     name: string;
-    avatar: string;
+    avatarUrl: string;
+    isPro: boolean;
 }
 
 export type Review = {
-    id: number;
-    author: ReviewAuthor;
-    text: string;
-    rating: number;
+    id: string;
     date: string;
+    user: ReviewAuthor;
+    comment: string;
+    rating: number;
 }
 
 export type NewReview = {
