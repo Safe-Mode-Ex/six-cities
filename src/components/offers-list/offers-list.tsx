@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Offer } from '../../types/offer.type';
 import OfferCard from '../offer-card/offer-card';
 
@@ -6,12 +5,10 @@ type OffersListProps = {
     offers: Offer[];
     isFavoritesScreen?: boolean;
     isOfferScreen?: boolean;
+    setActiveOfferId?: (offerId: number | null) => void;
 };
 
-function OffersList({ offers, isFavoritesScreen = false, isOfferScreen = false }: OffersListProps): JSX.Element {
-  const [activeOfferId, setActiveOfferId] = useState<number | null>(null);
-  console.log(activeOfferId);
-
+function OffersList({ offers, setActiveOfferId, isFavoritesScreen = false, isOfferScreen = false }: OffersListProps): JSX.Element {
   const getClassName = () => {
     if (isFavoritesScreen) {
       return 'favorites__places';
@@ -25,7 +22,7 @@ function OffersList({ offers, isFavoritesScreen = false, isOfferScreen = false }
   };
 
   const handleOfferHover = (offerId: number | null) => {
-    setActiveOfferId(offerId);
+    setActiveOfferId?.(offerId);
   };
 
   return (

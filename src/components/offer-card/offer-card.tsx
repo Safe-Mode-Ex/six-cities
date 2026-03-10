@@ -51,7 +51,7 @@ function OfferCard({offer, onHover, isFavoritesScreen = false, isOfferScreen = f
         >
           <img
             className="place-card__image"
-            src={offer.image}
+            src={offer.previewImage}
             width={isFavoritesScreen ? 150 : 260}
             height={isFavoritesScreen ? 110 : 200}
             alt="Place image"
@@ -81,9 +81,9 @@ function OfferCard({offer, onHover, isFavoritesScreen = false, isOfferScreen = f
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.name}</Link>
+          <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.features.type}</p>
+        <p className="place-card__type">{offer.type}</p>
       </div>
     </article>
   );

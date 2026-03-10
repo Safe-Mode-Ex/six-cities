@@ -22,12 +22,12 @@ function App({offers, cities, settings}: AppProps): JSX.Element {
   offers
     .filter(({isFavorite}) => isFavorite)
     .forEach((offer) => {
-      const cityOffers = favorites.get(offer.city);
+      const cityOffers = favorites.get(offer.city.name);
 
       if (cityOffers) {
         cityOffers.push(offer);
       } else {
-        favorites.set(offer.city, [offer]);
+        favorites.set(offer.city.name, [offer]);
       }
     });
 
@@ -35,7 +35,11 @@ function App({offers, cities, settings}: AppProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main} element={
-          <MainScreen offers={offers} cities={cities} />
+          <MainScreen
+            offers={offers}
+            cities={cities}
+            mapTemplate={settings.LEAFLET_VOYAGER_URL_TEMPLATE}
+          />
         }
         />
         <Route

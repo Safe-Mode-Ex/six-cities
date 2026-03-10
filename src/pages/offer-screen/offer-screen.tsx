@@ -172,14 +172,14 @@ function OfferScreen({reviewMinLength, reviewMaxLength}: OfferScreenProps): JSX.
                         <div className="reviews__avatar-wrapper user__avatar-wrapper">
                           <img
                             className="reviews__avatar user__avatar"
-                            src={review.author.avatar}
+                            src={review.user.avatarUrl}
                             width="54"
                             height="54"
                             alt="Reviews avatar"
                           />
                         </div>
                         <span className="reviews__user-name">
-                          {review.author.name}
+                          {review.user.name}
                         </span>
                       </div>
                       <div className="reviews__info">
@@ -189,7 +189,7 @@ function OfferScreen({reviewMinLength, reviewMaxLength}: OfferScreenProps): JSX.
                             <span className="visually-hidden">Rating</span>
                           </div>
                         </div>
-                        <p className="reviews__text">{review.text}</p>
+                        <p className="reviews__text">{review.comment}</p>
                         <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
                       </div>
                     </li>

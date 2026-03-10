@@ -1,139 +1,125 @@
-import { Offer } from '../types/offer.type';
+import { Offer, OfferDetails } from '../types/offer.type';
 
 export const OFFERS: Offer[] = [{
   id: 1,
-  image: 'img/apartment-01.jpg',
+  type: 'Apartment',
+  previewImage: 'img/apartment-01.jpg',
   price: 120,
   rating: 4,
-  name: 'Beautiful & luxurious apartment at great location',
+  title: 'Beautiful & luxurious apartment at great location',
   isPremium: true,
-  isFavorite: false,
-  features: {
-    type: 'Apartment',
-    bedrooms: 3,
-    adults: 4,
+  isFavorite: true,
+  city: {
+    name: 'Amsterdam',
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10,
+    },
   },
-  amenities: [
-    'Wi-Fi',
-    'Washing machine',
-    'Towels',
-    'Heating',
-    'Coffee machine',
-    'Baby seat',
-    'Kitchen',
-    'Dishwasher',
-    'Cabel TV',
-    'Fridge'
-  ],
-  description: [
-    'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-    'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
-  ],
-  city: 'Amsterdam',
+  location: {
+    latitude: 52.3909553943508,
+    longitude: 4.85309666406198,
+    zoom: 10,
+  },
 }, {
   id: 2,
-  image: 'img/room.jpg',
+  type: 'Room',
+  previewImage: 'img/room.jpg',
   price: 80,
   rating: 4,
-  name: 'Wood and stone place',
+  title: 'Wood and stone place',
   isPremium: false,
-  isFavorite: true,
-  features: {
-    type: 'Room',
-    bedrooms: 3,
-    adults: 4,
+  isFavorite: false,
+  city: {
+    name: 'Amsterdam',
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 10,
+    },
   },
-  amenities: [
-    'Wi-Fi',
-    'Washing machine',
-    'Towels',
-    'Heating',
-    'Coffee machine',
-    'Baby seat',
-    'Kitchen',
-    'Dishwasher',
-    'Cabel TV',
-    'Fridge'
-  ],
-  description: [
-    'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-    'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
-  ],
-  city: 'Amsterdam',
+  location: {
+    latitude: 52.3609553943508,
+    longitude: 4.85309666406198,
+    zoom: 10,
+  },
 }, {
   id: 3,
-  image: 'img/apartment-02.jpg',
+  type: 'Apartment',
+  previewImage: 'img/apartment-02.jpg',
   price: 132,
   rating: 4,
-  name: 'Canal View Prinsengracht',
+  title: 'Canal View Prinsengracht',
   isPremium: false,
   isFavorite: false,
-  features: {
-    type: 'Apartment',
-    bedrooms: 3,
-    adults: 4,
+  city: {
+    name: 'Amsterdam',
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 10,
+    },
   },
-  amenities: [
-    'Wi-Fi',
-    'Washing machine',
-    'Towels',
-    'Heating',
-    'Coffee machine',
-    'Baby seat',
-    'Kitchen',
-    'Dishwasher',
-    'Cabel TV',
-    'Fridge'
-  ],
-  description: [
-    'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-    'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
-  ],
-  city: 'Cologne',
+  location: {
+    latitude: 52.3909553943508,
+    longitude: 4.929309666406198,
+    zoom: 10,
+  },
 }, {
   id: 4,
-  image: 'img/apartment-03.jpg',
+  type: 'Apartment',
+  previewImage: 'img/apartment-03.jpg',
   price: 180,
   rating: 5,
-  name: 'Nice, cozy, warm big bed apartment',
+  title: 'Nice, cozy, warm big bed apartment',
   isPremium: true,
-  isFavorite: false,
-  features: {
-    type: 'Apartment',
-    bedrooms: 3,
-    adults: 4,
+  isFavorite: true,
+  city: {
+    name: 'Amsterdam',
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 10,
+    },
   },
-  amenities: [
-    'Wi-Fi',
-    'Washing machine',
-    'Towels',
-    'Heating',
-    'Coffee machine',
-    'Baby seat',
-    'Kitchen',
-    'Dishwasher',
-    'Cabel TV',
-    'Fridge'
-  ],
-  description: [
-    'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-    'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
-  ],
-  city: 'Brussels',
+  location: {
+    latitude: 52.3809553943508,
+    longitude: 4.939309666406198,
+    zoom: 10,
+  },
 }, {
   id: 5,
-  image: 'img/room.jpg',
+  type: 'Room',
+  previewImage: 'img/room.jpg',
   price: 80,
   rating: 4,
-  name:'Wood and stone place',
+  title:'Wood and stone place',
   isPremium: false,
   isFavorite: true,
-  features: {
-    type: 'Room',
-    bedrooms: 3,
-    adults: 4,
+  city: {
+    name: 'Brussels',
+    location: {
+      latitude: 51.8465573055142,
+      longitude: 5.3516970028686,
+      zoom: 10,
+    },
   },
-  amenities: [
+  location: {
+    latitude: 50.8465573055142,
+    longitude: 4.3516970028686,
+    zoom: 10,
+  },
+}];
+
+const offer = {...OFFERS[0]} as Omit<Offer, 'previewImage'>;
+
+export const offerDetails: OfferDetails = {
+  ...offer,
+  description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful`,
+  bedrooms: 3,
+  goods: [
     'Wi-Fi',
     'Washing machine',
     'Towels',
@@ -145,9 +131,15 @@ export const OFFERS: Offer[] = [{
     'Cabel TV',
     'Fridge'
   ],
-  description: [
-    'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-    'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
+  images: [
+    'img/apartment-01.jpg',
+    'img/apartment-02.jpg',
+    'img/apartment-03.jpg',
   ],
-  city: 'Brussels',
-}];
+  host: {
+    name: 'Angelina',
+    isPro: true,
+    avatarUrl: 'img/avatar-angelina.jpg',
+  },
+  maxAdults: 4,
+};
