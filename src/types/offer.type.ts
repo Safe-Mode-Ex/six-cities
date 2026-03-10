@@ -1,19 +1,36 @@
-type Offerfeatures = {
-    type: string;
-    bedrooms: number;
-    adults: number;
+type OfferLocation ={
+    latitude: number;
+    longitude: number;
+    zoom: number;
+}
+
+type OfferCity = {
+    name: string;
+    location: OfferLocation;
 }
 
 export type Offer = {
     id: number;
-    image: string;
+    title: string;
+    type: string;
     price: number;
-    rating: number;
-    name: string;
-    isPremium: boolean;
+    city: OfferCity;
+    location: OfferLocation;
     isFavorite: boolean;
-    features: Offerfeatures;
-    amenities: string[];
-    description: string[];
-    city: string;
+    isPremium: boolean;
+    rating: number;
+    previewImage: string;
 };
+
+export type OfferDetails = Omit<Offer, 'previewImage'> & {
+    description: string;
+    bedrooms: number;
+    goods: string[];
+    host: {
+        name: string;
+        isPro: boolean;
+        avatarUrl: string;
+    };
+    images: string[];
+    maxAdults: number;
+}

@@ -22,12 +22,12 @@ function App({offers, cities, settings}: AppProps): JSX.Element {
   offers
     .filter(({isFavorite}) => isFavorite)
     .forEach((offer) => {
-      const cityOffers = favorites.get(offer.city);
+      const cityOffers = favorites.get(offer.city.name);
 
       if (cityOffers) {
         cityOffers.push(offer);
       } else {
-        favorites.set(offer.city, [offer]);
+        favorites.set(offer.city.name, [offer]);
       }
     });
 
