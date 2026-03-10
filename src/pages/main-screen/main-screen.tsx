@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Locations from '../../components/locations/locations';
 import Logo from '../../components/logo/logo';
 import Map from '../../components/map/map';
@@ -7,9 +8,18 @@ import { Offer } from '../../types/offer.type';
 type MainScreenProps = {
   offers: Offer[];
   cities: string[];
+  mapTemplate: string;
 };
 
-function MainScreen({offers, cities}: MainScreenProps): JSX.Element {
+function MainScreen({offers, cities, mapTemplate}: MainScreenProps): JSX.Element {
+  const activeCityName = cities[3];
+  const [activeOfferId, setActiveOfferId] = useState<number | null>(null);
+  const activeOffer = offers.find(({ id }) => id === activeOfferId);
+  const points = offers.filter(({ city }) => city.name === activeCityName).map(({ city, id }) => ({
+    ...city,
+    id,
+  }));
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -42,13 +52,17 @@ function MainScreen({offers, cities}: MainScreenProps): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <Locations cities={cities} activeCity={cities[3]} />
+          <Locations cities={cities} activeCity={activeCityName} />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <Places offers={offers} />
+            <Places offers={offers} setActiveOfferId={(id: number | null) => setActiveOfferId(id)} />
             <div className="cities__right-section">
-              <Map />
+              <Map
+                points={points}
+                mapTemplate={mapTemplate}
+                activeOffer={activeOffer}
+              />
             </div>
           </div>
         </div>

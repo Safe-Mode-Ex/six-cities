@@ -35,7 +35,11 @@ function App({offers, cities, settings}: AppProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main} element={
-          <MainScreen offers={offers} cities={cities} />
+          <MainScreen
+            offers={offers}
+            cities={cities}
+            mapTemplate={settings.LEAFLET_VOYAGER_URL_TEMPLATE}
+          />
         }
         />
         <Route
