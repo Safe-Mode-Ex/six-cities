@@ -4,7 +4,18 @@ type ReviewProps = {
     review: Review;
 }
 
+const ISO_DATE_TIME_DIVIDER = 'T';
+const LOCALE = 'en-US';
+
 function ReviewItem({ review }: ReviewProps) {
+  const date = new Date(review.date);
+  const dateTime = date.toISOString().split(ISO_DATE_TIME_DIVIDER)[0];
+
+  const formattedDate = new Intl.DateTimeFormat(LOCALE, {
+    month: 'long',
+    year: 'numeric',
+  }).format(date);
+
   return (
     <li className="reviews__item" key={review.id}>
       <div className="reviews__user user">
@@ -29,7 +40,7 @@ function ReviewItem({ review }: ReviewProps) {
           </div>
         </div>
         <p className="reviews__text">{review.comment}</p>
-        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+        <time className="reviews__time" dateTime={dateTime}>{formattedDate}</time>
       </div>
     </li>
   );
