@@ -80,8 +80,8 @@ function ReviewForm({ reviewMinLength, reviewMaxLength, onSendReview }: ReviewFo
 
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set
-          <span className="reviews__star">rating</span> and describe your stay with at least
+          To submit review please make sure to set&nbsp;
+          <span className="reviews__star">rating</span> and describe your stay with at least&nbsp;
           <b className="reviews__text-amount">{reviewMinLength} characters</b>.
         </p>
         <button

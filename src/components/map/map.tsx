@@ -9,6 +9,7 @@ type MapProps = {
   mapTemplate: string;
   points: OfferMapPoint[];
   activeOfferId: number | null;
+  extraClass?: string;
 };
 
 const defaultCustomIcon = new Icon({
@@ -23,7 +24,7 @@ const activeCustomUrl = new Icon({
   iconAnchor: [20, 40],
 });
 
-function Map({ mapTemplate, points, activeOfferId }: MapProps): JSX.Element {
+function Map({ mapTemplate, points, activeOfferId, extraClass }: MapProps): JSX.Element {
   const cityLocation = points[0].location;
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityLocation, mapTemplate);
@@ -49,7 +50,12 @@ function Map({ mapTemplate, points, activeOfferId }: MapProps): JSX.Element {
   }, [activeOfferId, map, points]);
 
   return (
-    <section className="cities__map map" ref={mapRef}></section>
+    <section
+      className={`${extraClass || ''} map`}
+      ref={mapRef}
+      style={{maxWidth: '1144px', marginLeft: 'auto', marginRight: 'auto'}}
+    >
+    </section>
   );
 }
 
