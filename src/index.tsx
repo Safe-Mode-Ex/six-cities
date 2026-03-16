@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { OFFERS } from './mocks/offers';
-import { CITIES } from './mocks/cities';
 import * as Settings from './settings';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,6 +12,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App offers={OFFERS} cities={CITIES} settings={Settings} />
+    <Provider store={store}>
+      <App offers={OFFERS} settings={Settings} />
+    </Provider>
   </React.StrictMode>
 );

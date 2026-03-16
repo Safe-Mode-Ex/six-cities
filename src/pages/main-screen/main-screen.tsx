@@ -3,18 +3,37 @@ import Locations from '../../components/locations/locations';
 import Logo from '../../components/logo/logo';
 import Map from '../../components/map/map';
 import Places from '../../components/places/places';
-import { Offer, OfferMapPoint } from '../../types/offer.type';
+import { OfferMapPoint } from '../../types/offer.type';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
+import { setOffers, selectCity } from '../../store/action';
+import cn from 'classnames';
+import NoPlaces from '../../components/no-places/no-places';
+import { OFFERS } from '../../mocks/offers';
+import { CITIES } from '../../mocks/cities';
 
 type MainScreenProps = {
-  offers: Offer[];
-  cities: string[];
   mapTemplate: string;
 };
 
-function MainScreen({offers, cities, mapTemplate}: MainScreenProps): JSX.Element {
-  const activeCityName = cities[3];
+function MainScreen({mapTemplate}: MainScreenProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const handleSelectCity = (activeCity: string) => {
+    dispatch(selectCity(activeCity));
+  };
+
+  //TODO: сделать навигацию по городам
+  // const activeCityName = CITIES[2];
+  // dispatch(selectCity(activeCityName));
+  const activeCityName = useAppSelector(({ city }) => city);
+
+  const cityOffers = OFFERS.filter(({ city }) => city.name === activeCityName);
+  dispatch(setOffers(cityOffers));
+
+  const hasOffers = !!cityOffers?.length;
+
   const [activeOfferId, setActiveOfferId] = useState<number | null>(null);
-  const points: OfferMapPoint[] = offers
+  const points: OfferMapPoint[] = cityOffers
     .filter(({ city }) => city.name === activeCityName)
     .map(({ city, id }) => ({
       ...city,
@@ -52,21 +71,38 @@ function MainScreen({offers, cities, mapTemplate}: MainScreenProps): JSX.Element
         </div>
       </header>
 
-      <main className="page__main page__main--index">
+      <main className={cn(
+        'page__main page__main--index',
+        {
+          'page__main--index-empty': !hasOffers,
+        })}
+      >
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <Locations cities={cities} activeCity={activeCityName} />
+          <Locations
+            cities={CITIES}
+            activeCity={activeCityName}
+            selectCity={handleSelectCity}
+          />
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <Places offers={offers} setActiveOfferId={handleActiveOfferIdSet} />
+          <div className={cn(
+            'cities__places-container container',
+            {
+              'cities__places-container--empty': !hasOffers,
+            })}
+          >
+            {hasOffers ?
+              <Places offers={cityOffers} setActiveOfferId={handleActiveOfferIdSet} /> :
+              <NoPlaces city={activeCityName} />}
             <div className="cities__right-section">
+              {hasOffers &&
               <Map
                 points={points}
                 activeOfferId={activeOfferId}
                 mapTemplate={mapTemplate}
                 extraClass='cities__map'
-              />
+              />}
             </div>
           </div>
         </div>
