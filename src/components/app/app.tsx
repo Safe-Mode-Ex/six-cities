@@ -12,11 +12,10 @@ import { Settings } from '../../types/settings';
 
 type AppProps = {
   offers: Offer[];
-  cities: string[];
   settings: Settings;
 };
 
-function App({offers, cities, settings}: AppProps): JSX.Element {
+function App({offers, settings}: AppProps): JSX.Element {
   const favorites = new Map<string, Offer[]>();
 
   offers
@@ -35,11 +34,7 @@ function App({offers, cities, settings}: AppProps): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main} element={
-          <MainScreen
-            offers={offers}
-            cities={cities}
-            mapTemplate={settings.LEAFLET_VOYAGER_URL_TEMPLATE}
-          />
+          <MainScreen mapTemplate={settings.LEAFLET_VOYAGER_URL_TEMPLATE} />
         }
         />
         <Route
