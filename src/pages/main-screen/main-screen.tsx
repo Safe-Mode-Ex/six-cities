@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Locations from '../../components/locations/locations';
 import Logo from '../../components/logo/logo';
 import Map from '../../components/map/map';
 import Places from '../../components/places/places';
 import { OfferMapPoint } from '../../types/offer.type';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { setOffers, selectCity } from '../../store/action';
+import { selectCity, setOffers } from '../../store/action';
 import cn from 'classnames';
 import NoPlaces from '../../components/no-places/no-places';
 import { OFFERS } from '../../mocks/offers';
@@ -18,22 +18,25 @@ type MainScreenProps = {
 function MainScreen({mapTemplate}: MainScreenProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const handleSelectCity = (activeCity: string) => {
-    dispatch(selectCity(activeCity));
-  };
-
   //TODO: сделать навигацию по городам
-  // const activeCityName = CITIES[2];
-  // dispatch(selectCity(activeCityName));
+  useEffect(() => {
+    const activeCityName = CITIES[0];
+    dispatch(selectCity(activeCityName));
+  }, [dispatch]);
+
   const activeCityName = useAppSelector(({ city }) => city);
 
-  const cityOffers = OFFERS.filter(({ city }) => city.name === activeCityName);
-  dispatch(setOffers(cityOffers));
+  useEffect(() => {
+    const cityOffers = OFFERS.filter(({ city }) => city.name === activeCityName);
+    dispatch(setOffers(cityOffers));
+  }, [dispatch, activeCityName]);
 
-  const hasOffers = !!cityOffers?.length;
+  const offers = useAppSelector((state) => state.offers);
+
+  const hasOffers = !!offers?.length;
 
   const [activeOfferId, setActiveOfferId] = useState<number | null>(null);
-  const points: OfferMapPoint[] = cityOffers
+  const points: OfferMapPoint[] = offers
     .filter(({ city }) => city.name === activeCityName)
     .map(({ city, id }) => ({
       ...city,
@@ -82,7 +85,6 @@ function MainScreen({mapTemplate}: MainScreenProps): JSX.Element {
           <Locations
             cities={CITIES}
             activeCity={activeCityName}
-            selectCity={handleSelectCity}
           />
         </div>
         <div className="cities">
@@ -93,10 +95,10 @@ function MainScreen({mapTemplate}: MainScreenProps): JSX.Element {
             })}
           >
             {hasOffers ?
-              <Places offers={cityOffers} setActiveOfferId={handleActiveOfferIdSet} /> :
+              <Places setActiveOfferId={handleActiveOfferIdSet} /> :
               <NoPlaces city={activeCityName} />}
             <div className="cities__right-section">
-              {hasOffers &&
+              {!!points.length &&
               <Map
                 points={points}
                 activeOfferId={activeOfferId}
