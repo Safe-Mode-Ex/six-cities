@@ -1,31 +1,18 @@
 import Sort from '../sort/sort';
 import OffersList from '../offers-list/offers-list';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { SortType } from '../../enums';
 import { setActiveOfferId } from '../../store/action';
+import { sortOffersBy } from '../../helpers';
 
 function Places(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const sortType = useAppSelector((state) => state.sortType);
+  const sortedOffers = sortOffersBy(sortType, offers);
   const dispatch = useAppDispatch();
 
   const handleActiveOfferIdSet = (id: number | null) => {
     dispatch(setActiveOfferId(id));
   };
-
-  const sortedOffers = [...offers].sort((prev, next) => {
-    switch (sortType) {
-      case SortType.PRICE_LOW_TO_HIGH:
-        return prev.price - next.price;
-      case SortType.PRICE_HIGH_TO_LOW:
-        return next.price - prev.price;
-      case SortType.TOP_RATED_FIRST:
-        return next.rating - prev.rating;
-      default:
-        return 0;
-    }
-  });
-
 
   return (
     <section className="cities__places places">

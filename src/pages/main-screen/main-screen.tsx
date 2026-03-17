@@ -1,46 +1,30 @@
-import { useEffect } from 'react';
 import Locations from '../../components/locations/locations';
 import Logo from '../../components/logo/logo';
 import Map from '../../components/map/map';
 import Places from '../../components/places/places';
-import { OfferMapPoint } from '../../types/offer.type';
-import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { selectCity, setOffers } from '../../store/action';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import cn from 'classnames';
 import NoPlaces from '../../components/no-places/no-places';
-import { OFFERS } from '../../mocks/offers';
 import { CITIES } from '../../mocks/cities';
+import useDispatchCity from '../../hooks/use-dispatch-city';
+import useDispatchOffers from '../../hooks/use-dispatch-offers';
+import { getCityPoints } from '../../helpers';
 
 type MainScreenProps = {
   mapTemplate: string;
 };
 
 function MainScreen({mapTemplate}: MainScreenProps): JSX.Element {
-  const dispatch = useAppDispatch();
-
   //TODO: сделать навигацию по городам
-  useEffect(() => {
-    const activeCityName = CITIES[0];
-    dispatch(selectCity(activeCityName));
-  }, [dispatch]);
+  useDispatchCity();
 
   const activeCityName = useAppSelector(({ city }) => city);
-
-  useEffect(() => {
-    const cityOffers = OFFERS.filter(({ city }) => city.name === activeCityName);
-    dispatch(setOffers(cityOffers));
-  }, [dispatch, activeCityName]);
+  useDispatchOffers(activeCityName);
 
   const offers = useAppSelector((state) => state.offers);
-  const hasOffers = !!offers?.length;
   const activeOfferId = useAppSelector((state) => state.activeOfferId);
-
-  const points: OfferMapPoint[] = offers
-    .filter(({ city }) => city.name === activeCityName)
-    .map(({ city, id }) => ({
-      ...city,
-      id,
-    }));
+  const hasOffers = !!offers?.length;
+  const points = getCityPoints(offers, activeCityName);
 
   return (
     <div className="page page--gray page--main">
