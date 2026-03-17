@@ -1,15 +1,17 @@
-import { CITIES } from '../../mocks/cities';
+import { useAppDispatch } from '../../hooks/use-app-selector';
+import { selectCity } from '../../store/action';
 
 type LocationsProps = {
   cities: string[];
   activeCity: string;
-  selectCity: (cityName: string) => void;
 };
 
-function Locations({cities, activeCity, selectCity}: LocationsProps): JSX.Element {
-  if (!activeCity) {
-    selectCity(CITIES[0]);
-  }
+function Locations({cities, activeCity}: LocationsProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const setSelectedCity = (city: string) => {
+    dispatch(selectCity(city));
+  };
 
   return (
     <section className="locations container">
@@ -18,7 +20,7 @@ function Locations({cities, activeCity, selectCity}: LocationsProps): JSX.Elemen
           <li className="locations__item" key={city}>
             <a
               className={`locations__item-link tabs__item ${city === activeCity ? 'tabs__item--active' : ''}`}
-              onClick={() => selectCity(city)}
+              onClick={() => setSelectedCity(city)}
             >
               <span>{city}</span>
             </a>
