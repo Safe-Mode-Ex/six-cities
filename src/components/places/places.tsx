@@ -1,15 +1,17 @@
 import Sort from '../sort/sort';
 import OffersList from '../offers-list/offers-list';
-import { useAppSelector } from '../../hooks/use-app-selector';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { SortType } from '../../enums';
+import { setActiveOfferId } from '../../store/action';
 
-type PlacesProps = {
-  setActiveOfferId: (activeOfferId: number | null) => void;
-};
-
-function Places({setActiveOfferId}: PlacesProps): JSX.Element {
+function Places(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const sortType = useAppSelector((state) => state.sortType);
+  const dispatch = useAppDispatch();
+
+  const handleActiveOfferIdSet = (id: number | null) => {
+    dispatch(setActiveOfferId(id));
+  };
 
   const sortedOffers = [...offers].sort((prev, next) => {
     switch (sortType) {
@@ -30,7 +32,7 @@ function Places({setActiveOfferId}: PlacesProps): JSX.Element {
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">{offers.length} places to stay in {offers[0].city.name}</b>
       <Sort />
-      <OffersList offers={sortedOffers} setActiveOfferId={setActiveOfferId} />
+      <OffersList offers={sortedOffers} setActiveOfferId={handleActiveOfferIdSet} />
     </section>
   );
 }

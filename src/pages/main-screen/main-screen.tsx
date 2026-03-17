@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Locations from '../../components/locations/locations';
 import Logo from '../../components/logo/logo';
 import Map from '../../components/map/map';
@@ -32,18 +32,15 @@ function MainScreen({mapTemplate}: MainScreenProps): JSX.Element {
   }, [dispatch, activeCityName]);
 
   const offers = useAppSelector((state) => state.offers);
-
   const hasOffers = !!offers?.length;
+  const activeOfferId = useAppSelector((state) => state.activeOfferId);
 
-  const [activeOfferId, setActiveOfferId] = useState<number | null>(null);
   const points: OfferMapPoint[] = offers
     .filter(({ city }) => city.name === activeCityName)
     .map(({ city, id }) => ({
       ...city,
       id,
     }));
-
-  const handleActiveOfferIdSet = (id: number | null) => setActiveOfferId(id);
 
   return (
     <div className="page page--gray page--main">
@@ -95,7 +92,7 @@ function MainScreen({mapTemplate}: MainScreenProps): JSX.Element {
             })}
           >
             {hasOffers ?
-              <Places setActiveOfferId={handleActiveOfferIdSet} /> :
+              <Places /> :
               <NoPlaces city={activeCityName} />}
             <div className="cities__right-section">
               {!!points.length &&

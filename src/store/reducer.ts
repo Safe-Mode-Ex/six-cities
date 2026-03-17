@@ -1,13 +1,14 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setOffers, selectCity, setSortType } from './action';
+import { setOffers, selectCity, setSortType, setActiveOfferId } from './action';
 import { Offer } from '../types/offer.type';
 import { SORT_TYPES } from '../settings';
 import { SortType } from '../enums';
 
-const initialState: { city: string; offers: Offer[]; sortType: SortType } = {
+const initialState: { city: string; offers: Offer[]; sortType: SortType; activeOfferId: number | null } = {
   city: '',
   offers: [],
   sortType: SORT_TYPES[0],
+  activeOfferId: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -20,6 +21,9 @@ const reducer = createReducer(initialState, (builder) => {
     }))
     .addCase(setSortType, (state, action) => {
       state.sortType = action.payload;
+    })
+    .addCase(setActiveOfferId, (state, action) => {
+      state.activeOfferId = action.payload;
     });
 });
 
