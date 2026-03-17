@@ -1,19 +1,23 @@
 import cn from 'classnames';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { SORT_TYPES } from '../../settings';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { setSortType } from '../../store/action';
 import { SortType } from '../../enums';
+import useCloseSort from '../../hooks/use-close-sort';
 
 function Sort(): JSX.Element {
   const [isOpened, setOpenedState] = useState(false);
   const sortType = useAppSelector((state) => state.sortType);
+  const sortRef = useRef<HTMLElement>(null);
   const dispatch = useAppDispatch();
 
   const handleSetSortType = (type: SortType) => {
     dispatch(setSortType(type));
     setOpenedState(false);
   };
+
+  useCloseSort(sortRef, setOpenedState);
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -22,6 +26,7 @@ function Sort(): JSX.Element {
         className="places__sorting-type"
         tabIndex={0}
         onClick={() => setOpenedState(!isOpened)}
+        ref={sortRef}
       >
         {sortType}
         <svg className="places__sorting-arrow" width="7" height="4">
