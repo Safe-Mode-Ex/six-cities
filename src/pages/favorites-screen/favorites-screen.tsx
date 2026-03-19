@@ -1,5 +1,5 @@
 import Logo from '../../components/logo/logo';
-import { Offer } from '../../types/offer.type';
+import { Offer } from '../../types/offer';
 import OffersList from '../../components/offers-list/offers-list';
 
 type FavoritesScreenProps = {

@@ -1,5 +1,5 @@
 import 'leaflet/dist/leaflet.css';
-import { OfferMapPoint } from '../../types/offer.type';
+import { OfferMapPoint } from '../../types/offer';
 import { useRef } from 'react';
 import useMap from '../../hooks/use-map';
 import useMapMarkers from '../../hooks/use-map-markers';

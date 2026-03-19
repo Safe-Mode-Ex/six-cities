@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Offer } from '../../types/offer.type';
-import { AppRoute } from '../../types/app-route.type';
+import { Offer } from '../../types/offer';
+import { AppRoute } from '../../types/app-route';
 
 type OfferCardProps = {
   offer: Offer;

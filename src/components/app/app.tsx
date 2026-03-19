@@ -1,14 +1,16 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { Offer } from '../../types/offer.type';
+import { Offer } from '../../types/offer';
 import MainScreen from './../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import { AuthorizationStatus } from '../../types/authorization-status.type';
+import { AuthorizationStatus } from '../../types/authorization-status';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import PrivateRoute from '../private-route/private-route';
-import { AppRoute } from '../../types/app-route.type';
+import { AppRoute } from '../../types/app-route';
 import { Settings } from '../../types/settings';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 type AppProps = {
   offers: Offer[];
@@ -16,6 +18,13 @@ type AppProps = {
 };
 
 function App({offers, settings}: AppProps): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
+    return <LoadingScreen />;
+  }
+
   const favorites = new Map<string, Offer[]>();
 
   offers
@@ -51,7 +60,7 @@ function App({offers, settings}: AppProps): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <FavoritesScreen favorites={favorites} />
             </PrivateRoute>
           }

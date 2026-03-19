@@ -1,5 +1,5 @@
 import { SortType } from './enums';
-import { Offer, OfferMapPoint } from './types/offer.type';
+import { Offer, OfferMapPoint } from './types/offer';
 
 export const sortOffersBy = (sortType: SortType, offers: Offer[]): Offer[] => [...offers].sort((prev, next) => {
   switch (sortType) {
@@ -14,8 +14,7 @@ export const sortOffersBy = (sortType: SortType, offers: Offer[]): Offer[] => [.
   }
 });
 
-export const getCityPoints = (offers: Offer[], activeCityName: string): OfferMapPoint[] => offers
-  .filter(({ city }) => city.name === activeCityName)
+export const getCityPoints = (cityOffers: Offer[]): OfferMapPoint[] => cityOffers
   .map(({ city, id }) => ({
     ...city,
     id,

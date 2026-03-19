@@ -1,5 +1,5 @@
 import { REVIEWS } from '../../mocks/reviews';
-import { NewReview } from '../../types/review.type';
+import { NewReview } from '../../types/review';
 import ReviewForm from '../review-form/review-form';
 import ReviewItem from '../review/review';
 

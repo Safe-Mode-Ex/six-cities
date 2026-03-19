@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, Fragment, useState } from 'react';
-import { NewReview } from '../../types/review.type';
+import { NewReview } from '../../types/review';
 
 type ReviewFormProps = {
   reviewMinLength: number;
