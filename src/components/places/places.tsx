@@ -3,9 +3,13 @@ import OffersList from '../offers-list/offers-list';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { setActiveOfferId } from '../../store/action';
 import { sortOffersBy } from '../../helpers';
+import { Offer } from '../../types/offer';
 
-function Places(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+type PlacesProps = {
+  offers: Offer[];
+}
+
+function Places({ offers }: PlacesProps): JSX.Element {
   const sortType = useAppSelector((state) => state.sortType);
   const sortedOffers = sortOffersBy(sortType, offers);
   const dispatch = useAppDispatch();

@@ -7,7 +7,6 @@ import cn from 'classnames';
 import NoPlaces from '../../components/no-places/no-places';
 import { CITIES } from '../../mocks/cities';
 import useDispatchCity from '../../hooks/use-dispatch-city';
-import useDispatchOffers from '../../hooks/use-dispatch-offers';
 import { getCityPoints } from '../../helpers';
 
 type MainScreenProps = {
@@ -19,12 +18,12 @@ function MainScreen({mapTemplate}: MainScreenProps): JSX.Element {
   useDispatchCity();
 
   const activeCityName = useAppSelector(({ city }) => city);
-  useDispatchOffers(activeCityName);
-
   const offers = useAppSelector((state) => state.offers);
   const activeOfferId = useAppSelector((state) => state.activeOfferId);
-  const hasOffers = !!offers?.length;
-  const points = getCityPoints(offers, activeCityName);
+
+  const cityOffers = offers.filter(({ city }) => city.name === activeCityName);
+  const hasOffers = !!cityOffers?.length;
+  const points = getCityPoints(cityOffers);
 
   return (
     <div className="page page--gray page--main">
@@ -76,7 +75,7 @@ function MainScreen({mapTemplate}: MainScreenProps): JSX.Element {
             })}
           >
             {hasOffers ?
-              <Places /> :
+              <Places offers={cityOffers} /> :
               <NoPlaces city={activeCityName} />}
             <div className="cities__right-section">
               {!!points.length &&

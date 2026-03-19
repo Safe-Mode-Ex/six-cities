@@ -1,6 +1,6 @@
 import { Icon, layerGroup, Map, Marker } from 'leaflet';
 import { useEffect } from 'react';
-import { OfferMapPoint } from '../types/offer.type';
+import { OfferMapPoint } from '../types/offer';
 import { URL_MARKER_DEFAULT, URL_MARKER_ACTIVE } from '../settings';
 
 const defaultCustomIcon = new Icon({
