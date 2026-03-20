@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/app-state';
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 import { Offer, OfferDetails } from '../types/offer';
 import { APIRoute } from '../enums';
 import {
@@ -22,6 +22,7 @@ import { dropToken, saveToken } from '../services/token';
 import { AppRoute } from '../types/app-route';
 import { NewReview, Review } from '../types/review';
 import { initialState } from './reducer';
+import { StatusCodes } from 'http-status-codes';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
     dispatch: AppDispatch;
@@ -44,10 +45,20 @@ export const fetchOfferByIdAction = createAsyncThunk<void, string, {
 }>(
   'data/fetchOfferById',
   async (offerId, { dispatch, extra: api }) => {
-    dispatch(setOffersDataLoadingStatus(true));
-    const { data } = await api.get<OfferDetails>(`${APIRoute.Offers}/${offerId}`);
-    dispatch(loadOfferById(data));
-    dispatch(setOffersDataLoadingStatus(false));
+    try {
+      dispatch(setOffersDataLoadingStatus(true));
+      const { data } = await api.get<OfferDetails>(`${APIRoute.Offers}/${offerId}`);
+      dispatch(loadOfferById(data));
+      dispatch(setOffersDataLoadingStatus(false));
+    } catch (error) {
+      const errorCode = (error as AxiosError).response?.status;
+
+      if (errorCode === StatusCodes.NOT_FOUND) {
+        dispatch(redirectToRoute(AppRoute.NotFound));
+      }
+
+      dispatch(setOffersDataLoadingStatus(false));
+    }
   }
 );
 
