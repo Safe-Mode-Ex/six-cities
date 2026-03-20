@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Offer } from '../../types/offer';
 import MainScreen from './../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
@@ -11,6 +11,8 @@ import { AppRoute } from '../../types/app-route';
 import { Settings } from '../../types/settings';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import HistoryRouter from '../history-router/history-router';
+import browserHistory from '../../browser-history';
 
 type AppProps = {
   offers: Offer[];
@@ -40,7 +42,7 @@ function App({offers, settings}: AppProps): JSX.Element {
     });
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Main} element={
           <MainScreen mapTemplate={settings.LEAFLET_VOYAGER_URL_TEMPLATE} />
@@ -67,7 +69,7 @@ function App({offers, settings}: AppProps): JSX.Element {
         />
         <Route path="*" element={<NotFoundScreen />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
