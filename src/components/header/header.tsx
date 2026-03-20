@@ -1,6 +1,10 @@
-import { useAppSelector } from '../../hooks/use-app-selector';
+import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { AuthorizationStatus } from '../../types/authorization-status';
 import Logo from '../logo/logo';
+import { AppRoute } from '../../types/app-route';
+import { logoutAction } from '../../store/api-actions';
+import { MouseEvent } from 'react';
 
 type HeaderProps = {
     hasUserMenu?: boolean;
@@ -9,6 +13,12 @@ type HeaderProps = {
 function Header({ hasUserMenu = true }: HeaderProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
+  const dispatch = useAppDispatch();
+
+  const handleLogoutClick = (evt: MouseEvent) => {
+    evt.preventDefault();
+    dispatch(logoutAction());
+  };
 
   return (
     <header className="header">
@@ -21,7 +31,7 @@ function Header({ hasUserMenu = true }: HeaderProps): JSX.Element {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     {isAuthorized ? (
@@ -32,13 +42,17 @@ function Header({ hasUserMenu = true }: HeaderProps): JSX.Element {
                     ) : (
                       <span className="header__login">Sign in</span>
                     )}
-                  </a>
+                  </Link>
                 </li>
                 {isAuthorized && (
                   <li className="header__nav-item">
-                    <a className="header__nav-link" href="#">
+                    <Link
+                      className="header__nav-link"
+                      to="/"
+                      onClick={handleLogoutClick}
+                    >
                       <span className="header__signout">Sign out</span>
-                    </a>
+                    </Link>
                   </li>
                 )}
               </ul>

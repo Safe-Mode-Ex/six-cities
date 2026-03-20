@@ -3,11 +3,12 @@ import { AppDispatch, State } from '../types/app-state';
 import { AxiosInstance } from 'axios';
 import { Offer } from '../types/offer';
 import { APIRoute } from '../enums';
-import { loadOffers, requireAuthorization, setOffersDataLoadingStatus } from './action';
+import { loadOffers, redirectToRoute, requireAuthorization, setOffersDataLoadingStatus } from './action';
 import { AuthorizationStatus } from '../types/authorization-status';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
+import { AppRoute } from '../types/app-route';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
     dispatch: AppDispatch;
@@ -49,6 +50,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(redirectToRoute(AppRoute.Main));
   },
 );
 
