@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { OFFERS } from './mocks/offers';
 import * as Settings from './settings';
 import { Provider } from 'react-redux';
 import { store } from './store';
@@ -19,7 +18,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ToastContainer />
-      <App offers={OFFERS} settings={Settings} />
+      <App settings={Settings} />
     </Provider>
   </React.StrictMode>
 );

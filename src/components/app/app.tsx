@@ -15,13 +15,13 @@ import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 
 type AppProps = {
-  offers: Offer[];
   settings: Settings;
 };
 
-function App({offers, settings}: AppProps): JSX.Element {
+function App({settings}: AppProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const offers = useAppSelector((state) => state.offers);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return <LoadingScreen />;
@@ -45,7 +45,7 @@ function App({offers, settings}: AppProps): JSX.Element {
     <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Main} element={
-          <MainScreen mapTemplate={settings.LEAFLET_VOYAGER_URL_TEMPLATE} />
+          <MainScreen />
         }
         />
         <Route
@@ -54,7 +54,6 @@ function App({offers, settings}: AppProps): JSX.Element {
             <OfferScreen
               reviewMinLength={settings.REVIEW_COMMENT_MIN_LENGTH}
               reviewMaxLength={settings.REVIEW_COMMENT_MAX_LENGTH}
-              mapTemplate={settings.LEAFLET_VOYAGER_URL_TEMPLATE}
             />
           }
         />

@@ -1,23 +1,22 @@
 import 'leaflet/dist/leaflet.css';
-import { OfferMapPoint } from '../../types/offer';
+import { OfferLocation, OfferMapPoint } from '../../types/offer';
 import { useRef } from 'react';
 import useMap from '../../hooks/use-map';
 import useMapMarkers from '../../hooks/use-map-markers';
 
 type MapProps = {
-  mapTemplate: string;
+  location: OfferLocation;
   points: OfferMapPoint[];
   activeOfferId: string | null;
   extraClass?: string;
 };
 
-function Map({ mapTemplate, points, activeOfferId, extraClass }: MapProps): JSX.Element {
+function Map({ location, points, activeOfferId, extraClass }: MapProps): JSX.Element {
   // TODO: исправить локацию центра и каждого объявления
-  const cityLocation = points?.[0]?.location;
   const mapRef = useRef(null);
-  const map = useMap(mapRef, cityLocation, mapTemplate);
+  const map = useMap(mapRef, location);
 
-  useMapMarkers(points, map, activeOfferId);
+  useMapMarkers(location, points, map, activeOfferId);
 
   return (
     <section

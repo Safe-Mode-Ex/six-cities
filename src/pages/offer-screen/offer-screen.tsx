@@ -8,17 +8,16 @@ import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { useEffect } from 'react';
 import { clearNearbyOffers, clearOfferDetails, clearOfferReviews } from '../../store/action';
 import { RATING_MULTIPLIER } from '../../const';
+import { getCityPoints } from '../../helpers';
 
 type OfferScreenProps = {
   reviewMinLength: number;
   reviewMaxLength: number;
-  mapTemplate: string;
 };
 
 function OfferScreen({
   reviewMinLength,
   reviewMaxLength,
-  mapTemplate
 }: OfferScreenProps): JSX.Element {
   const activeOfferId = useParams().id as string;
   const offerDetails = useAppSelector((state) => state.offerDetails);
@@ -29,12 +28,12 @@ function OfferScreen({
   useEffect(() => {
     if (!offerDetails) {
       dispatch(fetchOfferByIdAction(activeOfferId));
-
-      return () => {
-        dispatch(clearOfferDetails());
-      };
     }
-  }, [activeOfferId, dispatch, offerDetails]);
+
+    return () => {
+      dispatch(clearOfferDetails());
+    };
+  }, [activeOfferId, dispatch]);
 
   useEffect(() => {
     if (offerDetails) {
@@ -46,12 +45,13 @@ function OfferScreen({
         dispatch(clearNearbyOffers());
       };
     }
-  }, [activeOfferId, dispatch, offerDetails]);
+  }, [activeOfferId, dispatch]);
 
-  const mapPoints = nearbyOffers.slice(0, 4).map(({ city, id }) => ({
-    ...city,
-    id,
-  }));
+  const mapPoints = offerDetails ? [...getCityPoints(nearbyOffers.slice(0, 3)), {
+    id: offerDetails?.id,
+    location: offerDetails?.location,
+  }] : [];
+  const cityLocation = offerDetails?.city.location;
 
   return (
     <div className="page">
@@ -141,7 +141,14 @@ function OfferScreen({
                 <Reviews offerId={activeOfferId} reviews={offerReviews} reviewMinLength={reviewMinLength} reviewMaxLength={reviewMaxLength} />
               </div>
             </div>
-            <Map points={mapPoints} activeOfferId={activeOfferId} mapTemplate={mapTemplate} extraClass='offer__map' />
+            {cityLocation && (
+              <Map
+                location={cityLocation}
+                points={mapPoints}
+                activeOfferId={activeOfferId}
+                extraClass='offer__map'
+              />
+            )}
           </section>
           <div className="container">
             <section className="near-places places">

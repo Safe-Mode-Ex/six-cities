@@ -35,4 +35,4 @@ export type OfferDetails = Omit<Offer, 'previewImage'> & {
     maxAdults: number;
 }
 
-export type OfferMapPoint = OfferCity & Pick<Offer, 'id'>;
+export type OfferMapPoint = { location: OfferLocation } & Pick<Offer, 'id'>;
