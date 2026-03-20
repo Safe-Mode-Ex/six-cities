@@ -4,10 +4,10 @@ import Places from '../../components/places/places';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import cn from 'classnames';
 import NoPlaces from '../../components/no-places/no-places';
-import { CITIES } from '../../mocks/cities';
 import useDispatchCity from '../../hooks/use-dispatch-city';
 import { getCityPoints } from '../../helpers';
 import Header from '../../components/header/header';
+import { CITIES } from '../../const';
 
 function MainScreen(): JSX.Element {
   //TODO: сделать навигацию по городам
