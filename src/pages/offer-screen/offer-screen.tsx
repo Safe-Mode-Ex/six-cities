@@ -5,8 +5,6 @@ import OffersList from '../../components/offers-list/offers-list';
 import Reviews from '../../components/reviews/reviews';
 import { fetchCommentsAction, fetchNearbyOffers, fetchOfferByIdAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { useEffect } from 'react';
-import { clearNearbyOffers, clearOfferDetails, clearOfferReviews } from '../../store/action';
 import { RATING_MULTIPLIER } from '../../const';
 import { getCityPoints } from '../../helpers';
 
@@ -25,27 +23,11 @@ function OfferScreen({
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (!offerDetails) {
-      dispatch(fetchOfferByIdAction(activeOfferId));
-    }
-
-    return () => {
-      dispatch(clearOfferDetails());
-    };
-  }, [activeOfferId, dispatch]);
-
-  useEffect(() => {
-    if (offerDetails) {
-      dispatch(fetchCommentsAction(activeOfferId));
-      dispatch(fetchNearbyOffers(activeOfferId));
-
-      return () => {
-        dispatch(clearOfferReviews());
-        dispatch(clearNearbyOffers());
-      };
-    }
-  }, [activeOfferId, dispatch]);
+  if (!offerDetails || offerDetails.id !== activeOfferId) {
+    dispatch(fetchOfferByIdAction(activeOfferId));
+    dispatch(fetchCommentsAction(activeOfferId));
+    dispatch(fetchNearbyOffers(activeOfferId));
+  }
 
   const mapPoints = offerDetails ? [...getCityPoints(nearbyOffers.slice(0, 3)), {
     id: offerDetails?.id,
