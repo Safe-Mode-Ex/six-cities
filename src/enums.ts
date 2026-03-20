@@ -7,6 +7,7 @@ export enum SortType {
 
 export enum APIRoute {
     Offers = '/offers',
+    Comments = '/comments',
     Login = '/login',
     Logout = '/logout',
 }

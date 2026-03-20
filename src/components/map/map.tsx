@@ -7,12 +7,13 @@ import useMapMarkers from '../../hooks/use-map-markers';
 type MapProps = {
   mapTemplate: string;
   points: OfferMapPoint[];
-  activeOfferId: string;
+  activeOfferId: string | null;
   extraClass?: string;
 };
 
 function Map({ mapTemplate, points, activeOfferId, extraClass }: MapProps): JSX.Element {
-  const cityLocation = points[0].location;
+  // TODO: исправить локацию центра и каждого объявления
+  const cityLocation = points?.[0]?.location;
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityLocation, mapTemplate);
 

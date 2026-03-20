@@ -1,5 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { loadOffers, selectCity, setSortType, setActiveOfferId, requireAuthorization, setOffersDataLoadingStatus, setUser, loadOfferById, clearOfferDetails } from './action';
+import {
+  loadOffers,
+  selectCity,
+  setSortType,
+  setActiveOfferId,
+  requireAuthorization,
+  setOffersDataLoadingStatus,
+  setUser,
+  loadOfferById,
+  clearOfferDetails,
+  loadReviewsByOfferId,
+  clearOfferReviews,
+  loadNearbyOffers,
+  clearNearbyOffers
+} from './action';
 import { SORT_TYPES } from '../settings';
 import { AuthorizationStatus } from '../types/authorization-status';
 import { AppState } from '../types/state';
@@ -13,6 +27,8 @@ const initialState: AppState = {
   user: null,
   isOffersDataLoading: false,
   offerDetails: null,
+  offerReviews: [],
+  nearbyOffers: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -43,6 +59,18 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(clearOfferDetails, (state) => {
       state.offerDetails = null;
+    })
+    .addCase(loadReviewsByOfferId, (state, action) => {
+      state.offerReviews = action.payload;
+    })
+    .addCase(clearOfferReviews, (state) => {
+      state.offerReviews = [];
+    })
+    .addCase(loadNearbyOffers, (state, action) => {
+      state.nearbyOffers = action.payload;
+    })
+    .addCase(clearNearbyOffers, (state) => {
+      state.nearbyOffers = [];
     });
 });
 
