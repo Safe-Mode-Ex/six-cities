@@ -1,13 +1,18 @@
 import { FormEvent, useRef } from 'react';
 import Header from '../../components/header/header';
-import { useAppDispatch } from '../../hooks/use-app-selector';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { loginAction } from '../../store/api-actions';
+import { AuthorizationStatus } from '../../types/authorization-status';
+import { AppRoute } from '../../types/app-route';
+import { Navigate } from 'react-router-dom';
 
 function LoginScreen(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
+
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
-  const dispatch = useAppDispatch();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -20,7 +25,7 @@ function LoginScreen(): JSX.Element {
     }
   };
 
-  return (
+  return isAuthorized ? <Navigate to={AppRoute.Main} /> : (
     <div className="page page--gray page--login">
       <Header hasUserMenu={false} />
 
