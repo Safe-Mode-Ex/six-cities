@@ -7,7 +7,7 @@ import useMapMarkers from '../../hooks/use-map-markers';
 type MapProps = {
   mapTemplate: string;
   points: OfferMapPoint[];
-  activeOfferId: number | null;
+  activeOfferId: string;
   extraClass?: string;
 };
 

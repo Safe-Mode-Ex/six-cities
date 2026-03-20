@@ -15,7 +15,7 @@ const activeCustomUrl = new Icon({
   iconAnchor: [20, 40],
 });
 
-function useMapMarkers(points: OfferMapPoint[], map: Map | null, activeOfferId: number | null): void {
+function useMapMarkers(points: OfferMapPoint[], map: Map | null, activeOfferId: string | null): void {
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);

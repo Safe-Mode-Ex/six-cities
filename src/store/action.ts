@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Offer } from '../types/offer';
+import { Offer, OfferDetails } from '../types/offer';
 import { SortType } from '../enums';
 import { AuthorizationStatus } from '../types/authorization-status';
 import { AppRoute } from '../types/app-route';
@@ -15,3 +15,5 @@ export const setActiveOfferId = createAction<number | null>('app/setActiveOfferI
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 export const redirectToRoute = createAction<AppRoute>(REDIRECT_TO_ROUTE_ACTION_NAME);
 export const setUser = createAction<UserData>('user/setUser');
+export const loadOfferById = createAction<OfferDetails>('data/loadOfferById');
+export const clearOfferDetails = createAction('data/clearOfferDetails');

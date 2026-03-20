@@ -1,6 +1,6 @@
 import { SortType } from '../enums';
 import { AuthorizationStatus } from './authorization-status';
-import { Offer } from './offer';
+import { Offer, OfferDetails } from './offer';
 import { UserData } from './user-data';
 
 export type AppState = {
@@ -11,4 +11,5 @@ export type AppState = {
   authorizationStatus: AuthorizationStatus;
   user: UserData | null;
   isOffersDataLoading: boolean;
+  offerDetails: OfferDetails | null;
 };

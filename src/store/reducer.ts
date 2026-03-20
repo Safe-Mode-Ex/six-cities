@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { loadOffers, selectCity, setSortType, setActiveOfferId, requireAuthorization, setOffersDataLoadingStatus, setUser } from './action';
+import { loadOffers, selectCity, setSortType, setActiveOfferId, requireAuthorization, setOffersDataLoadingStatus, setUser, loadOfferById, clearOfferDetails } from './action';
 import { SORT_TYPES } from '../settings';
 import { AuthorizationStatus } from '../types/authorization-status';
 import { AppState } from '../types/state';
@@ -12,6 +12,7 @@ const initialState: AppState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
   isOffersDataLoading: false,
+  offerDetails: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -36,6 +37,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setUser, (state, action) => {
       state.user = action.payload;
+    })
+    .addCase(loadOfferById, (state, action) => {
+      state.offerDetails = action.payload;
+    })
+    .addCase(clearOfferDetails, (state) => {
+      state.offerDetails = null;
     });
 });
 
