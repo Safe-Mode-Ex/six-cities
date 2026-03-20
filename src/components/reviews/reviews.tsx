@@ -8,11 +8,9 @@ import ReviewItem from '../review/review';
 type ReviewsProps = {
   offerId: string;
   reviews: Review[];
-  reviewMinLength: number;
-  reviewMaxLength: number;
 }
 
-function Reviews({offerId, reviews, reviewMinLength, reviewMaxLength}: ReviewsProps): JSX.Element {
+function Reviews({offerId, reviews}: ReviewsProps): JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
@@ -35,11 +33,7 @@ function Reviews({offerId, reviews, reviewMinLength, reviewMaxLength}: ReviewsPr
         ))}
       </ul>
       {isAuthorized && (
-        <ReviewForm
-          reviewMinLength={reviewMinLength}
-          reviewMaxLength={reviewMaxLength}
-          onSendReview={handleSendReview}
-        />
+        <ReviewForm onSendReview={handleSendReview} />
       )}
     </section>
   );

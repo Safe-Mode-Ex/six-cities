@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
@@ -8,26 +9,20 @@ import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { RATING_MULTIPLIER } from '../../const';
 import { getCityPoints } from '../../helpers';
 
-type OfferScreenProps = {
-  reviewMinLength: number;
-  reviewMaxLength: number;
-};
-
-function OfferScreen({
-  reviewMinLength,
-  reviewMaxLength,
-}: OfferScreenProps): JSX.Element {
+function OfferScreen(): JSX.Element {
   const activeOfferId = useParams().id as string;
   const offerDetails = useAppSelector((state) => state.offerDetails);
   const offerReviews = useAppSelector((state) => state.offerReviews);
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
   const dispatch = useAppDispatch();
 
-  if (!offerDetails || offerDetails.id !== activeOfferId) {
-    dispatch(fetchOfferByIdAction(activeOfferId));
-    dispatch(fetchCommentsAction(activeOfferId));
-    dispatch(fetchNearbyOffers(activeOfferId));
-  }
+  useEffect(() => {
+    if (!offerDetails || offerDetails.id !== activeOfferId) {
+      dispatch(fetchOfferByIdAction(activeOfferId));
+      dispatch(fetchCommentsAction(activeOfferId));
+      dispatch(fetchNearbyOffers(activeOfferId));
+    }
+  }, [activeOfferId, offerDetails, dispatch]);
 
   const mapPoints = offerDetails ? [...getCityPoints(nearbyOffers.slice(0, 3)), {
     id: offerDetails?.id,
@@ -120,7 +115,7 @@ function OfferScreen({
                     <p className="offer__text">{offerDetails.description}</p>
                   </div>
                 </div>
-                <Reviews offerId={activeOfferId} reviews={offerReviews} reviewMinLength={reviewMinLength} reviewMaxLength={reviewMaxLength} />
+                <Reviews offerId={activeOfferId} reviews={offerReviews} />
               </div>
             </div>
             {cityLocation && (

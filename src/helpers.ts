@@ -19,3 +19,5 @@ export const getCityPoints = (cityOffers: Offer[]): OfferMapPoint[] => cityOffer
     location,
     id,
   }));
+
+export const getDefaultSortTypes = () => Object.values(SortType);

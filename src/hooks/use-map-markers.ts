@@ -1,16 +1,16 @@
 import { Icon, layerGroup, Map, Marker } from 'leaflet';
 import { useEffect } from 'react';
 import { OfferLocation, OfferMapPoint } from '../types/offer';
-import { URL_MARKER_DEFAULT, URL_MARKER_ACTIVE } from '../settings';
+import { MarkerUrl } from '../enums';
 
 const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: MarkerUrl.Default,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
 const activeCustomUrl = new Icon({
-  iconUrl: URL_MARKER_ACTIVE,
+  iconUrl: MarkerUrl.Active,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });

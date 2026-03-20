@@ -1,7 +1,7 @@
 import { Map, TileLayer } from 'leaflet';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { OfferLocation } from '../types/offer';
-import { Leaflet } from '../const';
+import { Leaflet } from '../enums';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,

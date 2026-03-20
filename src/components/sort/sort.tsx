@@ -1,10 +1,10 @@
 import cn from 'classnames';
 import { useRef, useState } from 'react';
-import { SORT_TYPES } from '../../settings';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { setSortType } from '../../store/action';
 import { SortType } from '../../enums';
 import useCloseSort from '../../hooks/use-close-sort';
+import { getDefaultSortTypes } from '../../helpers';
 
 function Sort(): JSX.Element {
   const [isOpened, setOpenedState] = useState(false);
@@ -38,7 +38,7 @@ function Sort(): JSX.Element {
         { 'places__options--opened': isOpened }
       )}
       >
-        {SORT_TYPES.map((type) => (
+        {getDefaultSortTypes().map((type) => (
           <li
             className={cn(
               'places__option',

@@ -2,16 +2,15 @@ import { ChangeEvent, FormEvent, Fragment } from 'react';
 import { NewReview } from '../../types/review';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { setReviewForm } from '../../store/action';
+import { ReviewText } from '../../enums';
 
 type ReviewFormProps = {
-  reviewMinLength: number;
-  reviewMaxLength: number;
   onSendReview: (formValue: NewReview) => void;
 };
 
 const MAX_RATING = 5;
 
-function ReviewForm({ reviewMinLength, reviewMaxLength, onSendReview }: ReviewFormProps): JSX.Element {
+function ReviewForm({ onSendReview }: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
   const isCommentSending = useAppSelector((state) => state.isCommentSending);
   const formValue = useAppSelector((state) => state.reviewForm);
@@ -30,6 +29,10 @@ function ReviewForm({ reviewMinLength, reviewMaxLength, onSendReview }: ReviewFo
     evt.preventDefault();
     onSendReview(formValue);
   };
+
+  const isSubmitButtonDisabled = formValue.rating === 0 ||
+      formValue.comment.length < ReviewText.MinLength ||
+      isCommentSending;
 
   return (
     <form
@@ -76,7 +79,7 @@ function ReviewForm({ reviewMinLength, reviewMaxLength, onSendReview }: ReviewFo
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={formValue.comment}
         onChange={handleTextChange}
-        maxLength={reviewMaxLength}
+        maxLength={ReviewText.MaxLength}
         disabled={isCommentSending}
       >
       </textarea>
@@ -85,12 +88,12 @@ function ReviewForm({ reviewMinLength, reviewMaxLength, onSendReview }: ReviewFo
         <p className="reviews__help">
           To submit review please make sure to set&nbsp;
           <span className="reviews__star">rating</span> and describe your stay with at least&nbsp;
-          <b className="reviews__text-amount">{reviewMinLength} characters</b>.
+          <b className="reviews__text-amount">{ReviewText.MinLength} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={formValue.rating === 0 || formValue.comment.length < reviewMinLength || isCommentSending}
+          disabled={isSubmitButtonDisabled}
         >
           Submit
         </button>

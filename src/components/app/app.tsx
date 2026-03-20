@@ -8,17 +8,12 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import PrivateRoute from '../private-route/private-route';
 import { AppRoute } from '../../types/app-route';
-import { Settings } from '../../types/settings';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 
-type AppProps = {
-  settings: Settings;
-};
-
-function App({settings}: AppProps): JSX.Element {
+function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   const offers = useAppSelector((state) => state.offers);
@@ -51,10 +46,7 @@ function App({settings}: AppProps): JSX.Element {
         <Route
           path={`${AppRoute.Offer}/:id`}
           element={
-            <OfferScreen
-              reviewMinLength={settings.REVIEW_COMMENT_MIN_LENGTH}
-              reviewMaxLength={settings.REVIEW_COMMENT_MAX_LENGTH}
-            />
+            <OfferScreen />
           }
         />
         <Route path={AppRoute.Login} element={<LoginScreen />} />

@@ -16,14 +16,14 @@ import {
   setCommentSendingStatus,
   setReviewForm
 } from './action';
-import { SORT_TYPES } from '../settings';
 import { AuthorizationStatus } from '../types/authorization-status';
 import { AppState } from '../types/state';
+import { getDefaultSortTypes } from '../helpers';
 
 export const initialState: AppState = {
   city: '',
   offers: [],
-  sortType: SORT_TYPES[0],
+  sortType: getDefaultSortTypes()[0],
   activeOfferId: null,
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
