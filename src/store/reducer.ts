@@ -12,13 +12,15 @@ import {
   loadReviewsByOfferId,
   clearOfferReviews,
   loadNearbyOffers,
-  clearNearbyOffers
+  clearNearbyOffers,
+  setCommentSendingStatus,
+  setReviewForm
 } from './action';
 import { SORT_TYPES } from '../settings';
 import { AuthorizationStatus } from '../types/authorization-status';
 import { AppState } from '../types/state';
 
-const initialState: AppState = {
+export const initialState: AppState = {
   city: '',
   offers: [],
   sortType: SORT_TYPES[0],
@@ -29,6 +31,11 @@ const initialState: AppState = {
   offerDetails: null,
   offerReviews: [],
   nearbyOffers: [],
+  isCommentSending: false,
+  reviewForm: {
+    rating: 0,
+    comment: '',
+  },
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -71,6 +78,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(clearNearbyOffers, (state) => {
       state.nearbyOffers = [];
+    })
+    .addCase(setCommentSendingStatus, (state, action) => {
+      state.isCommentSending = action.payload;
+    })
+    .addCase(setReviewForm, (state, action) => {
+      state.reviewForm = action.payload;
     });
 });
 

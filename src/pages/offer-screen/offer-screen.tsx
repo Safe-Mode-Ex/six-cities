@@ -138,7 +138,7 @@ function OfferScreen({
                     <p className="offer__text">{offerDetails.description}</p>
                   </div>
                 </div>
-                <Reviews reviews={offerReviews} reviewMinLength={reviewMinLength} reviewMaxLength={reviewMaxLength} />
+                <Reviews offerId={activeOfferId} reviews={offerReviews} reviewMinLength={reviewMinLength} reviewMaxLength={reviewMaxLength} />
               </div>
             </div>
             <Map points={mapPoints} activeOfferId={activeOfferId} mapTemplate={mapTemplate} extraClass='offer__map' />

@@ -10,7 +10,9 @@ import {
   loadReviewsByOfferId,
   redirectToRoute,
   requireAuthorization,
+  setCommentSendingStatus,
   setOffersDataLoadingStatus,
+  setReviewForm,
   setUser
 } from './action';
 import { AuthorizationStatus } from '../types/authorization-status';
@@ -18,7 +20,8 @@ import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 import { AppRoute } from '../types/app-route';
-import { Review } from '../types/review';
+import { NewReview, Review } from '../types/review';
+import { initialState } from './reducer';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
     dispatch: AppDispatch;
@@ -69,6 +72,23 @@ export const fetchNearbyOffers = createAsyncThunk<void, string, {
   async (offerId, { dispatch, extra: api }) => {
     const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${offerId}/nearby`);
     dispatch(loadNearbyOffers(data));
+  }
+);
+
+export const sendOfferReview = createAsyncThunk<void, {
+  offerId: string; formData: NewReview;
+}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/sendOfferReview',
+  async ({ offerId, formData}, { dispatch, extra: api }) => {
+    dispatch(setCommentSendingStatus(true));
+    await api.post<Review>(`${APIRoute.Comments}/${offerId}`, formData);
+    dispatch(setCommentSendingStatus(false));
+    dispatch(setReviewForm(initialState.reviewForm));
+    dispatch(fetchCommentsAction(offerId));
   }
 );
 

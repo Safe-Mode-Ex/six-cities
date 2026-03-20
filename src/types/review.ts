@@ -14,5 +14,5 @@ export type Review = {
 
 export type NewReview = {
     rating: number;
-    text: string;
+    comment: string;
 }

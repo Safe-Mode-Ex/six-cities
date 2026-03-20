@@ -1,7 +1,7 @@
 import { SortType } from '../enums';
 import { AuthorizationStatus } from './authorization-status';
 import { Offer, OfferDetails } from './offer';
-import { Review } from './review';
+import { NewReview, Review } from './review';
 import { UserData } from './user-data';
 
 export type AppState = {
@@ -15,4 +15,6 @@ export type AppState = {
   offerDetails: OfferDetails | null;
   offerReviews: Review[];
   nearbyOffers: Offer[];
+  isCommentSending: boolean;
+  reviewForm: NewReview;
 };

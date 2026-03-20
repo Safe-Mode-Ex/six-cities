@@ -1,21 +1,27 @@
-import { useAppSelector } from '../../hooks/use-app-selector';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
+import { sendOfferReview } from '../../store/api-actions';
 import { AuthorizationStatus } from '../../types/authorization-status';
 import { NewReview, Review } from '../../types/review';
 import ReviewForm from '../review-form/review-form';
 import ReviewItem from '../review/review';
 
 type ReviewsProps = {
+  offerId: string;
   reviews: Review[];
   reviewMinLength: number;
   reviewMaxLength: number;
 }
 
-function Reviews({reviews, reviewMinLength, reviewMaxLength}: ReviewsProps): JSX.Element {
+function Reviews({offerId, reviews, reviewMinLength, reviewMaxLength}: ReviewsProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
 
-  const handleSendReview = (formValue: NewReview): void => {
-    console.log(formValue);
+  const handleSendReview = (formData: NewReview): void => {
+    dispatch(sendOfferReview({
+      offerId,
+      formData,
+    }));
   };
 
   return (
