@@ -4,7 +4,7 @@ import { AppRoute } from '../../types/app-route';
 
 type OfferCardProps = {
   offer: Offer;
-  onHover: (offerId: number | null) => void;
+  onHover: (offerId: string | null) => void;
   isFavoritesScreen?: boolean;
   isOfferScreen?: boolean;
 };
