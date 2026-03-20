@@ -3,6 +3,7 @@ import { Offer } from '../types/offer';
 import { SortType } from '../enums';
 import { AuthorizationStatus } from '../types/authorization-status';
 import { AppRoute } from '../types/app-route';
+import { UserData } from '../types/user-data';
 
 export const REDIRECT_TO_ROUTE_ACTION_NAME = 'app/redirectToRoute';
 
@@ -13,3 +14,4 @@ export const setSortType = createAction<SortType>('app/setSortType');
 export const setActiveOfferId = createAction<number | null>('app/setActiveOfferId');
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 export const redirectToRoute = createAction<AppRoute>(REDIRECT_TO_ROUTE_ACTION_NAME);
+export const setUser = createAction<UserData>('user/setUser');

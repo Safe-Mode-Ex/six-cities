@@ -13,6 +13,7 @@ type HeaderProps = {
 function Header({ hasUserMenu = true }: HeaderProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
+  const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   const handleLogoutClick = (evt: MouseEvent) => {
@@ -36,7 +37,7 @@ function Header({ hasUserMenu = true }: HeaderProps): JSX.Element {
                     </div>
                     {isAuthorized ? (
                       <>
-                        <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                        <span className="header__user-name user__name">{user?.email}</span>
                         <span className="header__favorite-count">3</span>
                       </>
                     ) : (
