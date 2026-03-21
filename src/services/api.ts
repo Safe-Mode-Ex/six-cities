@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosInstance } from 'axios';
 import { getToken } from './token';
 import { toast } from 'react-toastify';
+import { StatusCodes } from 'http-status-codes';
 
 type DetailMessageType = {
   type: string;
@@ -29,7 +30,7 @@ export const createApi = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<DetailMessageType>) => {
-      if (error.response) {
+      if (error.response && (error.response.status as StatusCodes) !== StatusCodes.UNAUTHORIZED) {
         const detailMessage = error.response.data;
         toast.error(detailMessage.message);
       }

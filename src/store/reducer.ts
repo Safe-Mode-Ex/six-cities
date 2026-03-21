@@ -8,11 +8,8 @@ import {
   setOffersDataLoadingStatus,
   setUser,
   loadOfferById,
-  clearOfferDetails,
   loadReviewsByOfferId,
-  clearOfferReviews,
   loadNearbyOffers,
-  clearNearbyOffers,
   setCommentSendingStatus,
   setReviewForm
 } from './action';
@@ -64,20 +61,11 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOfferById, (state, action) => {
       state.offerDetails = action.payload;
     })
-    .addCase(clearOfferDetails, (state) => {
-      state.offerDetails = null;
-    })
     .addCase(loadReviewsByOfferId, (state, action) => {
       state.offerReviews = action.payload;
     })
-    .addCase(clearOfferReviews, (state) => {
-      state.offerReviews = [];
-    })
     .addCase(loadNearbyOffers, (state, action) => {
       state.nearbyOffers = action.payload;
-    })
-    .addCase(clearNearbyOffers, (state) => {
-      state.nearbyOffers = [];
     })
     .addCase(setCommentSendingStatus, (state, action) => {
       state.isCommentSending = action.payload;
