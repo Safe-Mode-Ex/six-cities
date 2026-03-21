@@ -1,31 +1,40 @@
-import { REVIEWS } from '../../mocks/reviews';
-import { NewReview } from '../../types/review';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
+import { sendOfferReview } from '../../store/api-actions';
+import { AuthorizationStatus } from '../../types/authorization-status';
+import { NewReview, Review } from '../../types/review';
 import ReviewForm from '../review-form/review-form';
 import ReviewItem from '../review/review';
 
 type ReviewsProps = {
-  reviewMinLength: number;
-  reviewMaxLength: number;
+  offerId: string;
+  reviews: Review[];
 }
 
-function Reviews({reviewMinLength, reviewMaxLength}: ReviewsProps): JSX.Element {
-  const handleSendReview = (formValue: NewReview): void => {
-    console.log(formValue);
+function Reviews({offerId, reviews}: ReviewsProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
+
+  const handleSendReview = (formData: NewReview): void => {
+    dispatch(sendOfferReview({
+      offerId,
+      formData,
+    }));
   };
 
   return (
     <section className="offer__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
+      <h2 className="reviews__title">
+        Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
+      </h2>
       <ul className="reviews__list">
-        {REVIEWS.map((review) => (
+        {reviews.map((review) => (
           <ReviewItem key={review.id} review={review} />
         ))}
       </ul>
-      <ReviewForm
-        reviewMinLength={reviewMinLength}
-        reviewMaxLength={reviewMaxLength}
-        onSendReview={handleSendReview}
-      />
+      {isAuthorized && (
+        <ReviewForm onSendReview={handleSendReview} />
+      )}
     </section>
   );
 }

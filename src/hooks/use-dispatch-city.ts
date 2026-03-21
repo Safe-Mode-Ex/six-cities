@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { CITIES } from '../mocks/cities';
 import { selectCity } from '../store/action';
 import { useAppDispatch } from './use-app-selector';
+import { CITIES } from '../const';
 
 function useDispatchCity(): void {
   const dispatch = useAppDispatch();

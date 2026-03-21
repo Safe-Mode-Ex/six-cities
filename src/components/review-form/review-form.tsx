@@ -1,41 +1,45 @@
-import { ChangeEvent, FormEvent, Fragment, useState } from 'react';
+import { ChangeEvent, FormEvent, Fragment } from 'react';
 import { NewReview } from '../../types/review';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
+import { setReviewForm } from '../../store/action';
+import { ReviewText } from '../../enums';
 
 type ReviewFormProps = {
-  reviewMinLength: number;
-  reviewMaxLength: number;
   onSendReview: (formValue: NewReview) => void;
 };
 
 const MAX_RATING = 5;
 
-function ReviewForm({ reviewMinLength, reviewMaxLength, onSendReview }: ReviewFormProps): JSX.Element {
-  const [formValue, setFormValue] = useState({
-    rating: 0,
-    text: '',
-  });
+function ReviewForm({ onSendReview }: ReviewFormProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const isCommentSending = useAppSelector((state) => state.isCommentSending);
+  const formValue = useAppSelector((state) => state.reviewForm);
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const rating = Number(evt.target.value);
-    setFormValue((prev) => ({ ...prev, rating }));
+    dispatch(setReviewForm({ ...formValue, rating }));
   };
 
   const handleTextChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    const text = evt.target.value;
-    setFormValue((prev) => ({ ...prev, text }));
+    const comment = evt.target.value;
+    dispatch(setReviewForm({ ...formValue, comment }));
   };
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     onSendReview(formValue);
   };
+
+  const isSubmitButtonDisabled = formValue.rating === 0 ||
+      formValue.comment.length < ReviewText.MinLength ||
+      isCommentSending;
 
   return (
     <form
       className="reviews__form form"
       action="#"
       method="post"
-      onSubmit={handleSubmit}
+      onSubmit={handleFormSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
@@ -52,6 +56,7 @@ function ReviewForm({ reviewMinLength, reviewMaxLength, onSendReview }: ReviewFo
                 type="radio"
                 checked={formValue.rating === ratingValue}
                 onChange={handleRatingChange}
+                disabled={isCommentSending}
               />
               <label
                 htmlFor={`${ratingValue}-stars`}
@@ -72,9 +77,10 @@ function ReviewForm({ reviewMinLength, reviewMaxLength, onSendReview }: ReviewFo
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={formValue.text}
+        value={formValue.comment}
         onChange={handleTextChange}
-        maxLength={reviewMaxLength}
+        maxLength={ReviewText.MaxLength}
+        disabled={isCommentSending}
       >
       </textarea>
 
@@ -82,14 +88,14 @@ function ReviewForm({ reviewMinLength, reviewMaxLength, onSendReview }: ReviewFo
         <p className="reviews__help">
           To submit review please make sure to set&nbsp;
           <span className="reviews__star">rating</span> and describe your stay with at least&nbsp;
-          <b className="reviews__text-amount">{reviewMinLength} characters</b>.
+          <b className="reviews__text-amount">{ReviewText.MinLength} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={formValue.rating === 0 || formValue.text.length < reviewMinLength}
+          disabled={isSubmitButtonDisabled}
         >
-            Submit
+          Submit
         </button>
       </div>
     </form>

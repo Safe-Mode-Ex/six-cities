@@ -10,7 +10,7 @@ export type OfferCity = {
 }
 
 export type Offer = {
-    id: number;
+    id: string;
     title: string;
     type: string;
     price: number;
@@ -35,4 +35,4 @@ export type OfferDetails = Omit<Offer, 'previewImage'> & {
     maxAdults: number;
 }
 
-export type OfferMapPoint = OfferCity & Pick<Offer, 'id'>;
+export type OfferMapPoint = { location: OfferLocation } & Pick<Offer, 'id'>;

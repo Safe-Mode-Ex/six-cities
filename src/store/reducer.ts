@@ -1,18 +1,18 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { loadOffers, selectCity, setSortType, setActiveOfferId, requireAuthorization, setOffersDataLoadingStatus, setUser } from './action';
-import { SORT_TYPES } from '../settings';
-import { AuthorizationStatus } from '../types/authorization-status';
-import { AppState } from '../types/state';
-
-const initialState: AppState = {
-  city: '',
-  offers: [],
-  sortType: SORT_TYPES[0],
-  activeOfferId: null,
-  authorizationStatus: AuthorizationStatus.Unknown,
-  user: null,
-  isOffersDataLoading: false,
-};
+import {
+  loadOffers,
+  selectCity,
+  setSortType,
+  setActiveOfferId,
+  requireAuthorization,
+  setUser,
+  loadOfferById,
+  loadReviewsByOfferId,
+  loadNearbyOffers,
+  setReviewForm
+} from './action';
+import { fetchOfferByIdAction, fetchOffersAction, sendOfferReview } from './api-actions';
+import { initialState } from './const';
 
 const reducer = createReducer(initialState, (builder) => {
   builder
@@ -22,9 +22,12 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOffers, ((state, action) => {
       state.offers = action.payload;
     }))
-    .addCase(setOffersDataLoadingStatus, (state, action) => {
-      state.isOffersDataLoading = action.payload;
-    })
+    .addCase(fetchOffersAction.pending, ((state) => {
+      state.isOffersDataLoading = true;
+    }))
+    .addCase(fetchOffersAction.fulfilled, ((state) => {
+      state.isOffersDataLoading = false;
+    }))
     .addCase(setSortType, (state, action) => {
       state.sortType = action.payload;
     })
@@ -36,6 +39,36 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setUser, (state, action) => {
       state.user = action.payload;
+    })
+    .addCase(loadOfferById, (state, action) => {
+      state.offerDetails = action.payload;
+    })
+    .addCase(fetchOfferByIdAction.pending, (state) => {
+      state.isOffersDataLoading = true;
+    })
+    .addCase(fetchOfferByIdAction.fulfilled, (state) => {
+      state.isOffersDataLoading = false;
+    })
+    .addCase(fetchOfferByIdAction.rejected, (state) => {
+      state.isOffersDataLoading = false;
+    })
+    .addCase(loadReviewsByOfferId, (state, action) => {
+      state.offerReviews = action.payload;
+    })
+    .addCase(loadNearbyOffers, (state, action) => {
+      state.nearbyOffers = action.payload;
+    })
+    .addCase(sendOfferReview.pending, (state) => {
+      state.isCommentSending = true;
+    })
+    .addCase(sendOfferReview.fulfilled, (state) => {
+      state.isCommentSending = false;
+    })
+    .addCase(sendOfferReview.rejected, (state) => {
+      state.isCommentSending = false;
+    })
+    .addCase(setReviewForm, (state, action) => {
+      state.reviewForm = action.payload;
     });
 });
 

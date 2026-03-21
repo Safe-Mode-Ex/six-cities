@@ -4,16 +4,12 @@ import Places from '../../components/places/places';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import cn from 'classnames';
 import NoPlaces from '../../components/no-places/no-places';
-import { CITIES } from '../../mocks/cities';
 import useDispatchCity from '../../hooks/use-dispatch-city';
 import { getCityPoints } from '../../helpers';
 import Header from '../../components/header/header';
+import { CITIES } from '../../const';
 
-type MainScreenProps = {
-  mapTemplate: string;
-};
-
-function MainScreen({mapTemplate}: MainScreenProps): JSX.Element {
+function MainScreen(): JSX.Element {
   //TODO: сделать навигацию по городам
   useDispatchCity();
 
@@ -22,6 +18,7 @@ function MainScreen({mapTemplate}: MainScreenProps): JSX.Element {
   const activeOfferId = useAppSelector((state) => state.activeOfferId);
 
   const cityOffers = offers.filter(({ city }) => city.name === activeCityName);
+  const cityLocation = cityOffers[0]?.city.location;
   const hasOffers = !!cityOffers?.length;
   const points = getCityPoints(cityOffers);
 
@@ -55,9 +52,9 @@ function MainScreen({mapTemplate}: MainScreenProps): JSX.Element {
             <div className="cities__right-section">
               {!!points.length &&
               <Map
+                location={cityLocation}
                 points={points}
                 activeOfferId={activeOfferId}
-                mapTemplate={mapTemplate}
                 extraClass='cities__map'
               />}
             </div>

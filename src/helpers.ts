@@ -15,7 +15,9 @@ export const sortOffersBy = (sortType: SortType, offers: Offer[]): Offer[] => [.
 });
 
 export const getCityPoints = (cityOffers: Offer[]): OfferMapPoint[] => cityOffers
-  .map(({ city, id }) => ({
-    ...city,
+  .map(({ location, id }) => ({
+    location,
     id,
   }));
+
+export const getDefaultSortTypes = () => Object.values(SortType);

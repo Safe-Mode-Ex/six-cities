@@ -1,24 +1,31 @@
 import { Icon, layerGroup, Map, Marker } from 'leaflet';
 import { useEffect } from 'react';
-import { OfferMapPoint } from '../types/offer';
-import { URL_MARKER_DEFAULT, URL_MARKER_ACTIVE } from '../settings';
+import { OfferLocation, OfferMapPoint } from '../types/offer';
+import { MarkerUrl } from '../enums';
 
 const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: MarkerUrl.Default,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
 const activeCustomUrl = new Icon({
-  iconUrl: URL_MARKER_ACTIVE,
+  iconUrl: MarkerUrl.Active,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
-function useMapMarkers(points: OfferMapPoint[], map: Map | null, activeOfferId: number | null): void {
+function useMapMarkers(
+  {latitude, longitude}: OfferLocation,
+  points: OfferMapPoint[],
+  map: Map | null,
+  activeOfferId: string | null
+): void {
   useEffect(() => {
     if (map) {
-      const markerLayer = layerGroup().addTo(map);
+      const pannedMap = map.flyTo([latitude, longitude]);
+      const markerLayer = layerGroup().addTo(pannedMap);
+
       points.forEach(({ id, location }) => {
         const marker = new Marker({
           lat: location.latitude,
@@ -31,10 +38,10 @@ function useMapMarkers(points: OfferMapPoint[], map: Map | null, activeOfferId: 
       });
 
       return () => {
-        map.removeLayer(markerLayer);
+        pannedMap.removeLayer(markerLayer);
       };
     }
-  }, [activeOfferId, map, points]);
+  }, [activeOfferId, latitude, longitude, map, points]);
 }
 
 export default useMapMarkers;

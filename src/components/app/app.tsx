@@ -8,20 +8,15 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import PrivateRoute from '../private-route/private-route';
 import { AppRoute } from '../../types/app-route';
-import { Settings } from '../../types/settings';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 
-type AppProps = {
-  offers: Offer[];
-  settings: Settings;
-};
-
-function App({offers, settings}: AppProps): JSX.Element {
+function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const offers = useAppSelector((state) => state.offers);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return <LoadingScreen />;
@@ -45,17 +40,13 @@ function App({offers, settings}: AppProps): JSX.Element {
     <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Main} element={
-          <MainScreen mapTemplate={settings.LEAFLET_VOYAGER_URL_TEMPLATE} />
+          <MainScreen />
         }
         />
         <Route
           path={`${AppRoute.Offer}/:id`}
           element={
-            <OfferScreen
-              reviewMinLength={settings.REVIEW_COMMENT_MIN_LENGTH}
-              reviewMaxLength={settings.REVIEW_COMMENT_MAX_LENGTH}
-              mapTemplate={settings.LEAFLET_VOYAGER_URL_TEMPLATE}
-            />
+            <OfferScreen />
           }
         />
         <Route path={AppRoute.Login} element={<LoginScreen />} />
