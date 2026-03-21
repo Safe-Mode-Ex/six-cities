@@ -5,35 +5,14 @@ import {
   setSortType,
   setActiveOfferId,
   requireAuthorization,
-  setOffersDataLoadingStatus,
   setUser,
   loadOfferById,
   loadReviewsByOfferId,
   loadNearbyOffers,
-  setCommentSendingStatus,
   setReviewForm
 } from './action';
-import { AuthorizationStatus } from '../types/authorization-status';
-import { AppState } from '../types/state';
-import { getDefaultSortTypes } from '../helpers';
-
-export const initialState: AppState = {
-  city: '',
-  offers: [],
-  sortType: getDefaultSortTypes()[0],
-  activeOfferId: null,
-  authorizationStatus: AuthorizationStatus.Unknown,
-  user: null,
-  isOffersDataLoading: false,
-  offerDetails: null,
-  offerReviews: [],
-  nearbyOffers: [],
-  isCommentSending: false,
-  reviewForm: {
-    rating: 0,
-    comment: '',
-  },
-};
+import { fetchOfferByIdAction, fetchOffersAction, sendOfferReview } from './api-actions';
+import { initialState } from './const';
 
 const reducer = createReducer(initialState, (builder) => {
   builder
@@ -43,9 +22,12 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOffers, ((state, action) => {
       state.offers = action.payload;
     }))
-    .addCase(setOffersDataLoadingStatus, (state, action) => {
-      state.isOffersDataLoading = action.payload;
-    })
+    .addCase(fetchOffersAction.pending, ((state) => {
+      state.isOffersDataLoading = true;
+    }))
+    .addCase(fetchOffersAction.fulfilled, ((state) => {
+      state.isOffersDataLoading = false;
+    }))
     .addCase(setSortType, (state, action) => {
       state.sortType = action.payload;
     })
@@ -61,14 +43,29 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOfferById, (state, action) => {
       state.offerDetails = action.payload;
     })
+    .addCase(fetchOfferByIdAction.pending, (state) => {
+      state.isOffersDataLoading = true;
+    })
+    .addCase(fetchOfferByIdAction.fulfilled, (state) => {
+      state.isOffersDataLoading = false;
+    })
+    .addCase(fetchOfferByIdAction.rejected, (state) => {
+      state.isOffersDataLoading = false;
+    })
     .addCase(loadReviewsByOfferId, (state, action) => {
       state.offerReviews = action.payload;
     })
     .addCase(loadNearbyOffers, (state, action) => {
       state.nearbyOffers = action.payload;
     })
-    .addCase(setCommentSendingStatus, (state, action) => {
-      state.isCommentSending = action.payload;
+    .addCase(sendOfferReview.pending, (state) => {
+      state.isCommentSending = true;
+    })
+    .addCase(sendOfferReview.fulfilled, (state) => {
+      state.isCommentSending = false;
+    })
+    .addCase(sendOfferReview.rejected, (state) => {
+      state.isCommentSending = false;
     })
     .addCase(setReviewForm, (state, action) => {
       state.reviewForm = action.payload;

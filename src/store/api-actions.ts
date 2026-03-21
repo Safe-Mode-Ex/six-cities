@@ -10,8 +10,6 @@ import {
   loadReviewsByOfferId,
   redirectToRoute,
   requireAuthorization,
-  setCommentSendingStatus,
-  setOffersDataLoadingStatus,
   setReviewForm,
   setUser
 } from './action';
@@ -21,8 +19,8 @@ import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 import { AppRoute } from '../types/app-route';
 import { NewReview, Review } from '../types/review';
-import { initialState } from './reducer';
 import { StatusCodes } from 'http-status-codes';
+import { initialState } from './const';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
     dispatch: AppDispatch;
@@ -31,10 +29,8 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
 }>(
   'data/fetchOffers',
   async (_, { dispatch, extra: api }) => {
-    dispatch(setOffersDataLoadingStatus(true));
     const { data } = await api.get<Offer[]>(APIRoute.Offers);
     dispatch(loadOffers(data));
-    dispatch(setOffersDataLoadingStatus(false));
   },
 );
 
@@ -46,18 +42,14 @@ export const fetchOfferByIdAction = createAsyncThunk<void, string, {
   'data/fetchOfferById',
   async (offerId, { dispatch, extra: api }) => {
     try {
-      dispatch(setOffersDataLoadingStatus(true));
       const { data } = await api.get<OfferDetails>(`${APIRoute.Offers}/${offerId}`);
       dispatch(loadOfferById(data));
-      dispatch(setOffersDataLoadingStatus(false));
     } catch (error) {
       const errorCode = (error as AxiosError).response?.status;
 
       if (errorCode === StatusCodes.NOT_FOUND) {
         dispatch(redirectToRoute(AppRoute.NotFound));
       }
-
-      dispatch(setOffersDataLoadingStatus(false));
     }
   }
 );
@@ -95,9 +87,7 @@ export const sendOfferReview = createAsyncThunk<void, {
 }>(
   'data/sendOfferReview',
   async ({ offerId, formData}, { dispatch, extra: api }) => {
-    dispatch(setCommentSendingStatus(true));
     await api.post<Review>(`${APIRoute.Comments}/${offerId}`, formData);
-    dispatch(setCommentSendingStatus(false));
     dispatch(setReviewForm(initialState.reviewForm));
     dispatch(fetchCommentsAction(offerId));
   }
