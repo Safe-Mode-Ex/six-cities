@@ -5,6 +5,7 @@ import { loginAction } from '../../store/api-actions';
 import { AuthorizationStatus } from '../../types/authorization-status';
 import { AppRoute } from '../../types/app-route';
 import { Navigate } from 'react-router-dom';
+import { PASSWORD_REGEXP } from '../../const';
 
 function LoginScreen(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -58,6 +59,7 @@ function LoginScreen(): JSX.Element {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  pattern={PASSWORD_REGEXP}
                   required
                 />
               </div>
