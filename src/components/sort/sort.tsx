@@ -12,7 +12,7 @@ function Sort(): JSX.Element {
   const sortRef = useRef<HTMLElement>(null);
   const dispatch = useAppDispatch();
 
-  const handleSetSortType = (type: SortType) => {
+  const handleSortTypeClick = (type: SortType) => {
     dispatch(setSortType(type));
     setOpenedState(false);
   };
@@ -46,7 +46,7 @@ function Sort(): JSX.Element {
             )}
             tabIndex={0}
             key={type}
-            onClick={() => handleSetSortType(type)}
+            onClick={() => handleSortTypeClick(type)}
           >
             {type}
           </li>

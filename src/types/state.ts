@@ -8,7 +8,6 @@ export type AppState = {
   city: string;
   offers: Offer[];
   sortType: SortType;
-  activeOfferId: string | null;
   authorizationStatus: AuthorizationStatus;
   user: UserData | null;
   isOffersDataLoading: boolean;

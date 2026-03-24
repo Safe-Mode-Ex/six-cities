@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/offer';
 import { AppRoute } from '../../types/app-route';
+import { memo } from 'react';
+import cn from 'classnames';
+import { PlaceImageSize } from '../../enums';
+import { RATING_STARS_WIDTH } from '../../const';
 
 type OfferCardProps = {
   offer: Offer;
@@ -9,41 +13,32 @@ type OfferCardProps = {
   isOfferScreen?: boolean;
 };
 
-const RATING_STARS_WIDTH = 20;
-
-function OfferCard({offer, onHover, isFavoritesScreen = false, isOfferScreen = false}: OfferCardProps): JSX.Element {
-  const getClassName = () => {
-    if (isFavoritesScreen) {
-      return 'favorites__card';
-    }
-
-    if (isOfferScreen) {
-      return 'near-places__card';
-    }
-
-    return 'cities__card';
-  };
-
-  const getImgWrapperClassName = () => {
-    if (isFavoritesScreen) {
-      return 'favorites__image-wrapper';
-    }
-
-    if (isOfferScreen) {
-      return 'near-places__image-wrapper';
-    }
-
-    return 'cities__image-wrapper';
-  };
-
+function OfferCard({
+  offer,
+  onHover,
+  isFavoritesScreen = false,
+  isOfferScreen = false
+}: OfferCardProps): JSX.Element {
   return (
-    <article className={`${getClassName()} place-card`}>
+    <article className={cn(
+      'place-card',
+      { 'favorites__card': isFavoritesScreen },
+      { 'near-places__card': isOfferScreen },
+      { 'cities__card': !isFavoritesScreen && !isOfferScreen },
+    )}
+    >
       {offer.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className={`${getImgWrapperClassName()} place-card__image-wrapper`}>
+      <div className={cn(
+        'place-card__image-wrapper',
+        { 'favorites__image-wrapper': isFavoritesScreen },
+        { 'near-places__image-wrapper': isOfferScreen },
+        { 'cities__image-wrapper': !isFavoritesScreen && !isOfferScreen },
+      )}
+      >
         <a
           href="#"
           onMouseEnter={() => onHover(offer.id)}
@@ -52,8 +47,8 @@ function OfferCard({offer, onHover, isFavoritesScreen = false, isOfferScreen = f
           <img
             className="place-card__image"
             src={offer.previewImage}
-            width={isFavoritesScreen ? 150 : 260}
-            height={isFavoritesScreen ? 110 : 200}
+            width={isFavoritesScreen ? PlaceImageSize.WidthSmall : PlaceImageSize.WidtDefault}
+            height={isFavoritesScreen ? PlaceImageSize.HeightSmall : PlaceImageSize.HeightDefault}
             alt="Place image"
           />
         </a>
@@ -89,4 +84,6 @@ function OfferCard({offer, onHover, isFavoritesScreen = false, isOfferScreen = f
   );
 }
 
-export default OfferCard;
+const MemoizedOfferCard = memo(OfferCard);
+
+export default MemoizedOfferCard;

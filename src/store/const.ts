@@ -6,7 +6,6 @@ export const initialState: AppState = {
   city: '',
   offers: [],
   sortType: getDefaultSortTypes()[0],
-  activeOfferId: null,
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
   isOffersDataLoading: false,

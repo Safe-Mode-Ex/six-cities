@@ -26,3 +26,10 @@ export const MarkerUrl = {
   Default: '/img/pin.svg',
   Active: '/img/pin-active.svg',
 } as const;
+
+export const PlaceImageSize = {
+  WidthSmall: 150,
+  WidtDefault: 260,
+  HeightSmall: 110,
+  HeightDefault: 200,
+};

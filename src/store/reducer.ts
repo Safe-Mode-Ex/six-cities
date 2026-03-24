@@ -3,7 +3,6 @@ import {
   loadOffers,
   selectCity,
   setSortType,
-  setActiveOfferId,
   requireAuthorization,
   setUser,
   loadOfferById,
@@ -30,9 +29,6 @@ const reducer = createReducer(initialState, (builder) => {
     }))
     .addCase(setSortType, (state, action) => {
       state.sortType = action.payload;
-    })
-    .addCase(setActiveOfferId, (state, action) => {
-      state.activeOfferId = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;

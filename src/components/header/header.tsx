@@ -4,7 +4,7 @@ import { AuthorizationStatus } from '../../types/authorization-status';
 import Logo from '../logo/logo';
 import { AppRoute } from '../../types/app-route';
 import { logoutAction } from '../../store/api-actions';
-import { MouseEvent } from 'react';
+import { memo, MouseEvent } from 'react';
 
 type HeaderProps = {
     hasUserMenu?: boolean;
@@ -68,4 +68,6 @@ function Header({ hasUserMenu = true }: HeaderProps): JSX.Element {
   );
 }
 
-export default Header;
+const MemoizedHeader = memo(Header);
+
+export default MemoizedHeader;

@@ -6,7 +6,7 @@ import OffersList from '../../components/offers-list/offers-list';
 import Reviews from '../../components/reviews/reviews';
 import { fetchCommentsAction, fetchNearbyOffers, fetchOfferByIdAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { RATING_MULTIPLIER } from '../../const';
+import { RATING_STARS_WIDTH } from '../../const';
 import { getCityPoints } from '../../helpers';
 
 function OfferScreen(): JSX.Element {
@@ -64,7 +64,7 @@ function OfferScreen(): JSX.Element {
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
-                    <span style={{width: `${offerDetails.rating * RATING_MULTIPLIER}%`}}></span>
+                    <span style={{width: `${offerDetails.rating * RATING_STARS_WIDTH}%`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="offer__rating-value rating__value">{offerDetails.rating}</span>

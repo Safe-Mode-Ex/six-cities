@@ -1,26 +1,20 @@
 import cn from 'classnames';
 import { Offer } from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
-import { useAppDispatch } from '../../hooks/use-app-selector';
-import { setActiveOfferId } from '../../store/action';
 
 type OffersListProps = {
     offers: Offer[];
     isFavoritesScreen?: boolean;
     isOfferScreen?: boolean;
+    handleOfferHover?: (offerId: string | null) => void;
 };
 
 function OffersList({
   offers,
+  handleOfferHover,
   isFavoritesScreen = false,
   isOfferScreen = false
 }: OffersListProps): JSX.Element {
-  const dispatch = useAppDispatch();
-
-  const handleOfferHover = (offerId: string | null) => {
-    dispatch(setActiveOfferId(offerId));
-  };
-
   return (
     <div className={cn({
       'favorites__places': isFavoritesScreen,
@@ -33,7 +27,7 @@ function OffersList({
         <OfferCard
           key={`${offer.id}`}
           offer={offer}
-          onHover={handleOfferHover}
+          onHover={handleOfferHover ?? (() => {})}
           isFavoritesScreen={isFavoritesScreen}
         />
       ))}
