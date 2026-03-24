@@ -8,12 +8,14 @@ import { fetchCommentsAction, fetchNearbyOffers, fetchOfferByIdAction } from '..
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { getCityPoints } from '../../helpers';
 import { Rating } from '../../enums';
+import { getNearbyOffers, getOfferDetails, getOfferReviews } from '../../store/selector';
+import { MAX_MAP_NEARBY_OFFERS } from '../../const';
 
 function OfferScreen(): JSX.Element {
   const activeOfferId = useParams().id as string;
-  const offerDetails = useAppSelector((state) => state.offerDetails);
-  const offerReviews = useAppSelector((state) => state.offerReviews);
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
+  const offerDetails = useAppSelector(getOfferDetails);
+  const offerReviews = useAppSelector(getOfferReviews);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -24,7 +26,7 @@ function OfferScreen(): JSX.Element {
     }
   }, [activeOfferId, offerDetails, dispatch]);
 
-  const mapPoints = offerDetails ? [...getCityPoints(nearbyOffers.slice(0, 3)), {
+  const mapPoints = offerDetails ? [...getCityPoints(nearbyOffers.slice(0, MAX_MAP_NEARBY_OFFERS)), {
     id: offerDetails?.id,
     location: offerDetails?.location,
   }] : [];

@@ -4,6 +4,7 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import { sortOffersBy } from '../../helpers';
 import { Offer } from '../../types/offer';
 import { memo } from 'react';
+import { getSortType } from '../../store/selector';
 
 type PlacesProps = {
   offers: Offer[];
@@ -11,7 +12,7 @@ type PlacesProps = {
 }
 
 function Offers({ offers, handleOfferHover }: PlacesProps): JSX.Element {
-  const sortType = useAppSelector((state) => state.sortType);
+  const sortType = useAppSelector(getSortType);
   const sortedOffers = sortOffersBy(sortType, offers);
 
   return (

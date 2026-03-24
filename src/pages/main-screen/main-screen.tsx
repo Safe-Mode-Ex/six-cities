@@ -5,13 +5,14 @@ import useDispatchCity from '../../hooks/use-dispatch-city';
 import Header from '../../components/header/header';
 import { useMemo } from 'react';
 import Places from '../../components/places/places';
+import { getCity, getOffers } from '../../store/selector';
 
 function MainScreen(): JSX.Element {
   //TODO: сделать навигацию по городам
   useDispatchCity();
 
-  const activeCityName = useAppSelector(({ city }) => city);
-  const offers = useAppSelector((state) => state.offers);
+  const activeCityName = useAppSelector(getCity);
+  const offers = useAppSelector(getOffers);
 
   const cityOffers = useMemo(
     () => offers.filter(({ city }) => city.name === activeCityName),

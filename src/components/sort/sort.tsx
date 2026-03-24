@@ -5,10 +5,11 @@ import { setSortType } from '../../store/action';
 import { SortType } from '../../enums';
 import useCloseSort from '../../hooks/use-close-sort';
 import { getDefaultSortTypes } from '../../helpers';
+import { getSortType } from '../../store/selector';
 
 function Sort(): JSX.Element {
   const [isOpened, setOpenedState] = useState(false);
-  const sortType = useAppSelector((state) => state.sortType);
+  const sortType = useAppSelector(getSortType);
   const sortRef = useRef<HTMLElement>(null);
   const dispatch = useAppDispatch();
 

@@ -6,10 +6,11 @@ import { AuthorizationStatus } from '../../types/authorization-status';
 import { AppRoute } from '../../types/app-route';
 import { Navigate } from 'react-router-dom';
 import { PASSWORD_REGEXP } from '../../const';
+import { getAuthorizationStatus } from '../../store/selector';
 
 function LoginScreen(): JSX.Element {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
 
   const emailRef = useRef<HTMLInputElement | null>(null);
