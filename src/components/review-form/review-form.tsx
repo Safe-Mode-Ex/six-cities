@@ -1,37 +1,31 @@
-import { ChangeEvent, FormEvent, Fragment } from 'react';
+import { ChangeEvent, Fragment, useState } from 'react';
 import { NewReview } from '../../types/review';
-import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { setReviewForm } from '../../store/action';
-import { ReviewText } from '../../enums';
+import { Rating, ReviewText } from '../../enums';
+import useReviewFormSubmit from '../../hooks/use-form-submit';
+import { INITIAL_REVIEW_FORM_SATE } from '../../const';
 
 type ReviewFormProps = {
-  onSendReview: (formValue: NewReview) => void;
+  offerId: string;
 };
 
-const MAX_RATING = 5;
-
-function ReviewForm({ onSendReview }: ReviewFormProps): JSX.Element {
-  const dispatch = useAppDispatch();
-  const isCommentSending = useAppSelector((state) => state.isCommentSending);
-  const formValue = useAppSelector((state) => state.reviewForm);
+function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
+  const [formData, setReviewForm] = useState<NewReview>(INITIAL_REVIEW_FORM_SATE);
+  const [isCommentSending, setCommentSending] = useState(false);
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const rating = Number(evt.target.value);
-    dispatch(setReviewForm({ ...formValue, rating }));
+    setReviewForm({ ...formData, rating });
   };
 
   const handleTextChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     const comment = evt.target.value;
-    dispatch(setReviewForm({ ...formValue, comment }));
+    setReviewForm({ ...formData, comment });
   };
 
-  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    onSendReview(formValue);
-  };
+  const handleFormSubmit = useReviewFormSubmit(offerId, formData, setReviewForm, setCommentSending);
 
-  const isSubmitButtonDisabled = formValue.rating === 0 ||
-      formValue.comment.length < ReviewText.MinLength ||
+  const isSubmitButtonDisabled = formData.rating === 0 ||
+      formData.comment.length < ReviewText.MinLength ||
       isCommentSending;
 
   return (
@@ -43,8 +37,8 @@ function ReviewForm({ onSendReview }: ReviewFormProps): JSX.Element {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {Array.from({ length: MAX_RATING }, (_, index) => {
-          const ratingValue = MAX_RATING - index;
+        {Array.from({ length: Rating.MaxValue }, (_, index) => {
+          const ratingValue = Rating.MaxValue - index;
 
           return (
             <Fragment key={index}>
@@ -54,7 +48,7 @@ function ReviewForm({ onSendReview }: ReviewFormProps): JSX.Element {
                 value={ratingValue}
                 id={`${ratingValue}-stars`}
                 type="radio"
-                checked={formValue.rating === ratingValue}
+                checked={formData.rating === ratingValue}
                 onChange={handleRatingChange}
                 disabled={isCommentSending}
               />
@@ -77,7 +71,7 @@ function ReviewForm({ onSendReview }: ReviewFormProps): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={formValue.comment}
+        value={formData.comment}
         onChange={handleTextChange}
         maxLength={ReviewText.MaxLength}
         disabled={isCommentSending}

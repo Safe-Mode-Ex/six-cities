@@ -33,3 +33,8 @@ export const PlaceImageSize = {
   HeightSmall: 110,
   HeightDefault: 200,
 };
+
+export const Rating = {
+  StarsWidth: 20,
+  MaxValue: 5,
+};

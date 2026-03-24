@@ -1,7 +1,6 @@
-import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { sendOfferReview } from '../../store/api-actions';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { AuthorizationStatus } from '../../types/authorization-status';
-import { NewReview, Review } from '../../types/review';
+import { Review } from '../../types/review';
 import ReviewForm from '../review-form/review-form';
 import ReviewItem from '../review/review';
 
@@ -11,16 +10,8 @@ type ReviewsProps = {
 }
 
 function Reviews({offerId, reviews}: ReviewsProps): JSX.Element {
-  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
-
-  const handleSendReview = (formData: NewReview): void => {
-    dispatch(sendOfferReview({
-      offerId,
-      formData,
-    }));
-  };
 
   return (
     <section className="offer__reviews reviews">
@@ -33,7 +24,7 @@ function Reviews({offerId, reviews}: ReviewsProps): JSX.Element {
         ))}
       </ul>
       {isAuthorized && (
-        <ReviewForm onSendReview={handleSendReview} />
+        <ReviewForm offerId={offerId} />
       )}
     </section>
   );

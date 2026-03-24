@@ -12,9 +12,4 @@ export const initialState: AppState = {
   offerDetails: null,
   offerReviews: [],
   nearbyOffers: [],
-  isCommentSending: false,
-  reviewForm: {
-    rating: 0,
-    comment: '',
-  },
 };

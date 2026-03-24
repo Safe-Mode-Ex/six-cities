@@ -4,7 +4,7 @@ import { SortType } from '../enums';
 import { AuthorizationStatus } from '../types/authorization-status';
 import { AppRoute } from '../types/app-route';
 import { UserData } from '../types/user-data';
-import { NewReview, Review } from '../types/review';
+import { Review } from '../types/review';
 
 export const REDIRECT_TO_ROUTE_ACTION_NAME = 'app/redirectToRoute';
 
@@ -18,4 +18,3 @@ export const setUser = createAction<UserData>('user/setUser');
 export const loadOfferById = createAction<OfferDetails>('offer/loadOfferById');
 export const loadReviewsByOfferId = createAction<Review[]>('reviews/loadReviewsByOfferId');
 export const loadNearbyOffers = createAction<Offer[]>('nearby/loadNearbyOffers');
-export const setReviewForm = createAction<NewReview>('reviewForm/setReviewForm');

@@ -8,9 +8,8 @@ import {
   loadOfferById,
   loadReviewsByOfferId,
   loadNearbyOffers,
-  setReviewForm
 } from './action';
-import { fetchOfferByIdAction, fetchOffersAction, sendOfferReview } from './api-actions';
+import { fetchOfferByIdAction, fetchOffersAction } from './api-actions';
 import { initialState } from './const';
 
 const reducer = createReducer(initialState, (builder) => {
@@ -53,18 +52,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadNearbyOffers, (state, action) => {
       state.nearbyOffers = action.payload;
-    })
-    .addCase(sendOfferReview.pending, (state) => {
-      state.isCommentSending = true;
-    })
-    .addCase(sendOfferReview.fulfilled, (state) => {
-      state.isCommentSending = false;
-    })
-    .addCase(sendOfferReview.rejected, (state) => {
-      state.isCommentSending = false;
-    })
-    .addCase(setReviewForm, (state, action) => {
-      state.reviewForm = action.payload;
     });
 });
 

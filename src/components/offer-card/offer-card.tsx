@@ -3,8 +3,7 @@ import { Offer } from '../../types/offer';
 import { AppRoute } from '../../types/app-route';
 import { memo } from 'react';
 import cn from 'classnames';
-import { PlaceImageSize } from '../../enums';
-import { RATING_STARS_WIDTH } from '../../const';
+import { PlaceImageSize, Rating } from '../../enums';
 
 type OfferCardProps = {
   offer: Offer;
@@ -71,7 +70,7 @@ function OfferCard({
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${offer.rating * RATING_STARS_WIDTH}%` }}></span>
+            <span style={{ width: `${offer.rating * Rating.StarsWidth}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
