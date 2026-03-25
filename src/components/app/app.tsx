@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import { Offer } from '../../types/offer';
 import MainScreen from './../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
@@ -22,8 +21,6 @@ function App(): JSX.Element {
     return <LoadingScreen />;
   }
 
-  const favorites = new Map<string, Offer[]>();
-
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>
@@ -42,7 +39,7 @@ function App(): JSX.Element {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute>
-              <FavoritesScreen favorites={favorites} />
+              <FavoritesScreen />
             </PrivateRoute>
           }
         />

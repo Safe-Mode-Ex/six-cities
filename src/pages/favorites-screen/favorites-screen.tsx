@@ -1,12 +1,26 @@
-import { Offer } from '../../types/offer';
 import OffersList from '../../components/offers-list/offers-list';
 import Header from '../../components/header/header';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
+import { fetchFavoriteOffersAction } from '../../store/api-actions';
+import { getFavorite } from '../../store/favorite/selector';
+import { useEffect } from 'react';
 
-type FavoritesScreenProps = {
-  favorites: Map<string, Offer[]>;
-};
+function FavoritesScreen(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const favorite = useAppSelector(getFavorite);
 
-function FavoritesScreen({ favorites }: FavoritesScreenProps): JSX.Element {
+  useEffect(() => {
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(fetchFavoriteOffersAction());
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch]);
+
   return (
     <div className="page">
       <Header />
@@ -16,7 +30,7 @@ function FavoritesScreen({ favorites }: FavoritesScreenProps): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {Array.from(favorites.entries()).map(([city, offers]) => (
+              {Object.entries(favorite).map(([city, offers]) => (
                 <li className="favorites__locations-items" key={city}>
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">

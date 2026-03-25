@@ -94,3 +94,11 @@ export const logoutAction = createAsyncThunk<void, undefined, ActionConfig>(
     dropToken();
   }
 );
+
+export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, ActionConfig>(
+  'favorite/fetchFavoriteOffersAction',
+  async (_, { extra: api }) => {
+    const { data } = await api.get<Offer[]>(APIRoute.Favorite);
+    return data;
+  }
+);

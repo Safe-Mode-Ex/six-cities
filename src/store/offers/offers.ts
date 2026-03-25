@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace, SortType } from '../../enums';
-import { OffersProcess } from '../../types/app-state';
+import { OffersState } from '../../types/app-state';
 import { fetchOffersAction } from '../api-actions';
 import { getDefaultSortTypes } from '../../helpers';
 
-const initialState: OffersProcess = {
+const initialState: OffersState = {
   city: '',
   offers: [],
   isOffersDataLoading: false,

@@ -12,7 +12,6 @@ type MapProps = {
 };
 
 function Map({ location, points, activeOfferId, extraClass }: MapProps): JSX.Element {
-  // TODO: исправить локацию центра и каждого объявления
   const mapRef = useRef(null);
   const map = useMap(mapRef, location);
 

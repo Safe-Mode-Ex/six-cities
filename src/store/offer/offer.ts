@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../enums';
-import { OfferDetailsProcess } from '../../types/app-state';
+import { OfferDetailsState } from '../../types/app-state';
 import { fetchCommentsAction, fetchNearbyOffers, fetchOfferByIdAction } from '../api-actions';
 
-const initialState: OfferDetailsProcess = {
+const initialState: OfferDetailsState = {
   offerDetails: null,
   offerReviews: [],
   nearbyOffers: [],
