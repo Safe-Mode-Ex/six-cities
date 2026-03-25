@@ -1,19 +1,17 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { AuthorizationStatus } from '../../types/authorization-status';
 import Logo from '../logo/logo';
 import { AppRoute } from '../../types/app-route';
 import { logoutAction } from '../../store/api-actions';
 import { memo, MouseEvent } from 'react';
-import { getAuthorizationStatus, getUser } from '../../store/selector';
+import { getAuthorizedStatus, getUser } from '../../store/user-process/selector';
 
 type HeaderProps = {
     hasUserMenu?: boolean;
 }
 
 function Header({ hasUserMenu = true }: HeaderProps): JSX.Element {
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
+  const isAuthorized = useAppSelector(getAuthorizedStatus);
   const user = useAppSelector(getUser);
   const dispatch = useAppDispatch();
 

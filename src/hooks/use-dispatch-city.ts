@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { selectCity } from '../store/action';
 import { useAppDispatch } from './use-app-selector';
 import { CITIES } from '../const';
+import { selectCity } from '../store/offers/offers';
 
 function useDispatchCity(): void {
   const dispatch = useAppDispatch();

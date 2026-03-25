@@ -4,7 +4,7 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import { sortOffersBy } from '../../helpers';
 import { Offer } from '../../types/offer';
 import { memo } from 'react';
-import { getSortType } from '../../store/selector';
+import { getSortType } from '../../store/offers/selector';
 
 type PlacesProps = {
   offers: Offer[];

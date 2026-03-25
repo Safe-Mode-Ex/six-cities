@@ -1,6 +1,6 @@
 import { CITIES } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-selector';
-import { selectCity } from '../../store/action';
+import { selectCity } from '../../store/offers/offers';
 
 type LocationsProps = {
   activeCity: string;

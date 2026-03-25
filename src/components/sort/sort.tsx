@@ -1,11 +1,11 @@
 import cn from 'classnames';
 import { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { setSortType } from '../../store/action';
 import { SortType } from '../../enums';
 import useCloseSort from '../../hooks/use-close-sort';
 import { getDefaultSortTypes } from '../../helpers';
-import { getSortType } from '../../store/selector';
+import { getSortType } from '../../store/offers/selector';
+import { setSortType } from '../../store/offers/offers';
 
 function Sort(): JSX.Element {
   const [isOpened, setOpenedState] = useState(false);

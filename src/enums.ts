@@ -38,3 +38,9 @@ export const Rating = {
   StarsWidth: 20,
   MaxValue: 5,
 };
+
+export enum NameSpace {
+  User = 'USER',
+  Offers = 'OFFERS',
+  Offer = 'OFFER',
+}

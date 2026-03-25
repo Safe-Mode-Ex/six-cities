@@ -8,8 +8,8 @@ import { fetchCommentsAction, fetchNearbyOffers, fetchOfferByIdAction } from '..
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { getCityPoints } from '../../helpers';
 import { Rating } from '../../enums';
-import { getNearbyOffers, getOfferDetails, getOfferReviews } from '../../store/selector';
 import { MAX_MAP_NEARBY_OFFERS } from '../../const';
+import { getNearbyOffers, getOfferDetails, getOfferReviews } from '../../store/offer/selector';
 
 function OfferScreen(): JSX.Element {
   const activeOfferId = useParams().id as string;
