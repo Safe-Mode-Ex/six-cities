@@ -1,7 +1,7 @@
 import { ChangeEvent, Fragment, useState } from 'react';
 import { NewReview } from '../../types/review';
 import { Rating, ReviewText } from '../../enums';
-import useReviewFormSubmit from '../../hooks/use-form-submit';
+import useReviewFormSubmit from '../../hooks/use-review-form-submit';
 import { INITIAL_REVIEW_FORM_SATE } from '../../const';
 
 type ReviewFormProps = {
