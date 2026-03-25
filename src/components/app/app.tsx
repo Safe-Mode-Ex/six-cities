@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import { Offer } from '../../types/offer';
 import MainScreen from './../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import { AuthorizationStatus } from '../../types/authorization-status';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
@@ -12,29 +11,18 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
+import { getAuthCheckedStatus } from '../../store/user-process/selector';
+import { getIsOffersDataLoading } from '../../store/offers/selector';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  const offers = useAppSelector((state) => state.offers);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
+  if (!isAuthChecked || isOffersDataLoading) {
     return <LoadingScreen />;
   }
 
   const favorites = new Map<string, Offer[]>();
-
-  offers
-    .filter(({isFavorite}) => isFavorite)
-    .forEach((offer) => {
-      const cityOffers = favorites.get(offer.city.name);
-
-      if (cityOffers) {
-        cityOffers.push(offer);
-      } else {
-        favorites.set(offer.city.name, [offer]);
-      }
-    });
 
   return (
     <HistoryRouter history={browserHistory}>
@@ -53,7 +41,7 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={authorizationStatus}>
+            <PrivateRoute>
               <FavoritesScreen favorites={favorites} />
             </PrivateRoute>
           }

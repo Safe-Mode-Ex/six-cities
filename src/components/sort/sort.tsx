@@ -1,18 +1,19 @@
 import cn from 'classnames';
 import { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { setSortType } from '../../store/action';
 import { SortType } from '../../enums';
 import useCloseSort from '../../hooks/use-close-sort';
 import { getDefaultSortTypes } from '../../helpers';
+import { getSortType } from '../../store/offers/selector';
+import { setSortType } from '../../store/offers/offers';
 
 function Sort(): JSX.Element {
   const [isOpened, setOpenedState] = useState(false);
-  const sortType = useAppSelector((state) => state.sortType);
+  const sortType = useAppSelector(getSortType);
   const sortRef = useRef<HTMLElement>(null);
   const dispatch = useAppDispatch();
 
-  const handleSetSortType = (type: SortType) => {
+  const handleSortTypeClick = (type: SortType) => {
     dispatch(setSortType(type));
     setOpenedState(false);
   };
@@ -46,7 +47,7 @@ function Sort(): JSX.Element {
             )}
             tabIndex={0}
             key={type}
-            onClick={() => handleSetSortType(type)}
+            onClick={() => handleSortTypeClick(type)}
           >
             {type}
           </li>

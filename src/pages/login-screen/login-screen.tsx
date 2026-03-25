@@ -2,14 +2,14 @@ import { FormEvent, useRef } from 'react';
 import Header from '../../components/header/header';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { loginAction } from '../../store/api-actions';
-import { AuthorizationStatus } from '../../types/authorization-status';
 import { AppRoute } from '../../types/app-route';
 import { Navigate } from 'react-router-dom';
+import { PASSWORD_REGEXP } from '../../const';
+import { getAuthorizedStatus } from '../../store/user-process/selector';
 
 function LoginScreen(): JSX.Element {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
+  const isAuthorized = useAppSelector(getAuthorizedStatus);
 
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -58,6 +58,7 @@ function LoginScreen(): JSX.Element {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  pattern={PASSWORD_REGEXP}
                   required
                 />
               </div>

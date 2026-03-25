@@ -1,3 +1,4 @@
+import { Rating } from '../../enums';
 import { Review } from '../../types/review';
 
 type ReviewProps = {
@@ -35,7 +36,7 @@ function ReviewItem({ review }: ReviewProps) {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `${review.rating * 20}%`}}></span>
+            <span style={{width: `${review.rating * Rating.StarsWidth}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

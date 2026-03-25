@@ -1,19 +1,18 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { AuthorizationStatus } from '../../types/authorization-status';
 import Logo from '../logo/logo';
 import { AppRoute } from '../../types/app-route';
 import { logoutAction } from '../../store/api-actions';
-import { MouseEvent } from 'react';
+import { memo, MouseEvent } from 'react';
+import { getAuthorizedStatus, getUser } from '../../store/user-process/selector';
 
 type HeaderProps = {
     hasUserMenu?: boolean;
 }
 
 function Header({ hasUserMenu = true }: HeaderProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
-  const user = useAppSelector((state) => state.user);
+  const isAuthorized = useAppSelector(getAuthorizedStatus);
+  const user = useAppSelector(getUser);
   const dispatch = useAppDispatch();
 
   const handleLogoutClick = (evt: MouseEvent) => {
@@ -68,4 +67,6 @@ function Header({ hasUserMenu = true }: HeaderProps): JSX.Element {
   );
 }
 
-export default Header;
+const MemoizedHeader = memo(Header);
+
+export default MemoizedHeader;

@@ -6,14 +6,16 @@ import OffersList from '../../components/offers-list/offers-list';
 import Reviews from '../../components/reviews/reviews';
 import { fetchCommentsAction, fetchNearbyOffers, fetchOfferByIdAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { RATING_MULTIPLIER } from '../../const';
 import { getCityPoints } from '../../helpers';
+import { Rating } from '../../enums';
+import { MAX_MAP_NEARBY_OFFERS } from '../../const';
+import { getNearbyOffers, getOfferDetails, getOfferReviews } from '../../store/offer/selector';
 
 function OfferScreen(): JSX.Element {
   const activeOfferId = useParams().id as string;
-  const offerDetails = useAppSelector((state) => state.offerDetails);
-  const offerReviews = useAppSelector((state) => state.offerReviews);
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
+  const offerDetails = useAppSelector(getOfferDetails);
+  const offerReviews = useAppSelector(getOfferReviews);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -24,7 +26,7 @@ function OfferScreen(): JSX.Element {
     }
   }, [activeOfferId, offerDetails, dispatch]);
 
-  const mapPoints = offerDetails ? [...getCityPoints(nearbyOffers.slice(0, 3)), {
+  const mapPoints = offerDetails ? [...getCityPoints(nearbyOffers.slice(0, MAX_MAP_NEARBY_OFFERS)), {
     id: offerDetails?.id,
     location: offerDetails?.location,
   }] : [];
@@ -64,7 +66,7 @@ function OfferScreen(): JSX.Element {
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
-                    <span style={{width: `${offerDetails.rating * RATING_MULTIPLIER}%`}}></span>
+                    <span style={{width: `${Math.round(offerDetails.rating) * Rating.StarsWidth}%`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="offer__rating-value rating__value">{offerDetails.rating}</span>
