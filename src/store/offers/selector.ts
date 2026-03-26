@@ -19,5 +19,5 @@ export const getCity = createSelector(
 
 export const getIsOffersDataLoading = createSelector(
   (state: Pick<State, NameSpace.Offers>) => state,
-  (state) => state[NameSpace.Offers].isOffersDataLoading
+  (state) => state[NameSpace.Offers].isOffersLoading
 );

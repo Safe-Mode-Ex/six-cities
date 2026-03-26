@@ -41,11 +41,10 @@ export const Rating = {
 } as const;
 
 export enum NameSpace {
-  User = 'USER',
-  Offers = 'OFFERS',
-  Offer = 'OFFER',
-  Favorite = 'FAVORITE',
-  App = 'APP',
+  User = 'user',
+  Offers = 'offers',
+  Offer = 'offer',
+  Favorite = 'favorite',
 }
 
 export enum FavoriteStatus {

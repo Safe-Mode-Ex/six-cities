@@ -4,6 +4,7 @@ import { AppRoute } from '../../types/app-route';
 import { memo } from 'react';
 import cn from 'classnames';
 import { PlaceImageSize, Rating } from '../../enums';
+import useHandleBookmarkButtonClick from '../../hooks/use-handle-bookmark-button-click';
 
 type OfferCardProps = {
   offer: Offer;
@@ -18,6 +19,8 @@ function OfferCard({
   isFavoritesScreen = false,
   isOfferScreen = false
 }: OfferCardProps): JSX.Element {
+  const handleBookmarkButtonClick = useHandleBookmarkButtonClick();
+
   return (
     <article className={cn(
       'place-card',
@@ -59,8 +62,12 @@ function OfferCard({
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''}`}
+            className={cn(
+              'place-card__bookmark-button button',
+              { 'place-card__bookmark-button--active': offer.isFavorite }
+            )}
             type="button"
+            onClick={handleBookmarkButtonClick(offer.id, offer.isFavorite)}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>

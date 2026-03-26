@@ -10,7 +10,6 @@ import { dropToken, saveToken } from '../services/token';
 import { AppRoute } from '../types/app-route';
 import { NewReview, Review } from '../types/review';
 import { StatusCodes } from 'http-status-codes';
-import { setOfferDetails } from './offer/offer';
 
 export type ActionConfig = {
     dispatch: AppDispatch;
@@ -104,14 +103,14 @@ export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, Ac
   }
 );
 
-export const changeFavoriteStateAction = createAsyncThunk<void, {
+export const changeFavoriteStateAction = createAsyncThunk<OfferDetails, {
   offerId: string;
   status: FavoriteStatus;
 }, ActionConfig>(
   'favorite/changeFavoriteStateAction',
   async ({ offerId, status }, { dispatch, extra: api }) => {
     const { data } = await api.post<OfferDetails>(`${APIRoute.Favorite}/${offerId}/${status}`);
-    dispatch(setOfferDetails(data));
     dispatch(fetchFavoriteOffersAction());
+    return data;
   }
 );

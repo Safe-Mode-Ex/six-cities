@@ -3,28 +3,24 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
 import Reviews from '../../components/reviews/reviews';
-import { changeFavoriteStateAction } from '../../store/api-actions';
-import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { getCityPoints } from '../../helpers';
 import { Rating } from '../../enums';
 import { MAX_MAP_NEARBY_OFFERS } from '../../const';
 import { getNearbyOffers, getOfferDetails, getOfferReviews } from '../../store/offer/selector';
 import cn from 'classnames';
-import { getAuthorizedStatus } from '../../store/user-process/selector';
-import { redirectToRoute } from '../../store/action';
-import { AppRoute } from '../../types/app-route';
 import LoadingScreen from '../loading-screen/loading-screen';
 import useOfferData from '../../hooks/use-offer-data';
+import useHandleBookmarkButtonClick from '../../hooks/use-handle-bookmark-button-click';
 
 function OfferScreen(): JSX.Element {
   const activeOfferId = useParams().id as string;
   const offerDetails = useAppSelector(getOfferDetails);
   const offerReviews = useAppSelector(getOfferReviews);
   const nearbyOffers = useAppSelector(getNearbyOffers);
-  const isAuthorized = useAppSelector(getAuthorizedStatus);
-  const dispatch = useAppDispatch();
+  const handleBookmarkButtonClick = useHandleBookmarkButtonClick();
 
-  useOfferData(activeOfferId, offerDetails, dispatch);
+  useOfferData(activeOfferId, offerDetails);
 
   if (!offerDetails) {
     return <LoadingScreen />;
@@ -35,19 +31,6 @@ function OfferScreen(): JSX.Element {
     location: offerDetails?.location,
   }];
   const cityLocation = offerDetails.city.location;
-
-  const handleBookmarkButtonClick = (evt: React.MouseEvent) => {
-    evt.preventDefault();
-
-    if (isAuthorized) {
-      dispatch(changeFavoriteStateAction({
-        offerId: offerDetails.id,
-        status: Number(!offerDetails.isFavorite),
-      }));
-    } else {
-      dispatch(redirectToRoute(AppRoute.Login));
-    }
-  };
 
   return (
     <div className="page">
@@ -79,7 +62,7 @@ function OfferScreen(): JSX.Element {
                     { 'offer__bookmark-button--active': offerDetails.isFavorite }
                   )}
                   type="button"
-                  onClick={handleBookmarkButtonClick}
+                  onClick={handleBookmarkButtonClick(offerDetails.id, offerDetails.isFavorite)}
                 >
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>

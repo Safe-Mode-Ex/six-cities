@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../enums';
 import { OfferDetailsState } from '../../types/app-state';
-import { fetchCommentsAction, fetchNearbyOffers, fetchOfferByIdAction } from '../api-actions';
+import { changeFavoriteStateAction, fetchCommentsAction, fetchNearbyOffers, fetchOfferByIdAction } from '../api-actions';
 import { OfferDetails } from '../../types/offer';
 
 const initialState: OfferDetailsState = {
@@ -14,7 +14,7 @@ export const offer = createSlice({
   name: NameSpace.Offer,
   initialState,
   reducers: {
-    setOfferDetails: (state, action: PayloadAction<OfferDetails>) => {
+    setOfferDetails: (state, action: PayloadAction<OfferDetails | null>) => {
       state.offerDetails = action.payload;
     }
   },
@@ -28,6 +28,11 @@ export const offer = createSlice({
       })
       .addCase(fetchNearbyOffers.fulfilled, (state, action) => {
         state.nearbyOffers = action.payload;
+      })
+      .addCase(changeFavoriteStateAction.fulfilled, (state, action) => {
+        if (state.offerDetails) {
+          state.offerDetails.isFavorite = action.payload.isFavorite;
+        }
       });
   },
 });
