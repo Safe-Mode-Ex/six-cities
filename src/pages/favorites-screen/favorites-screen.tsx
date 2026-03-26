@@ -1,4 +1,3 @@
-import OffersList from '../../components/offers-list/offers-list';
 import Header from '../../components/header/header';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
@@ -7,6 +6,7 @@ import { useEffect } from 'react';
 import NoFavorites from '../../components/no-favorites/no-favorites';
 import cn from 'classnames';
 import Footer from '../../components/footer/footer';
+import Favorites from '../../components/favorites/favorites';
 
 function FavoritesScreen(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -15,15 +15,7 @@ function FavoritesScreen(): JSX.Element {
   const hasFavorites = favoriteEntries.length;
 
   useEffect(() => {
-    let isMounted = true;
-
-    if (isMounted) {
-      dispatch(fetchFavoriteOffersAction());
-    }
-
-    return () => {
-      isMounted = false;
-    };
+    dispatch(fetchFavoriteOffersAction());
   }, [dispatch]);
 
   return (
@@ -40,26 +32,7 @@ function FavoritesScreen(): JSX.Element {
       )}
       >
         <div className="page__favorites-container container">
-          {hasFavorites ? (
-            <section className="favorites">
-              <h1 className="favorites__title">Saved listing</h1>
-              <ul className="favorites__list">
-                {favoriteEntries.map(([city, offers]) => (
-                  <li className="favorites__locations-items" key={city}>
-                    <div className="favorites__locations locations locations--current">
-                      <div className="locations__item">
-                        <a className="locations__item-link" href="#">
-                          <span>{city}</span>
-                        </a>
-                      </div>
-                    </div>
-
-                    <OffersList offers={offers} isFavoritesScreen />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ) : <NoFavorites />}
+          {hasFavorites ? <Favorites favoriteEntries={favoriteEntries} /> : <NoFavorites />}
         </div>
       </main>
 
