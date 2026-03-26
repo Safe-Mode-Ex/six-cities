@@ -11,7 +11,7 @@ const initialState: OffersState = {
   isOffersLoading: false,
 };
 
-export const offers = createSlice({
+export const offersSlice = createSlice({
   name: NameSpace.Offers,
   initialState,
   reducers: {
@@ -41,4 +41,4 @@ export const offers = createSlice({
   },
 });
 
-export const { selectCity, setSortType } = offers.actions;
+export const { selectCity, setSortType } = offersSlice.actions;
