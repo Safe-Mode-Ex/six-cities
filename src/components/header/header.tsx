@@ -4,7 +4,8 @@ import Logo from '../logo/logo';
 import { AppRoute } from '../../types/app-route';
 import { logoutAction } from '../../store/api-actions';
 import { memo, MouseEvent } from 'react';
-import { getAuthorizedStatus, getUser } from '../../store/user-process/selector';
+import { getAuthorizedStatus, getUser } from '../../store/user/selector';
+import { getFavoriteOffersCount } from '../../store/favorite/selector';
 
 type HeaderProps = {
     hasUserMenu?: boolean;
@@ -13,6 +14,7 @@ type HeaderProps = {
 function Header({ hasUserMenu = true }: HeaderProps): JSX.Element {
   const isAuthorized = useAppSelector(getAuthorizedStatus);
   const user = useAppSelector(getUser);
+  const favoriteOffersCount = useAppSelector(getFavoriteOffersCount);
   const dispatch = useAppDispatch();
 
   const handleLogoutClick = (evt: MouseEvent) => {
@@ -40,7 +42,7 @@ function Header({ hasUserMenu = true }: HeaderProps): JSX.Element {
                     {isAuthorized ? (
                       <>
                         <span className="header__user-name user__name">{user?.email}</span>
-                        <span className="header__favorite-count">3</span>
+                        <span className="header__favorite-count">{favoriteOffersCount}</span>
                       </>
                     ) : (
                       <span className="header__login">Sign in</span>

@@ -10,6 +10,7 @@ export enum APIRoute {
     Comments = '/comments',
     Login = '/login',
     Logout = '/logout',
+    Favorite = '/favorite',
 }
 
 export enum Leaflet {
@@ -32,15 +33,21 @@ export const PlaceImageSize = {
   WidtDefault: 260,
   HeightSmall: 110,
   HeightDefault: 200,
-};
+} as const;
 
 export const Rating = {
   StarsWidth: 20,
   MaxValue: 5,
-};
+} as const;
 
 export enum NameSpace {
-  User = 'USER',
-  Offers = 'OFFERS',
-  Offer = 'OFFER',
+  User = 'user',
+  Offers = 'offers',
+  Offer = 'offer',
+  Favorite = 'favorite',
+}
+
+export enum FavoriteStatus {
+  Disabled = 0,
+  Enabled = 1,
 }

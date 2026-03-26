@@ -1,26 +1,32 @@
 import { SortType } from '../enums';
 import { store } from '../store/store';
 import { AuthorizationStatus } from './authorization-status';
-import { Offer, OfferDetails } from './offer';
+import { CityOffersGroup, Offer, OfferDetails } from './offer';
 import { Review } from './review';
 import { UserData } from './user-data';
 
-export type UserProcess = {
+export type UserProcessState = {
   authorizationStatus: AuthorizationStatus;
   user: UserData | null;
 };
 
-export type OffersProcess = {
+export type OffersState = {
   city: string;
   offers: Offer[];
-  isOffersDataLoading: boolean;
   sortType: SortType;
+  isOffersLoading: boolean;
 };
 
-export type OfferDetailsProcess = {
+export type OfferDetailsState = {
   offerDetails: OfferDetails | null;
   offerReviews: Review[];
   nearbyOffers: Offer[];
+}
+
+export type FavoriteState = {
+  favorite: CityOffersGroup;
+  favoriteOffersCount: number;
+  isFavoriteLoading: boolean;
 }
 
 export type State = ReturnType<typeof store.getState>;

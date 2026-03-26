@@ -1,3 +1,5 @@
+import { CITIES } from '../const';
+
 export type OfferLocation ={
     latitude: number;
     longitude: number;
@@ -5,7 +7,7 @@ export type OfferLocation ={
 }
 
 export type OfferCity = {
-    name: string;
+    name: typeof CITIES[number];
     location: OfferLocation;
 }
 
@@ -36,3 +38,4 @@ export type OfferDetails = Omit<Offer, 'previewImage'> & {
 }
 
 export type OfferMapPoint = { location: OfferLocation } & Pick<Offer, 'id'>;
+export type CityOffersGroup = Partial<Record<typeof CITIES[number], Offer[]>>;

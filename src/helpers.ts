@@ -1,5 +1,5 @@
 import { SortType } from './enums';
-import { Offer, OfferMapPoint } from './types/offer';
+import { CityOffersGroup, Offer, OfferMapPoint } from './types/offer';
 
 export const sortOffersBy = (sortType: SortType, offers: Offer[]): Offer[] => [...offers].sort((prev, next) => {
   switch (sortType) {
@@ -21,3 +21,13 @@ export const getCityPoints = (cityOffers: Offer[]): OfferMapPoint[] => cityOffer
   }));
 
 export const getDefaultSortTypes = () => Object.values(SortType);
+
+export const getGroupedByCityOffers = (offers: Offer[]): CityOffersGroup => offers
+  .reduce<CityOffersGroup>((groupedOffers, offer) => {
+    const cityName = offer.city.name;
+    const currentCityOffers = groupedOffers[cityName] ?? [];
+
+    groupedOffers[cityName] = [...currentCityOffers, offer];
+
+    return groupedOffers;
+  }, {});

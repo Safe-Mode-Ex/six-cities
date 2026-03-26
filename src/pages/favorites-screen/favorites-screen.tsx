@@ -1,45 +1,48 @@
-import { Offer } from '../../types/offer';
-import OffersList from '../../components/offers-list/offers-list';
 import Header from '../../components/header/header';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
+import { fetchFavoriteOffersAction } from '../../store/api-actions';
+import { getFavorite, getIsFavoriteLoading } from '../../store/favorite/selector';
+import { useEffect } from 'react';
+import NoFavorites from '../../components/no-favorites/no-favorites';
+import cn from 'classnames';
+import Footer from '../../components/footer/footer';
+import Favorites from '../../components/favorites/favorites';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-type FavoritesScreenProps = {
-  favorites: Map<string, Offer[]>;
-};
+function FavoritesScreen(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const favorite = useAppSelector(getFavorite);
+  const isLoading = useAppSelector(getIsFavoriteLoading);
+  const favoriteEntries = Object.entries(favorite);
+  const hasFavorites = favoriteEntries.length;
 
-function FavoritesScreen({ favorites }: FavoritesScreenProps): JSX.Element {
-  return (
-    <div className="page">
-      <Header />
+  useEffect(() => {
+    dispatch(fetchFavoriteOffersAction());
+  }, [dispatch]);
 
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {Array.from(favorites.entries()).map(([city, offers]) => (
-                <li className="favorites__locations-items" key={city}>
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <a className="locations__item-link" href="#">
-                        <span>{city}</span>
-                      </a>
-                    </div>
-                  </div>
+  return isLoading ?
+    <LoadingScreen /> :
+    (
+      <div className={cn(
+        'page',
+        { 'page--favorites-empty': !hasFavorites }
+      )}
+      >
+        <Header />
 
-                  <OffersList offers={offers} isFavoritesScreen />
-                </li>
-              ))}
-            </ul>
-          </section>
-        </div>
-      </main>
-      <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
-      </footer>
-    </div>
-  );
+        <main className={cn(
+          'page__main page__main--favorites',
+          { 'page__main--favorites-empty': !hasFavorites }
+        )}
+        >
+          <div className="page__favorites-container container">
+            {hasFavorites ? <Favorites favoriteEntries={favoriteEntries} /> : <NoFavorites />}
+          </div>
+        </main>
+
+        <Footer />
+      </div>
+    );
 }
 
 export default FavoritesScreen;

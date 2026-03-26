@@ -1,17 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace, SortType } from '../../enums';
-import { OffersProcess } from '../../types/app-state';
-import { fetchOffersAction } from '../api-actions';
+import { OffersState } from '../../types/app-state';
+import { changeFavoriteStateAction, fetchOffersAction, logoutAction } from '../api-actions';
 import { getDefaultSortTypes } from '../../helpers';
 
-const initialState: OffersProcess = {
+const initialState: OffersState = {
   city: '',
   offers: [],
-  isOffersDataLoading: false,
-  sortType: getDefaultSortTypes()[0]
+  sortType: getDefaultSortTypes()[0],
+  isOffersLoading: false,
 };
 
-export const offers = createSlice({
+export const offersSlice = createSlice({
   name: NameSpace.Offers,
   initialState,
   reducers: {
@@ -25,13 +25,23 @@ export const offers = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchOffersAction.pending, (state) => {
-        state.isOffersDataLoading = true;
+        state.isOffersLoading = true;
       })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
-        state.isOffersDataLoading = false;
+        state.isOffersLoading = false;
+      })
+      .addCase(changeFavoriteStateAction.fulfilled, (state, action) => {
+        const currentOffer = state.offers.find(({ id }) => id === action.payload.id);
+
+        if (currentOffer) {
+          currentOffer.isFavorite = action.payload.isFavorite;
+        }
+      })
+      .addCase(logoutAction.pending, (state) => {
+        state.offers.forEach((offer) => (offer.isFavorite = false));
       });
   },
 });
 
-export const { selectCity, setSortType } = offers.actions;
+export const { selectCity, setSortType } = offersSlice.actions;

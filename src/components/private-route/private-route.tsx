@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { AppRoute } from '../../types/app-route';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getAuthorizedStatus } from '../../store/user-process/selector';
+import { getAuthorizedStatus } from '../../store/user/selector';
 
 type PrivateRouteProps = {
     children: JSX.Element;
