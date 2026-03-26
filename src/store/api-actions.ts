@@ -19,7 +19,7 @@ export type ActionConfig = {
 }
 
 export const fetchOffersAction = createAsyncThunk<Offer[], undefined, ActionConfig>(
-  'data/fetchOffers',
+  'offers/fetchOffers',
   async (_, { extra: api }) => {
     const { data } = await api.get<Offer[]>(APIRoute.Offers);
     return data;
@@ -27,7 +27,7 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, ActionConf
 );
 
 export const fetchOfferByIdAction = createAsyncThunk<OfferDetails | null, string, ActionConfig>(
-  'data/fetchOfferById',
+  'offer/fetchOfferById',
   async (offerId, { dispatch, extra: api }) => {
     try {
       const { data } = await api.get<OfferDetails>(`${APIRoute.Offers}/${offerId}`);
@@ -45,7 +45,7 @@ export const fetchOfferByIdAction = createAsyncThunk<OfferDetails | null, string
 );
 
 export const fetchCommentsAction = createAsyncThunk<Review[], string, ActionConfig>(
-  'data/fetchComments',
+  'offer/fetchComments',
   async (offerId, { extra: api }) => {
     const { data } = await api.get<Review[]>(`${APIRoute.Comments}/${offerId}`);
     return data;
@@ -53,7 +53,7 @@ export const fetchCommentsAction = createAsyncThunk<Review[], string, ActionConf
 );
 
 export const fetchNearbyOffers = createAsyncThunk<Offer[], string, ActionConfig>(
-  'data/fetchNearbyOffers',
+  'offer/fetchNearbyOffers',
   async (offerId, { extra: api }) => {
     const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${offerId}/nearby`);
     return data;
@@ -71,7 +71,7 @@ export const sendOfferReview = createAsyncThunk<void, {
 );
 
 export const checkAuthAction = createAsyncThunk<UserData, undefined, ActionConfig>(
-  'data/checkAuth',
+  'user/checkAuth',
   async (_, { extra: api }) => {
     const { data } = await api.get<UserData>(APIRoute.Login);
     return data;

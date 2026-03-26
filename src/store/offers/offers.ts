@@ -7,7 +7,6 @@ import { getDefaultSortTypes } from '../../helpers';
 const initialState: OffersState = {
   city: '',
   offers: [],
-  isOffersDataLoading: false,
   sortType: getDefaultSortTypes()[0]
 };
 
@@ -24,12 +23,8 @@ export const offers = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchOffersAction.pending, (state) => {
-        state.isOffersDataLoading = true;
-      })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
-        state.isOffersDataLoading = false;
       });
   },
 });

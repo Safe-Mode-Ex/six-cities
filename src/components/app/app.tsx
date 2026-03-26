@@ -11,13 +11,13 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 import { getAuthCheckedStatus } from '../../store/user-process/selector';
-import { getIsOffersDataLoading } from '../../store/offers/selector';
+import { getLoadingState } from '../../store/app/selector';
 
 function App(): JSX.Element {
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
-  const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
+  const isLoading = useAppSelector(getLoadingState);
 
-  if (!isAuthChecked || isOffersDataLoading) {
+  if (!isAuthChecked || isLoading) {
     return <LoadingScreen />;
   }
 

@@ -13,7 +13,6 @@ export type UserProcessState = {
 export type OffersState = {
   city: string;
   offers: Offer[];
-  isOffersDataLoading: boolean;
   sortType: SortType;
 };
 
@@ -26,6 +25,10 @@ export type OfferDetailsState = {
 export type FavoriteState = {
   favorite: CityOffersGroup;
   favoriteOffersCount: number;
+}
+
+export type AppState = {
+  isLoading: boolean;
 }
 
 export type State = ReturnType<typeof store.getState>;
