@@ -11,3 +11,8 @@ export const getFavoriteOffersCount = createSelector(
   (state: Pick<State, NameSpace.Favorite>) => state,
   (state) => state[NameSpace.Favorite].favoriteOffersCount,
 );
+
+export const getIsFavoriteLoading = createSelector(
+  (state: Pick<State, NameSpace.Favorite>) => state,
+  (state) => state[NameSpace.Favorite].isFavoriteLoading,
+);

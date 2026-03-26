@@ -26,6 +26,7 @@ export type OfferDetailsState = {
 export type FavoriteState = {
   favorite: CityOffersGroup;
   favoriteOffersCount: number;
+  isFavoriteLoading: boolean;
 }
 
 export type State = ReturnType<typeof store.getState>;
