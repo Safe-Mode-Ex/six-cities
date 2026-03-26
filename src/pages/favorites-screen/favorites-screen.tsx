@@ -6,6 +6,7 @@ import { getFavorite } from '../../store/favorite/selector';
 import { useEffect } from 'react';
 import NoFavorites from '../../components/no-favorites/no-favorites';
 import cn from 'classnames';
+import Footer from '../../components/footer/footer';
 
 function FavoritesScreen(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -61,11 +62,8 @@ function FavoritesScreen(): JSX.Element {
           ) : <NoFavorites />}
         </div>
       </main>
-      <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
-      </footer>
+
+      <Footer />
     </div>
   );
 }

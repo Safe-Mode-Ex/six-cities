@@ -1,4 +1,4 @@
-function NoFavorites() {
+function NoFavorites(): JSX.Element {
   return (
     <section className="favorites favorites--empty">
       <h1 className="visually-hidden">Favorites (empty)</h1>
