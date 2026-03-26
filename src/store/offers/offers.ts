@@ -3,7 +3,6 @@ import { NameSpace, SortType } from '../../enums';
 import { OffersState } from '../../types/app-state';
 import { changeFavoriteStateAction, fetchOffersAction } from '../api-actions';
 import { getDefaultSortTypes } from '../../helpers';
-import { Offer } from '../../types/offer';
 
 const initialState: OffersState = {
   city: '',
@@ -33,8 +32,11 @@ export const offers = createSlice({
         state.isOffersLoading = false;
       })
       .addCase(changeFavoriteStateAction.fulfilled, (state, action) => {
-        (state.offers.find(({ id }) => id === action.payload.id) as Offer)
-          .isFavorite = action.payload.isFavorite;
+        const currentOffer = state.offers.find(({ id }) => id === action.payload.id);
+
+        if (currentOffer) {
+          currentOffer.isFavorite = action.payload.isFavorite;
+        }
       });
   },
 });

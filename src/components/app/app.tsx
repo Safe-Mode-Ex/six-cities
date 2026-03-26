@@ -12,18 +12,21 @@ import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 import { getAuthCheckedStatus, getAuthorizedStatus } from '../../store/user-process/selector';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
+import { useEffect } from 'react';
 
 function App(): JSX.Element {
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
   const isAuthorized = useAppSelector(getAuthorizedStatus);
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    if (isAuthorized) {
+      dispatch(fetchFavoriteOffersAction());
+    }
+  }, [dispatch, isAuthorized]);
+
   if (!isAuthChecked) {
     return <LoadingScreen />;
-  }
-
-  if (isAuthorized) {
-    dispatch(fetchFavoriteOffersAction());
   }
 
   return (
