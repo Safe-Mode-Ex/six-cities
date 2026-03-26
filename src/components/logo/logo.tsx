@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { AppRoute } from '../../types/app-route';
+import { memo } from 'react';
 
 const HEADER_LOGO_LINK_CLASS_NAME = 'header__logo-link';
 
@@ -18,4 +19,6 @@ function Logo(): JSX.Element {
   );
 }
 
-export default Logo;
+const MemoizedLogo = memo(Logo);
+
+export default MemoizedLogo;
