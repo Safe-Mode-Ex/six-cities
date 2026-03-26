@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace, SortType } from '../../enums';
 import { OffersState } from '../../types/app-state';
-import { changeFavoriteStateAction, fetchOffersAction } from '../api-actions';
+import { changeFavoriteStateAction, fetchOffersAction, logoutAction } from '../api-actions';
 import { getDefaultSortTypes } from '../../helpers';
 
 const initialState: OffersState = {
@@ -37,6 +37,9 @@ export const offersSlice = createSlice({
         if (currentOffer) {
           currentOffer.isFavorite = action.payload.isFavorite;
         }
+      })
+      .addCase(logoutAction.pending, (state) => {
+        state.offers.forEach((offer) => (offer.isFavorite = false));
       });
   },
 });
