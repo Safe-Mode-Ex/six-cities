@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { useRef, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { SortType } from '../../enums';
 import useCloseSort from '../../hooks/use-close-sort';
@@ -57,4 +57,6 @@ function Sort(): JSX.Element {
   );
 }
 
-export default Sort;
+const MemoizedSort = memo(Sort);
+
+export default MemoizedSort;
