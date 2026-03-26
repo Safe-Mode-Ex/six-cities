@@ -4,18 +4,23 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import OffersList from '../../components/offers-list/offers-list';
 import Reviews from '../../components/reviews/reviews';
-import { fetchCommentsAction, fetchNearbyOffers, fetchOfferByIdAction } from '../../store/api-actions';
+import { changeFavoriteStateAction, fetchCommentsAction, fetchNearbyOffers, fetchOfferByIdAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { getCityPoints } from '../../helpers';
 import { Rating } from '../../enums';
 import { MAX_MAP_NEARBY_OFFERS } from '../../const';
 import { getNearbyOffers, getOfferDetails, getOfferReviews } from '../../store/offer/selector';
+import cn from 'classnames';
+import { getAuthorizedStatus } from '../../store/user-process/selector';
+import { redirectToRoute } from '../../store/action';
+import { AppRoute } from '../../types/app-route';
 
 function OfferScreen(): JSX.Element {
   const activeOfferId = useParams().id as string;
   const offerDetails = useAppSelector(getOfferDetails);
   const offerReviews = useAppSelector(getOfferReviews);
   const nearbyOffers = useAppSelector(getNearbyOffers);
+  const isAuthorized = useAppSelector(getAuthorizedStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -31,6 +36,19 @@ function OfferScreen(): JSX.Element {
     location: offerDetails?.location,
   }] : [];
   const cityLocation = offerDetails?.city.location;
+
+  const handleBookmarkButtonClick = (evt: React.MouseEvent) => {
+    evt.preventDefault();
+
+    if (offerDetails && isAuthorized) {
+      dispatch(changeFavoriteStateAction({
+        offerId: offerDetails?.id,
+        status: Number(!offerDetails.isFavorite),
+      }));
+    } else {
+      dispatch(redirectToRoute(AppRoute.Login));
+    }
+  };
 
   return (
     <div className="page">
@@ -57,7 +75,14 @@ function OfferScreen(): JSX.Element {
                 )}
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">{offerDetails.title}</h1>
-                  <button className="offer__bookmark-button button" type="button">
+                  <button
+                    className={cn(
+                      'offer__bookmark-button button',
+                      { 'offer__bookmark-button--active': offerDetails.isFavorite }
+                    )}
+                    type="button"
+                    onClick={handleBookmarkButtonClick}
+                  >
                     <svg className="offer__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>

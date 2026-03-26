@@ -1,7 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../enums';
 import { OfferDetailsState } from '../../types/app-state';
 import { fetchCommentsAction, fetchNearbyOffers, fetchOfferByIdAction } from '../api-actions';
+import { OfferDetails } from '../../types/offer';
 
 const initialState: OfferDetailsState = {
   offerDetails: null,
@@ -12,7 +13,11 @@ const initialState: OfferDetailsState = {
 export const offer = createSlice({
   name: NameSpace.Offer,
   initialState,
-  reducers: {},
+  reducers: {
+    setOfferDetails: (state, action: PayloadAction<OfferDetails>) => {
+      state.offerDetails = action.payload;
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchOfferByIdAction.fulfilled, (state, action) => {
@@ -26,3 +31,5 @@ export const offer = createSlice({
       });
   },
 });
+
+export const { setOfferDetails } = offer.actions;

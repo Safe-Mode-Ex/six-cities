@@ -46,3 +46,8 @@ export enum NameSpace {
   Offer = 'OFFER',
   Favorite = 'FAVORITE',
 }
+
+export enum FavoriteStatus {
+  Disabled = 0,
+  Enabled = 1,
+}
