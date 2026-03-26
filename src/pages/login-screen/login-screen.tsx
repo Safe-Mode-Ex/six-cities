@@ -1,29 +1,12 @@
-import { FormEvent, useRef } from 'react';
 import Header from '../../components/header/header';
-import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { loginAction } from '../../store/api-actions';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { AppRoute } from '../../types/app-route';
 import { Navigate } from 'react-router-dom';
-import { PASSWORD_REGEXP } from '../../const';
 import { getAuthorizedStatus } from '../../store/user-process/selector';
+import LoginForm from '../../components/login-form/login-form';
 
 function LoginScreen(): JSX.Element {
-  const dispatch = useAppDispatch();
   const isAuthorized = useAppSelector(getAuthorizedStatus);
-
-  const emailRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
-
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-
-    if (emailRef.current && passwordRef.current) {
-      dispatch(loginAction({
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-      }));
-    }
-  };
 
   return isAuthorized ? <Navigate to={AppRoute.Main} /> : (
     <div className="page page--gray page--login">
@@ -33,37 +16,7 @@ function LoginScreen(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form
-              className="login__form form"
-              action="#"
-              method="post"
-              onSubmit={handleSubmit}
-            >
-              <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">E-mail</label>
-                <input
-                  ref={emailRef}
-                  className="login__input form__input"
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  required
-                />
-              </div>
-              <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">Password</label>
-                <input
-                  ref={passwordRef}
-                  className="login__input form__input"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  pattern={PASSWORD_REGEXP}
-                  required
-                />
-              </div>
-              <button className="login__submit form__submit button" type="submit">Sign in</button>
-            </form>
+            <LoginForm />
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
