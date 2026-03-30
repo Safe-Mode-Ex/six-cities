@@ -81,25 +81,27 @@ describe('OffersProcess Slice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('should set offers to array with offers and isOffersLoading to false with fetchOffersAction.fulfilled', () => {
-    const offersMock = getFakeOffers();
-    const expectedState = {
-      city: '',
-      sortType: getDefaultSortTypes()[0],
-      offers: offersMock,
-      isOffersLoading: false,
-    };
+  it('should set offers to array with offers and isOffersLoading to false with fetchOffersAction.fulfilled',
+    () => {
+      const offersMock = getFakeOffers();
+      const expectedState = {
+        city: '',
+        sortType: getDefaultSortTypes()[0],
+        offers: offersMock,
+        isOffersLoading: false,
+      };
 
-    const result = offersSlice.reducer(undefined, fetchOffersAction.fulfilled(offersMock, '', undefined));
+      const result = offersSlice
+        .reducer(undefined, fetchOffersAction.fulfilled(offersMock, '', undefined));
 
-    expect(result).toEqual(expectedState);
-  });
+      expect(result).toEqual(expectedState);
+    });
 
   it('should change offers\'s isFavorite property with changeFavoriteStateAction.fulfilled', () => {
     const offersMock = getFakeOffers();
     const currentOfferIndex = 0;
     const currentOffer = offersMock[currentOfferIndex] as unknown as OfferDetails;
-    const action = { offerId: currentOffer.id, status: Number(!currentOffer.isFavorite) };
+    const arg = { offerId: '', status: 0 };
     const expectedOffer = { ...offersMock[currentOfferIndex], isFavorite: !currentOffer.isFavorite };
     const initialState = {
       city: '',
@@ -114,7 +116,8 @@ describe('OffersProcess Slice', () => {
       isOffersLoading: false,
     };
 
-    const result = offersSlice.reducer(initialState, changeFavoriteStateAction.fulfilled(currentOffer, '', action));
+    const result = offersSlice
+      .reducer(initialState, changeFavoriteStateAction.fulfilled(currentOffer, '', arg));
 
     expect(result).toEqual(expectedState);
   });
@@ -127,15 +130,10 @@ describe('OffersProcess Slice', () => {
       sortType: getDefaultSortTypes()[0],
       isOffersLoading: false,
     };
-    const expectedState = {
-      city: '',
-      offers: offersMock.map((offer) => ({ ...offer, isFavorite: false })),
-      sortType: getDefaultSortTypes()[0],
-      isOffersLoading: false,
-    };
+    const expectedOffers = offersMock.map((offer) => ({ ...offer, isFavorite: false }));
 
     const result = offersSlice.reducer(initialState, logoutAction.fulfilled);
 
-    expect(result).toEqual(expectedState);
+    expect(result.offers).toEqual(expectedOffers);
   });
 });

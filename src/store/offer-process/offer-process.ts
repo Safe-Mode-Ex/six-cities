@@ -34,7 +34,7 @@ export const offerProcess = createSlice({
           state.offerDetails.isFavorite = action.payload.isFavorite;
         }
       })
-      .addCase(logoutAction.pending, (state) => {
+      .addCase(logoutAction.fulfilled, (state) => {
         if (state.offerDetails) {
           state.offerDetails.isFavorite = false;
         }

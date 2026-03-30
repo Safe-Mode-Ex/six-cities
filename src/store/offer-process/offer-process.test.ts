@@ -1,5 +1,6 @@
 import { OfferDetails } from '../../types/offer';
-import { getFakeOfferDetails } from '../../utils/mocks';
+import { getFakeOfferDetails, getFakeOffers, getFakeReviews } from '../../utils/mocks';
+import { changeFavoriteStateAction, fetchCommentsAction, fetchNearbyOffers, fetchOfferByIdAction, logoutAction } from '../api-actions';
 import { offerProcess, setOfferDetails } from './offer-process';
 
 describe('OfferProcess Slice', () => {
@@ -30,15 +31,73 @@ describe('OfferProcess Slice', () => {
   });
 
   it('should set offer details with setOfferDetails action', () => {
+    const offerDetails = getFakeOfferDetails();
+
+    const result = offerProcess.reducer(undefined, setOfferDetails(offerDetails));
+
+    expect(result.offerDetails).toEqual(offerDetails);
+  });
+
+  it('should set offerDetails with fetchOfferByIdAction.fulfiled', () => {
+    const expectedOfferDetails = getFakeOfferDetails();
+
+    const result = offerProcess
+      .reducer(undefined, fetchOfferByIdAction.fulfilled(expectedOfferDetails, '', ''));
+
+    expect(result.offerDetails).toEqual(expectedOfferDetails);
+  });
+
+  it('should set offerReviews with fetchCommentsAction.fulfilled', () => {
+    const expectedComments = getFakeReviews();
+
+    const result = offerProcess
+      .reducer(undefined, fetchCommentsAction.fulfilled(expectedComments, '', ''));
+
+    expect(result.offerReviews).toEqual(expectedComments);
+  });
+
+  it('should set nearbyOffers with fetchNearbyOffers.fulfilled', () => {
+    const expectedNearbyOffers = getFakeOffers();
+
+    const result = offerProcess
+      .reducer(undefined, fetchNearbyOffers.fulfilled(expectedNearbyOffers, '', ''));
+
+    expect(result.nearbyOffers).toEqual(expectedNearbyOffers);
+  });
+
+  it('should change isFavorite for offer with changeFavoriteStateAction.fulfilled', () => {
+    const offerDetails = getFakeOfferDetails();
+    const arg = { offerId: '', status: 0 };
+    const expectedOfferDetails = {
+      ...offerDetails,
+      isFavorite: !offerDetails.isFavorite,
+    };
+
     const initialState = {
-      offerDetails: null,
+      offerDetails,
       offerReviews: [],
       nearbyOffers: [],
     };
+
+    const result = offerProcess
+      .reducer(initialState, changeFavoriteStateAction.fulfilled(expectedOfferDetails, '', arg));
+
+    expect(result.offerDetails?.isFavorite).toEqual(expectedOfferDetails.isFavorite);
+  });
+
+  it('should set isFavorite to false with logoutAction.fulfilled', () => {
     const offerDetails = getFakeOfferDetails();
+    const initialState = {
+      offerDetails: {
+        ...offerDetails,
+        isFavorite: true,
+      },
+      offerReviews: [],
+      nearbyOffers: [],
+    };
 
-    const result = offerProcess.reducer(initialState, setOfferDetails(offerDetails));
+    const result = offerProcess.reducer(initialState, logoutAction.fulfilled);
 
-    expect(result.offerDetails).toEqual(offerDetails);
+    expect(result.offerDetails?.isFavorite).toBe(false);
   });
 });
