@@ -31,6 +31,9 @@ export const offersSlice = createSlice({
         state.offers = action.payload;
         state.isOffersLoading = false;
       })
+      .addCase(fetchOffersAction.rejected, (state) => {
+        state.isOffersLoading = false;
+      })
       .addCase(changeFavoriteStateAction.fulfilled, (state, action) => {
         const currentOffer = state.offers.find(({ id }) => id === action.payload.id);
 
@@ -38,7 +41,7 @@ export const offersSlice = createSlice({
           currentOffer.isFavorite = action.payload.isFavorite;
         }
       })
-      .addCase(logoutAction.pending, (state) => {
+      .addCase(logoutAction.fulfilled, (state) => {
         state.offers.forEach((offer) => (offer.isFavorite = false));
       });
   },

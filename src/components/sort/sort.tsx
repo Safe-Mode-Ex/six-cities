@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { SortType } from '../../enums';
 import useCloseSort from '../../hooks/use-close-sort';
 import { getDefaultSortTypes } from '../../helpers';
-import { getSortType } from '../../store/offers/selector';
-import { setSortType } from '../../store/offers/offers';
+import { getSortType } from '../../store/offers-process/selectors';
+import { setSortType } from '../../store/offers-process/offers-process';
 
 function Sort(): JSX.Element {
   const [isOpened, setOpenedState] = useState(false);

@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { NameSpace } from '../enums';
 import { offerProcess } from './offer-process/offer-process';
-import { offersSlice } from './offers/offers';
+import { offersSlice } from './offers-process/offers-process';
 import { userSlice } from './user/user';
 import { favoriteProcess } from './favorite-process/favorite-process';
 
