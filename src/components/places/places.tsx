@@ -3,8 +3,8 @@ import NoPlaces from '../no-places/no-places';
 import Offers from '../offers/offers';
 import Map from '../map/map';
 import { useCallback, useMemo, useState } from 'react';
-import { getCityPoints } from '../../helpers';
 import { Offer } from '../../types/offer';
+import { getCityPoints } from '../../utils/helpers';
 
 type PlacesProps = {
     activeCityName: string;
