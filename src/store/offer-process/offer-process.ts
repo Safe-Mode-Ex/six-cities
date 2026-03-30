@@ -10,7 +10,7 @@ const initialState: OfferDetailsState = {
   nearbyOffers: [],
 };
 
-export const offerSlice = createSlice({
+export const offerProcess = createSlice({
   name: NameSpace.Offer,
   initialState,
   reducers: {
@@ -42,4 +42,4 @@ export const offerSlice = createSlice({
   },
 });
 
-export const { setOfferDetails } = offerSlice.actions;
+export const { setOfferDetails } = offerProcess.actions;

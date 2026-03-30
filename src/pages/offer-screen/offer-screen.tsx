@@ -3,9 +3,8 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Reviews from '../../components/reviews/reviews';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getCityPoints } from '../../helpers';
 import { MAX_MAP_NEARBY_OFFERS } from '../../const';
-import { getNearbyOffers, getOfferDetails, getOfferReviews } from '../../store/offer/selector';
+import { getNearbyOffers, getOfferDetails, getOfferReviews } from '../../store/offer-process/selectors';
 import LoadingScreen from '../loading-screen/loading-screen';
 import useOfferData from '../../hooks/use-offer-data';
 import NearbyOffers from '../../components/nearby-offers/nearby-offers';
@@ -13,6 +12,7 @@ import OfferNameWrapper from '../../components/offer-name-wrapper/offer-name-wra
 import OfferInside from '../../components/offer-inside/offer-inside';
 import OfferRating from '../../components/offer-rating/offer-rating';
 import OfferGalleryContainer from '../../components/offer-gallery-container/offer-gallery-container';
+import { getCityPoints } from '../../utils/helpers';
 
 function OfferScreen(): JSX.Element {
   const activeOfferId = useParams().id as string;

@@ -1,7 +1,7 @@
 import Header from '../../components/header/header';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
-import { getFavorite, getIsFavoriteLoading } from '../../store/favorite/selector';
+import { getFavorite, getIsFavoriteLoading } from '../../store/favorite-process/selectors';
 import { useEffect } from 'react';
 import NoFavorites from '../../components/no-favorites/no-favorites';
 import cn from 'classnames';

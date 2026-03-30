@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace, SortType } from '../../enums';
 import { OffersState } from '../../types/app-state';
 import { changeFavoriteStateAction, fetchOffersAction, logoutAction } from '../api-actions';
-import { getDefaultSortTypes } from '../../helpers';
+import { getDefaultSortTypes } from '../../utils/helpers';
 
 const initialState: OffersState = {
   city: '',

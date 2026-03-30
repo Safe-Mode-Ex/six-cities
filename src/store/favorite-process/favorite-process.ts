@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../enums';
 import { FavoriteState } from '../../types/app-state';
 import { fetchFavoriteOffersAction } from '../api-actions';
-import { getGroupedByCityOffers } from '../../helpers';
+import { getGroupedByCityOffers } from '../../utils/helpers';
 
 const initialState: FavoriteState = {
   favorite: {},
@@ -10,7 +10,7 @@ const initialState: FavoriteState = {
   isFavoriteLoading: false,
 };
 
-export const favoriteSlice = createSlice({
+export const favoriteProcess = createSlice({
   name: NameSpace.Favorite,
   initialState,
   reducers: {},
