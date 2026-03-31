@@ -3,6 +3,10 @@ import { Offer, OfferDetails } from '../types/offer';
 import { name, datatype, lorem, commerce, internet, image } from 'faker';
 import { Review } from '../types/review';
 import { UserData } from '../types/user-data';
+import { Action } from 'redux';
+import { createApi } from '../services/api';
+import { State } from '../types/app-state';
+import { ThunkDispatch } from 'redux-thunk';
 
 export const getFakeOfferDetails = (): OfferDetails => ({
   id: datatype.uuid(),
@@ -87,3 +91,6 @@ export const getFakeUser = (): UserData => ({
   name: name.firstName(),
   token: datatype.uuid(),
 });
+
+export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createApi>, Action>;
+export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
