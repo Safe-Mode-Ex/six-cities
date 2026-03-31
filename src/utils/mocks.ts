@@ -75,3 +75,6 @@ export const getFakeReviews = (): Review[] => ([
     rating: datatype.number(),
   }
 ]);
+
+
+export const getFakeFavorite = (): Offer[] => getFakeOffers().map((item) => ({ ...item, isFavorite: true }));
