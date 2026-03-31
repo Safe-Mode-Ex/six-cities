@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 import { INITIAL_REVIEW_FORM_SATE } from '../const';
-import { sendOfferReview } from '../store/api-actions';
+import { sendOfferReviewAction } from '../store/api-actions';
 import { NewReview } from '../types/review';
 import { useAppDispatch } from './use-app-selector';
 
@@ -16,7 +16,7 @@ function useReviewFormSubmit(
     evt.preventDefault();
 
     setCommentSending(true);
-    dispatch(sendOfferReview({
+    dispatch(sendOfferReviewAction({
       offerId,
       formData,
     })).then(() => {
