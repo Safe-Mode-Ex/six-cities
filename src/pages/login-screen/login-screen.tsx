@@ -2,7 +2,7 @@ import Header from '../../components/header/header';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { AppRoute } from '../../types/app-route';
 import { Navigate } from 'react-router-dom';
-import { getAuthorizedStatus } from '../../store/user/selector';
+import { getAuthorizedStatus } from '../../store/user-process/selector';
 import LoginForm from '../../components/login-form/login-form';
 
 function LoginScreen(): JSX.Element {

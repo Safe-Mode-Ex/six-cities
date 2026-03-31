@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getAuthorizedStatus } from '../../store/user/selector';
+import { getAuthorizedStatus } from '../../store/user-process/selector';
 import { Review } from '../../types/review';
 import ReviewForm from '../review-form/review-form';
 import ReviewItem from '../review/review';

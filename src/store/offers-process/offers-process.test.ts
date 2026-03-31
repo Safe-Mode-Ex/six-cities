@@ -2,7 +2,7 @@ import { OfferDetails } from '../../types/offer';
 import { getDefaultSortTypes } from '../../utils/helpers';
 import { getFakeOffers } from '../../utils/mocks';
 import { changeFavoriteStateAction, fetchOffersAction, logoutAction } from '../api-actions';
-import { offersSlice, selectCity, setSortType } from './offers-process';
+import { offersProcess, selectCity, setSortType } from './offers-process';
 
 describe('OffersProcess Slice', () => {
   it('should return initial state with empty action', () => {
@@ -14,7 +14,7 @@ describe('OffersProcess Slice', () => {
       isOffersLoading: false,
     };
 
-    const result = offersSlice.reducer(expectedState, emptyAction);
+    const result = offersProcess.reducer(expectedState, emptyAction);
 
     expect(result).toEqual(expectedState);
   });
@@ -28,7 +28,7 @@ describe('OffersProcess Slice', () => {
       isOffersLoading: false,
     };
 
-    const result = offersSlice.reducer(undefined, emptyAction);
+    const result = offersProcess.reducer(undefined, emptyAction);
 
     expect(result).toEqual(expectedState);
   });
@@ -36,9 +36,9 @@ describe('OffersProcess Slice', () => {
   it('should change city with selectCity action', () => {
     const expectedCity = 'Amsterdam';
 
-    const result = offersSlice.reducer(undefined, selectCity(expectedCity));
+    const { city } = offersProcess.reducer(undefined, selectCity(expectedCity));
 
-    expect(result.city).toEqual(expectedCity);
+    expect(city).toEqual(expectedCity);
   });
 
   it('should change sortType with setSorttype action', () => {
@@ -50,7 +50,7 @@ describe('OffersProcess Slice', () => {
     };
     const expectedSortType = getDefaultSortTypes()[1];
 
-    const result = offersSlice.reducer(initialState, setSortType(expectedSortType));
+    const result = offersProcess.reducer(initialState, setSortType(expectedSortType));
 
     expect(result.sortType).toEqual(expectedSortType);
   });
@@ -63,7 +63,7 @@ describe('OffersProcess Slice', () => {
       isOffersLoading: true,
     };
 
-    const result = offersSlice.reducer(undefined, fetchOffersAction.pending);
+    const result = offersProcess.reducer(undefined, fetchOffersAction.pending);
 
     expect(result).toEqual(expectedState);
   });
@@ -76,7 +76,7 @@ describe('OffersProcess Slice', () => {
       isOffersLoading: false,
     };
 
-    const result = offersSlice.reducer(undefined, fetchOffersAction.rejected);
+    const result = offersProcess.reducer(undefined, fetchOffersAction.rejected);
 
     expect(result).toEqual(expectedState);
   });
@@ -91,7 +91,7 @@ describe('OffersProcess Slice', () => {
         isOffersLoading: false,
       };
 
-      const result = offersSlice
+      const result = offersProcess
         .reducer(undefined, fetchOffersAction.fulfilled(offersMock, '', undefined));
 
       expect(result).toEqual(expectedState);
@@ -116,7 +116,7 @@ describe('OffersProcess Slice', () => {
       isOffersLoading: false,
     };
 
-    const result = offersSlice
+    const result = offersProcess
       .reducer(initialState, changeFavoriteStateAction.fulfilled(currentOffer, '', arg));
 
     expect(result).toEqual(expectedState);
@@ -132,8 +132,8 @@ describe('OffersProcess Slice', () => {
     };
     const expectedOffers = offersMock.map((offer) => ({ ...offer, isFavorite: false }));
 
-    const result = offersSlice.reducer(initialState, logoutAction.fulfilled);
+    const { offers } = offersProcess.reducer(initialState, logoutAction.fulfilled);
 
-    expect(result.offers).toEqual(expectedOffers);
+    expect(offers).toEqual(expectedOffers);
   });
 });

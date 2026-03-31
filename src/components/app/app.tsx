@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
-import { getAuthCheckedStatus, getAuthorizedStatus } from '../../store/user/selector';
+import { getAuthCheckedStatus, getAuthorizedStatus } from '../../store/user-process/selector';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 

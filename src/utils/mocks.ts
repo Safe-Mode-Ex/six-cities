@@ -2,6 +2,7 @@ import { CITIES } from '../const';
 import { Offer, OfferDetails } from '../types/offer';
 import { name, datatype, lorem, commerce, internet, image } from 'faker';
 import { Review } from '../types/review';
+import { UserData } from '../types/user-data';
 
 export const getFakeOfferDetails = (): OfferDetails => ({
   id: datatype.uuid(),
@@ -78,3 +79,11 @@ export const getFakeReviews = (): Review[] => ([
 
 
 export const getFakeFavorite = (): Offer[] => getFakeOffers().map((item) => ({ ...item, isFavorite: true }));
+
+export const getFakeUser = (): UserData => ({
+  avatarUrl: image.avatar(),
+  email: internet.email(),
+  isPro: datatype.boolean(),
+  name: name.firstName(),
+  token: datatype.uuid(),
+});

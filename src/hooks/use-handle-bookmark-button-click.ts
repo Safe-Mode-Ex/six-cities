@@ -1,6 +1,6 @@
 import { redirectToRoute } from '../store/action';
 import { changeFavoriteStateAction } from '../store/api-actions';
-import { getAuthorizedStatus } from '../store/user/selector';
+import { getAuthorizedStatus } from '../store/user-process/selector';
 import { AppRoute } from '../types/app-route';
 import { useAppDispatch, useAppSelector } from './use-app-selector';
 
