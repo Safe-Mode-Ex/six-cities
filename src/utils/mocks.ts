@@ -94,3 +94,15 @@ export const getFakeUser = (): UserData => ({
 
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createApi>, Action>;
 export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);
+
+export const getFakeComments = (): Review[] => [{
+  id: datatype.uuid(),
+  date: datatype.datetime.toString(),
+  user: {
+    name: name.firstName(),
+    isPro: datatype.boolean(),
+    avatarUrl: image.avatar(),
+  },
+  comment: lorem.sentence(),
+  rating: datatype.number(5),
+}];

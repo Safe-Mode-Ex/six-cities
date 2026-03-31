@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../enums';
 import { OfferDetailsState } from '../../types/app-state';
-import { changeFavoriteStateAction, fetchCommentsAction, fetchNearbyOffers, fetchOfferByIdAction, logoutAction } from '../api-actions';
+import { changeFavoriteStateAction, fetchCommentsAction, fetchNearbyOffersAction, fetchOfferByIdAction, logoutAction } from '../api-actions';
 import { OfferDetails } from '../../types/offer';
 
 const initialState: OfferDetailsState = {
@@ -26,7 +26,7 @@ export const offerProcess = createSlice({
       .addCase(fetchCommentsAction.fulfilled, (state, action) => {
         state.offerReviews = action.payload;
       })
-      .addCase(fetchNearbyOffers.fulfilled, (state, action) => {
+      .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
         state.nearbyOffers = action.payload;
       })
       .addCase(changeFavoriteStateAction.fulfilled, (state, action) => {
