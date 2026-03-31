@@ -70,7 +70,7 @@ export const getFakeOffers = (): Offer[] => ([
 export const getFakeReviews = (): Review[] => ([
   {
     id: datatype.uuid(),
-    date: datatype.datetime.toString(),
+    date: datatype.datetime().toISOString(),
     user: {
       name: name.firstName(),
       isPro: datatype.boolean(),

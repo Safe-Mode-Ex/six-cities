@@ -8,9 +8,9 @@ function OfferInside({ goods }: OfferInsideProps): JSX.Element {
   return (
     <div className="offer__inside">
       <h2 className="offer__inside-title">What&apos;s inside</h2>
-      <ul className="offer__inside-list">
+      <ul className="offer__inside-list" data-testid="goods-container">
         {goods.map((feature) => (
-          <li className="offer__inside-item" key={feature}>
+          <li className="offer__inside-item" key={feature} data-testid="feature-value">
             {feature}
           </li>
         ))}
