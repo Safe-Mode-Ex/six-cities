@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import {HelmetProvider} from 'react-helmet-async';
 import MainScreen from './../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
@@ -28,28 +29,30 @@ function App(): JSX.Element {
   }
 
   return (
-    <Routes>
-      <Route path={AppRoute.Main} element={
-        <MainScreen />
-      }
-      />
-      <Route
-        path={`${AppRoute.Offer}/:id`}
-        element={
-          <OfferScreen />
+    <HelmetProvider>
+      <Routes>
+        <Route path={AppRoute.Main} element={
+          <MainScreen />
         }
-      />
-      <Route path={AppRoute.Login} element={<LoginScreen />} />
-      <Route
-        path={AppRoute.Favorites}
-        element={
-          <PrivateRoute>
-            <FavoritesScreen />
-          </PrivateRoute>
-        }
-      />
-      <Route path="*" element={<NotFoundScreen />} />
-    </Routes>
+        />
+        <Route
+          path={`${AppRoute.Offer}/:id`}
+          element={
+            <OfferScreen />
+          }
+        />
+        <Route path={AppRoute.Login} element={<LoginScreen />} />
+        <Route
+          path={AppRoute.Favorites}
+          element={
+            <PrivateRoute>
+              <FavoritesScreen />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<NotFoundScreen />} />
+      </Routes>
+    </HelmetProvider>
   );
 }
 

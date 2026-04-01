@@ -13,6 +13,7 @@ import OfferInside from '../../components/offer-inside/offer-inside';
 import OfferRating from '../../components/offer-rating/offer-rating';
 import OfferGalleryContainer from '../../components/offer-gallery-container/offer-gallery-container';
 import { getCityPoints } from '../../utils/helpers';
+import { Helmet } from 'react-helmet-async';
 
 function OfferScreen(): JSX.Element {
   const activeOfferId = useParams().id as string;
@@ -34,6 +35,9 @@ function OfferScreen(): JSX.Element {
 
   return (
     <div className="page">
+      <Helmet>
+        <title>6 cities. {offerDetails.title}</title>
+      </Helmet>
       <Header />
 
       <main className="page__main page__main--offer" data-testid="offer-page">

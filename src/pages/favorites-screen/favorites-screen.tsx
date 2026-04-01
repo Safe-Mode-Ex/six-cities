@@ -8,6 +8,7 @@ import cn from 'classnames';
 import Footer from '../../components/footer/footer';
 import Favorites from '../../components/favorites/favorites';
 import LoadingScreen from '../loading-screen/loading-screen';
+import { Helmet } from 'react-helmet-async';
 
 function FavoritesScreen(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -28,6 +29,9 @@ function FavoritesScreen(): JSX.Element {
         { 'page--favorites-empty': !hasFavorites }
       )}
       >
+        <Helmet>
+          <title>6 cities. Favorites</title>
+        </Helmet>
         <Header />
 
         <main
