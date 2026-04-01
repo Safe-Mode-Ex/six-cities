@@ -11,18 +11,29 @@ function useOfferData(
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchOfferByIdAction(activeOfferId));
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(fetchOfferByIdAction(activeOfferId));
+    }
 
     return () => {
+      isMounted = false;
       dispatch(setOfferDetails(null));
     };
   }, [activeOfferId, dispatch]);
 
   useEffect(() => {
-    if (offerDetails) {
+    let isMounted = true;
+
+    if (offerDetails && isMounted) {
       dispatch(fetchCommentsAction(activeOfferId));
       dispatch(fetchNearbyOffersAction(activeOfferId));
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [activeOfferId, dispatch, offerDetails]);
 }
 

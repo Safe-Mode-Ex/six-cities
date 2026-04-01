@@ -6,7 +6,7 @@ import * as helpers from '../../utils/helpers';
 describe('FavoriteProcess Slice', () => {
   it('should call getGroupedByCityOffers once changing state with fetchFavoriteOffersAction.fulfilled',
     () => {
-      const favoriteOffers = getFakeFavorite();
+      const favoriteOffers = [getFakeFavorite()[0]];
       const favorite = { [favoriteOffers[0].city.name]: favoriteOffers };
       const expectedState = {
         favorite,

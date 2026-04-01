@@ -100,9 +100,12 @@ describe('OffersProcess Slice', () => {
   it('should change offers\'s isFavorite property with changeFavoriteStateAction.fulfilled', () => {
     const offersMock = getFakeOffers();
     const currentOfferIndex = 0;
-    const currentOffer = offersMock[currentOfferIndex] as unknown as OfferDetails;
+    const currentOffer = offersMock[currentOfferIndex];
     const arg = { offerId: '', status: 0 };
-    const expectedOffer = { ...offersMock[currentOfferIndex], isFavorite: !currentOffer.isFavorite };
+    const expectedOffer = {
+      ...offersMock[currentOfferIndex],
+      isFavorite: !currentOffer.isFavorite
+    } as unknown as OfferDetails;
     const initialState = {
       city: '',
       offers: offersMock,
@@ -112,12 +115,12 @@ describe('OffersProcess Slice', () => {
     const expectedState = {
       city: '',
       sortType: getDefaultSortTypes()[0],
-      offers: offersMock.splice(currentOfferIndex, 1, expectedOffer),
+      offers: offersMock.map((offer, index) => index === currentOfferIndex ? expectedOffer : offer),
       isOffersLoading: false,
     };
 
     const result = offersProcess
-      .reducer(initialState, changeFavoriteStateAction.fulfilled(currentOffer, '', arg));
+      .reducer(initialState, changeFavoriteStateAction.fulfilled(expectedOffer, '', arg));
 
     expect(result).toEqual(expectedState);
   });

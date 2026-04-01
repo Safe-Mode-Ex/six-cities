@@ -34,7 +34,7 @@ export const getFakeOfferDetails = (): OfferDetails => ({
   rating: datatype.float({ min: 0, max: 5 }),
   description: lorem.sentence(),
   bedrooms: datatype.number({ min: 1, max: 10 }),
-  goods: [commerce.product(), commerce.product(), commerce.product()],
+  goods: [commerce.product()],
   host: {
     name: name.findName(),
     isPro: datatype.boolean(),
@@ -46,12 +46,58 @@ export const getFakeOfferDetails = (): OfferDetails => ({
 
 export const getFakeOffers = (): Offer[] => ([
   {
-    id: datatype.uuid(),
+    id: '1',
     title: name.title(),
     type: 'Hotel',
     price: datatype.number(),
     city: {
-      name: CITIES[datatype.number({ min: 0, max: CITIES.length - 1 })],
+      name: 'Paris',
+      location: {
+        latitude: datatype.float({ min: -90, max: 90 }),
+        longitude: datatype.float({ min: -180, max: 180 }),
+        zoom: datatype.number({ min: 1, max: 20 }),
+      },
+    },
+    location: {
+      latitude: datatype.float({ min: -90, max: 90 }),
+      longitude: datatype.float({ min: -180, max: 180 }),
+      zoom: datatype.number({ min: 1, max: 20 }),
+    },
+    isFavorite: datatype.boolean(),
+    isPremium: datatype.boolean(),
+    rating: datatype.float({ min: 0, max: 5 }),
+    previewImage: image.imageUrl(),
+  },
+  {
+    id: '2',
+    title: name.title(),
+    type: 'Hotel',
+    price: datatype.number(),
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: datatype.float({ min: -90, max: 90 }),
+        longitude: datatype.float({ min: -180, max: 180 }),
+        zoom: datatype.number({ min: 1, max: 20 }),
+      },
+    },
+    location: {
+      latitude: datatype.float({ min: -90, max: 90 }),
+      longitude: datatype.float({ min: -180, max: 180 }),
+      zoom: datatype.number({ min: 1, max: 20 }),
+    },
+    isFavorite: datatype.boolean(),
+    isPremium: datatype.boolean(),
+    rating: datatype.float({ min: 0, max: 5 }),
+    previewImage: image.imageUrl(),
+  },
+  {
+    id: '3',
+    title: name.title(),
+    type: 'Hotel',
+    price: datatype.number(),
+    city: {
+      name: 'Amsterdam',
       location: {
         latitude: datatype.float({ min: -90, max: 90 }),
         longitude: datatype.float({ min: -180, max: 180 }),
