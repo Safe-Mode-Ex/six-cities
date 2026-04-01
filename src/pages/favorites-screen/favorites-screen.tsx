@@ -39,7 +39,7 @@ function FavoritesScreen(): JSX.Element {
             'page__main page__main--favorites',
             { 'page__main--favorites-empty': !hasFavorites }
           )}
-          data-testId="page-favorites"
+          data-testid="page-favorites"
         >
           <div className="page__favorites-container container">
             {hasFavorites ? <Favorites favoriteEntries={favoriteEntries} /> : <NoFavorites />}
