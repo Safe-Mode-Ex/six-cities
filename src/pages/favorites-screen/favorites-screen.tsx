@@ -30,10 +30,12 @@ function FavoritesScreen(): JSX.Element {
       >
         <Header />
 
-        <main className={cn(
-          'page__main page__main--favorites',
-          { 'page__main--favorites-empty': !hasFavorites }
-        )}
+        <main
+          className={cn(
+            'page__main page__main--favorites',
+            { 'page__main--favorites-empty': !hasFavorites }
+          )}
+          data-testId="page-favorites"
         >
           <div className="page__favorites-container container">
             {hasFavorites ? <Favorites favoriteEntries={favoriteEntries} /> : <NoFavorites />}

@@ -8,8 +8,6 @@ import PrivateRoute from '../private-route/private-route';
 import { AppRoute } from '../../types/app-route';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import HistoryRouter from '../history-router/history-router';
-import browserHistory from '../../browser-history';
 import { getAuthCheckedStatus, getAuthorizedStatus } from '../../store/user-process/selector';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
 import { useEffect } from 'react';
@@ -30,30 +28,28 @@ function App(): JSX.Element {
   }
 
   return (
-    <HistoryRouter history={browserHistory}>
-      <Routes>
-        <Route path={AppRoute.Main} element={
-          <MainScreen />
+    <Routes>
+      <Route path={AppRoute.Main} element={
+        <MainScreen />
+      }
+      />
+      <Route
+        path={`${AppRoute.Offer}/:id`}
+        element={
+          <OfferScreen />
         }
-        />
-        <Route
-          path={`${AppRoute.Offer}/:id`}
-          element={
-            <OfferScreen />
-          }
-        />
-        <Route path={AppRoute.Login} element={<LoginScreen />} />
-        <Route
-          path={AppRoute.Favorites}
-          element={
-            <PrivateRoute>
-              <FavoritesScreen />
-            </PrivateRoute>
-          }
-        />
-        <Route path="*" element={<NotFoundScreen />} />
-      </Routes>
-    </HistoryRouter>
+      />
+      <Route path={AppRoute.Login} element={<LoginScreen />} />
+      <Route
+        path={AppRoute.Favorites}
+        element={
+          <PrivateRoute>
+            <FavoritesScreen />
+          </PrivateRoute>
+        }
+      />
+      <Route path="*" element={<NotFoundScreen />} />
+    </Routes>
   );
 }
 

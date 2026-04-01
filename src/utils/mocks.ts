@@ -7,6 +7,9 @@ import { Action } from 'redux';
 import { createApi } from '../services/api';
 import { State } from '../types/app-state';
 import { ThunkDispatch } from 'redux-thunk';
+import { NameSpace } from '../enums';
+import { getDefaultSortTypes } from './helpers';
+import { AuthorizationStatus } from '../types/authorization-status';
 
 export const getFakeOfferDetails = (): OfferDetails => ({
   id: datatype.uuid(),
@@ -37,7 +40,7 @@ export const getFakeOfferDetails = (): OfferDetails => ({
     isPro: datatype.boolean(),
     avatarUrl: internet.avatar(),
   },
-  images: [image.imageUrl(), image.imageUrl(), image.imageUrl()],
+  images: [image.imageUrl(10), image.imageUrl(20), image.imageUrl(30)],
   maxAdults: datatype.number({ min: 1, max: 10 }),
 });
 
@@ -106,3 +109,27 @@ export const getFakeComments = (): Review[] => [{
   comment: lorem.sentence(),
   rating: datatype.number(5),
 }];
+
+export const getFakeStore = (initialState?: Partial<State>): State => ({
+  [NameSpace.Offer]: {
+    offerDetails: null,
+    offerReviews: [],
+    nearbyOffers: [],
+  },
+  [NameSpace.Offers]: {
+    city: '',
+    offers: [],
+    sortType: getDefaultSortTypes()[0],
+    isOffersLoading: false,
+  },
+  [NameSpace.User]: {
+    authorizationStatus: AuthorizationStatus.Unknown,
+    user: null,
+  },
+  [NameSpace.Favorite]: {
+    favorite: {},
+    favoriteOffersCount: 0,
+    isFavoriteLoading: false,
+  },
+  ...initialState ?? {},
+});
