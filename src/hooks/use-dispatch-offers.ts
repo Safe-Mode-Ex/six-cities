@@ -6,7 +6,15 @@ function useDispatchOffers() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchOffersAction());
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(fetchOffersAction());
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch]);
 }
 

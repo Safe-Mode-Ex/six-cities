@@ -4,8 +4,8 @@ import Logo from '../logo/logo';
 import { AppRoute } from '../../types/app-route';
 import { logoutAction } from '../../store/api-actions';
 import { memo, MouseEvent } from 'react';
-import { getAuthorizedStatus, getUser } from '../../store/user/selector';
-import { getFavoriteOffersCount } from '../../store/favorite/selector';
+import { getAuthorizedStatus, getUser } from '../../store/user-process/selector';
+import { getFavoriteOffersCount } from '../../store/favorite-process/selectors';
 
 type HeaderProps = {
     hasUserMenu?: boolean;

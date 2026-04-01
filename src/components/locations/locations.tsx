@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { CITIES } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-selector';
-import { selectCity } from '../../store/offers/offers';
+import { selectCity } from '../../store/offers-process/offers-process';
 import Location from '../location/location';
 
 type LocationsProps = {

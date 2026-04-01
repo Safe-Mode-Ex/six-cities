@@ -1,0 +1,22 @@
+.loading__text {
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 32px;
+    line-height: 1.1875;
+}
+
+.loading__desc {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0 30px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

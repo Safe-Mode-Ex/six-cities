@@ -1,13 +1,14 @@
 import Header from '../../components/header/header';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
-import { getFavorite, getIsFavoriteLoading } from '../../store/favorite/selector';
+import { getFavorite, getIsFavoriteLoading } from '../../store/favorite-process/selectors';
 import { useEffect } from 'react';
 import NoFavorites from '../../components/no-favorites/no-favorites';
 import cn from 'classnames';
 import Footer from '../../components/footer/footer';
 import Favorites from '../../components/favorites/favorites';
 import LoadingScreen from '../loading-screen/loading-screen';
+import { Helmet } from 'react-helmet-async';
 
 function FavoritesScreen(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -28,12 +29,17 @@ function FavoritesScreen(): JSX.Element {
         { 'page--favorites-empty': !hasFavorites }
       )}
       >
+        <Helmet>
+          <title>6 cities. Favorites</title>
+        </Helmet>
         <Header />
 
-        <main className={cn(
-          'page__main page__main--favorites',
-          { 'page__main--favorites-empty': !hasFavorites }
-        )}
+        <main
+          className={cn(
+            'page__main page__main--favorites',
+            { 'page__main--favorites-empty': !hasFavorites }
+          )}
+          data-testid="page-favorites"
         >
           <div className="page__favorites-container container">
             {hasFavorites ? <Favorites favoriteEntries={favoriteEntries} /> : <NoFavorites />}

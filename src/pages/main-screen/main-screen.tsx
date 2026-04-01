@@ -4,10 +4,11 @@ import cn from 'classnames';
 import useDispatchCity from '../../hooks/use-dispatch-city';
 import Header from '../../components/header/header';
 import Places from '../../components/places/places';
-import { getCity, getIsOffersDataLoading, getOffers } from '../../store/offers/selector';
+import { getCity, getIsOffersDataLoading, getOffers } from '../../store/offers-process/selectors';
 import useCityOffers from '../../hooks/use-city-offers';
 import useDispatchOffers from '../../hooks/use-dispatch-offers';
 import LoadingScreen from '../loading-screen/loading-screen';
+import { Helmet } from 'react-helmet-async';
 
 function MainScreen(): JSX.Element {
   //TODO: сделать навигацию по городам через роутер
@@ -25,6 +26,9 @@ function MainScreen(): JSX.Element {
     <LoadingScreen /> :
     (
       <div className="page page--gray page--main">
+        <Helmet>
+          <title>6 cities. Let&apos;s travel a bit!</title>
+        </Helmet>
         <Header />
 
         <main className={cn(

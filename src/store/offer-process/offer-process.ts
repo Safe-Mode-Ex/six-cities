@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../enums';
 import { OfferDetailsState } from '../../types/app-state';
-import { changeFavoriteStateAction, fetchCommentsAction, fetchNearbyOffers, fetchOfferByIdAction, logoutAction } from '../api-actions';
+import { changeFavoriteStateAction, fetchCommentsAction, fetchNearbyOffersAction, fetchOfferByIdAction, logoutAction } from '../api-actions';
 import { OfferDetails } from '../../types/offer';
 
 const initialState: OfferDetailsState = {
@@ -10,7 +10,7 @@ const initialState: OfferDetailsState = {
   nearbyOffers: [],
 };
 
-export const offerSlice = createSlice({
+export const offerProcess = createSlice({
   name: NameSpace.Offer,
   initialState,
   reducers: {
@@ -26,7 +26,7 @@ export const offerSlice = createSlice({
       .addCase(fetchCommentsAction.fulfilled, (state, action) => {
         state.offerReviews = action.payload;
       })
-      .addCase(fetchNearbyOffers.fulfilled, (state, action) => {
+      .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
         state.nearbyOffers = action.payload;
       })
       .addCase(changeFavoriteStateAction.fulfilled, (state, action) => {
@@ -34,7 +34,7 @@ export const offerSlice = createSlice({
           state.offerDetails.isFavorite = action.payload.isFavorite;
         }
       })
-      .addCase(logoutAction.pending, (state) => {
+      .addCase(logoutAction.fulfilled, (state) => {
         if (state.offerDetails) {
           state.offerDetails.isFavorite = false;
         }
@@ -42,4 +42,4 @@ export const offerSlice = createSlice({
   },
 });
 
-export const { setOfferDetails } = offerSlice.actions;
+export const { setOfferDetails } = offerProcess.actions;

@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import {HelmetProvider} from 'react-helmet-async';
 import MainScreen from './../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
@@ -8,9 +9,7 @@ import PrivateRoute from '../private-route/private-route';
 import { AppRoute } from '../../types/app-route';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import HistoryRouter from '../history-router/history-router';
-import browserHistory from '../../browser-history';
-import { getAuthCheckedStatus, getAuthorizedStatus } from '../../store/user/selector';
+import { getAuthCheckedStatus, getAuthorizedStatus } from '../../store/user-process/selector';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 
@@ -30,7 +29,7 @@ function App(): JSX.Element {
   }
 
   return (
-    <HistoryRouter history={browserHistory}>
+    <HelmetProvider>
       <Routes>
         <Route path={AppRoute.Main} element={
           <MainScreen />
@@ -53,7 +52,7 @@ function App(): JSX.Element {
         />
         <Route path="*" element={<NotFoundScreen />} />
       </Routes>
-    </HistoryRouter>
+    </HelmetProvider>
   );
 }
 

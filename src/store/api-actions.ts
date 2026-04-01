@@ -51,7 +51,7 @@ export const fetchCommentsAction = createAsyncThunk<Review[], string, ActionConf
   }
 );
 
-export const fetchNearbyOffers = createAsyncThunk<Offer[], string, ActionConfig>(
+export const fetchNearbyOffersAction = createAsyncThunk<Offer[], string, ActionConfig>(
   'offer/fetchNearbyOffers',
   async (offerId, { extra: api }) => {
     const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${offerId}/nearby`);
@@ -59,7 +59,7 @@ export const fetchNearbyOffers = createAsyncThunk<Offer[], string, ActionConfig>
   }
 );
 
-export const sendOfferReview = createAsyncThunk<void, {
+export const sendOfferReviewAction = createAsyncThunk<void, {
   offerId: string; formData: NewReview;
 }, ActionConfig>(
   'data/sendOfferReview',
