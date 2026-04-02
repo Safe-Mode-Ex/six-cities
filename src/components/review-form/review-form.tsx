@@ -34,6 +34,7 @@ function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
       action="#"
       method="post"
       onSubmit={handleFormSubmit}
+      data-testid="reviews-form"
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">

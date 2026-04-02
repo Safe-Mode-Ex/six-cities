@@ -146,7 +146,7 @@ export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({
 
 export const getFakeComments = (): Review[] => [{
   id: datatype.uuid(),
-  date: datatype.datetime.toString(),
+  date: datatype.datetime().toISOString(),
   user: {
     name: name.firstName(),
     isPro: datatype.boolean(),

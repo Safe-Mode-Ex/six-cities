@@ -19,7 +19,7 @@ function Locations({ activeCity }: LocationsProps): JSX.Element {
   );
 
   return (
-    <section className="locations container">
+    <section className="locations container" data-testid="locations-container">
       <ul className="locations__list tabs__list">
         {CITIES.map((city) => (
           <Location

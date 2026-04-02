@@ -41,11 +41,7 @@ function MainScreen(): JSX.Element {
           <div className="tabs">
             <Locations activeCity={activeCityName} />
           </div>
-          <Places
-            activeCityName={activeCityName}
-            cityOffers={cityOffers}
-            hasOffers={hasOffers}
-          />
+          <Places activeCityName={activeCityName} cityOffers={cityOffers}/>
         </main>
       </div>
     );

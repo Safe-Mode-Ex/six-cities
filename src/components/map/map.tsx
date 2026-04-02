@@ -22,6 +22,7 @@ function Map({ location, points, activeOfferId, extraClass }: MapProps): JSX.Ele
       className={`${extraClass || ''} map`}
       ref={mapRef}
       style={{maxWidth: '1144px', marginLeft: 'auto', marginRight: 'auto'}}
+      data-testid="map-container"
     >
     </section>
   );

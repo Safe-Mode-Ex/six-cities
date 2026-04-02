@@ -9,7 +9,7 @@ function Favorites({ favoriteEntries }: FavoritesProps): JSX.Element {
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
-      <ul className="favorites__list">
+      <ul className="favorites__list" data-testid="favorites-list">
         {favoriteEntries.map(([city, offers]) => (
           <FavoritesLocation key={city} city={city} offers={offers} />
         ))}
