@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { State } from '../types/app-state';
 import { createApi } from '../services/api';
 import { AppThunkDispatch } from './mocks';
+import { HelmetProvider } from 'react-helmet-async';
 
 type ComponentWithMockStore = {
   withStoreComponent: JSX.Element;
@@ -20,7 +21,9 @@ export function withHistory(component: JSX.Element, history?: MemoryHistory) {
 
   return (
     <HistoryRouter history={memoryHistory}>
-      {component}
+      <HelmetProvider>
+        {component}
+      </HelmetProvider>
     </HistoryRouter>
   );
 }
