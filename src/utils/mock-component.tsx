@@ -16,7 +16,7 @@ type ComponentWithMockStore = {
   mockAxiosAdapter: MockAdapter;
 }
 
-export function withHistory(component: JSX.Element, history?: MemoryHistory) {
+export function withHistory(component: JSX.Element, history?: MemoryHistory): JSX.Element {
   const memoryHistory = history ?? createMemoryHistory();
 
   return (

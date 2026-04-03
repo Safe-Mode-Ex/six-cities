@@ -34,6 +34,7 @@ function LoginForm(): JSX.Element {
           name="email"
           placeholder="Email"
           required
+          data-testid="email-input"
         />
       </div>
       <div className="login__input-wrapper form__input-wrapper">
@@ -46,6 +47,7 @@ function LoginForm(): JSX.Element {
           placeholder="Password"
           pattern={PASSWORD_REGEXP}
           required
+          data-testid="password-input"
         />
       </div>
       <button className="login__submit form__submit button" type="submit">Sign in</button>
