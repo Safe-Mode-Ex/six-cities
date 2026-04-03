@@ -28,6 +28,7 @@ function Sort(): JSX.Element {
         tabIndex={0}
         onClick={() => setOpenedState(!isOpened)}
         ref={sortRef}
+        data-testid="sorting-type"
       >
         {sortType}
         <svg className="places__sorting-arrow" width="7" height="4">
