@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import MainScreen from './../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
@@ -7,22 +7,16 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import PrivateRoute from '../private-route/private-route';
 import { AppRoute } from '../../types/app-route';
-import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import { getAuthCheckedStatus, getAuthorizedStatus } from '../../store/user-process/selector';
-import { fetchFavoriteOffersAction } from '../../store/api-actions';
-import { useEffect } from 'react';
+import { getAuthCheckedStatus } from '../../store/user-process/selector';
+import { CITIES } from '../../const';
+import useFetchFavoriteOffers from '../../hooks/use-fetch-favorite-offers';
 
 function App(): JSX.Element {
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
-  const isAuthorized = useAppSelector(getAuthorizedStatus);
-  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (isAuthorized) {
-      dispatch(fetchFavoriteOffersAction());
-    }
-  }, [dispatch, isAuthorized]);
+  useFetchFavoriteOffers();
 
   if (!isAuthChecked) {
     return <LoadingScreen />;
@@ -31,10 +25,11 @@ function App(): JSX.Element {
   return (
     <HelmetProvider>
       <Routes>
-        <Route path={AppRoute.Main} element={
-          <MainScreen />
-        }
+        <Route
+          path={AppRoute.Main}
+          element={<Navigate to={`${AppRoute.Main}${CITIES[0].toLowerCase()}`} />}
         />
+        <Route path={`${AppRoute.Main}/:cityName`} element={<MainScreen />} />
         <Route
           path={`${AppRoute.Offer}/:id`}
           element={

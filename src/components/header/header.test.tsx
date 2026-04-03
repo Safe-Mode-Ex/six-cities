@@ -170,10 +170,10 @@ describe('Component: Header', () => {
       const expectedText = 'Login screen';
       const mockLoginRouteComponent = <span>{expectedText}</span>;
       const mockHistory = createMemoryHistory();
-      mockHistory.push(AppRoute.Main);
+      mockHistory.push(`${AppRoute.Main}paris`);
       const componentWithHistory = withHistory(
         <Routes>
-          <Route path={AppRoute.Main} element={<MainScreen />} />
+          <Route path={`${AppRoute.Main}:cityName`} element={<MainScreen />} />
           <Route path={AppRoute.Login} element={mockLoginRouteComponent} />
         </Routes>,
         mockHistory,

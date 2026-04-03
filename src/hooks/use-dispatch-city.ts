@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from './use-app-selector';
-import { CITIES } from '../const';
 import { selectCity } from '../store/offers-process/offers-process';
+import { CITIES } from '../const';
 
-function useDispatchCity(): void {
+function useDispatchCity(city: string = CITIES[0]): void {
   const dispatch = useAppDispatch();
-  const activeCityName = CITIES[0];
+  const activeCityName = city;
 
   useEffect(() => {
     dispatch(selectCity(activeCityName));

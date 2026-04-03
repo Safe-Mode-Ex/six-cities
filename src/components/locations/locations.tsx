@@ -1,14 +1,10 @@
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { CITIES } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-selector';
 import { selectCity } from '../../store/offers-process/offers-process';
 import Location from '../location/location';
 
-type LocationsProps = {
-  activeCity: string;
-};
-
-function Locations({ activeCity }: LocationsProps): JSX.Element {
+function Locations(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleCityClick = useCallback(
@@ -25,7 +21,6 @@ function Locations({ activeCity }: LocationsProps): JSX.Element {
           <Location
             key={city}
             city={city}
-            isActive={activeCity === city}
             onCityClick={handleCityClick}
           />
         ))}
@@ -34,4 +29,6 @@ function Locations({ activeCity }: LocationsProps): JSX.Element {
   );
 }
 
-export default Locations;
+const MemoizedLocations = memo(Locations);
+
+export default MemoizedLocations;
