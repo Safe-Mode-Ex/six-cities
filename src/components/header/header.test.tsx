@@ -94,8 +94,8 @@ describe('Component: Header', () => {
 
       render(preparedComponent);
 
-      expect(screen.getByTestId(userEmailTestId).textContent).toBe(stateMock.user?.user?.email);
-      expect(+screen.getByTestId(favoriteCountTestId).textContent).toBe(stateMock.favorite?.favoriteOffersCount);
+      expect(screen.getByTestId(userEmailTestId).textContent!).toBe(stateMock.user?.user?.email);
+      expect(+screen.getByTestId(favoriteCountTestId).textContent!).toBe(stateMock.favorite?.favoriteOffersCount);
     });
 
     it('should render Sign out link if isAuthorized is true', () => {
