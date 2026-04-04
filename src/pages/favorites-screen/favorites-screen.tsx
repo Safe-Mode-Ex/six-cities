@@ -1,8 +1,6 @@
 import Header from '../../components/header/header';
-import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
-import { fetchFavoriteOffersAction } from '../../store/api-actions';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { getFavorite, getIsFavoriteLoading } from '../../store/favorite-process/selectors';
-import { useEffect } from 'react';
 import NoFavorites from '../../components/no-favorites/no-favorites';
 import cn from 'classnames';
 import Footer from '../../components/footer/footer';
@@ -11,15 +9,10 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import { Helmet } from 'react-helmet-async';
 
 function FavoritesScreen(): JSX.Element {
-  const dispatch = useAppDispatch();
   const favorite = useAppSelector(getFavorite);
   const isLoading = useAppSelector(getIsFavoriteLoading);
   const favoriteEntries = Object.entries(favorite);
   const hasFavorites = favoriteEntries.length;
-
-  useEffect(() => {
-    dispatch(fetchFavoriteOffersAction());
-  }, [dispatch]);
 
   return isLoading ?
     <LoadingScreen /> :
