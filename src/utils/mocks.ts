@@ -163,7 +163,6 @@ export const getFakeStore = (initialState?: Partial<State>): State => ({
     nearbyOffers: [],
   },
   [NameSpace.Offers]: {
-    city: '',
     offers: [],
     sortType: getDefaultSortTypes()[0],
     isOffersLoading: false,
