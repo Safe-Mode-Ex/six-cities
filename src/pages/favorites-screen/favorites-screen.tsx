@@ -7,6 +7,7 @@ import Footer from '../../components/footer/footer';
 import Favorites from '../../components/favorites/favorites';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { Helmet } from 'react-helmet-async';
+import styles from './favorites-screen.module.css';
 
 function FavoritesScreen(): JSX.Element {
   const favorite = useAppSelector(getFavorite);
@@ -19,6 +20,7 @@ function FavoritesScreen(): JSX.Element {
     (
       <div className={cn(
         'page',
+        styles.page,
         { 'page--favorites-empty': !hasFavorites }
       )}
       >
@@ -30,11 +32,16 @@ function FavoritesScreen(): JSX.Element {
         <main
           className={cn(
             'page__main page__main--favorites',
+            styles.pageMainFavorites,
             { 'page__main--favorites-empty': !hasFavorites }
           )}
           data-testid="page-favorites"
         >
-          <div className="page__favorites-container container">
+          <div className={cn(
+            'page__favorites-container container',
+            styles.pageFavoritesContainer,
+          )}
+          >
             {hasFavorites ? <Favorites favoriteEntries={favoriteEntries} /> : <NoFavorites />}
           </div>
         </main>

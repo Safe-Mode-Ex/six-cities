@@ -1,9 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
+import styles from './not-found.module.css';
 
 function NotFoundScreen(): JSX.Element {
   return (
-    <div style={{textAlign: 'center', padding: '50px'}}>
+    <div className={styles.notFoundPage}>
       <Helmet>
         <title>6 cities. Page not found</title>
       </Helmet>
