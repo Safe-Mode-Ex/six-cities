@@ -5,22 +5,21 @@ import { changeFavoriteStateAction, fetchOffersAction, logoutAction } from '../a
 import { getDefaultSortTypes } from '../../utils/helpers';
 
 const initialState: OffersState = {
-  city: '',
   offers: [],
   sortType: getDefaultSortTypes()[0],
-  isOffersLoading: false,
+  isOffersLoading: true,
 };
 
 export const offersProcess = createSlice({
   name: NameSpace.Offers,
   initialState,
   reducers: {
-    selectCity: (state, action: PayloadAction<string>) => {
-      state.city = action.payload;
-    },
     setSortType: (state, action: PayloadAction<SortType>) => {
       state.sortType = action.payload;
-    }
+    },
+    setOffersLoading: (state, action: PayloadAction<boolean>) => {
+      state.isOffersLoading = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -47,4 +46,4 @@ export const offersProcess = createSlice({
   },
 });
 
-export const { selectCity, setSortType } = offersProcess.actions;
+export const { setSortType, setOffersLoading } = offersProcess.actions;

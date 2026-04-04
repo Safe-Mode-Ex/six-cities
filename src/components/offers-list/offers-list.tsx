@@ -16,12 +16,14 @@ function OffersList({
   isOfferScreen = false
 }: OffersListProps): JSX.Element {
   return (
-    <div className={cn({
-      'favorites__places': isFavoritesScreen,
-      'places__list': !isFavoritesScreen,
-      'near-places__list': isOfferScreen,
-      'cities__places-list tabs__content': !isFavoritesScreen && !isOfferScreen,
-    })}
+    <div
+      className={cn({
+        'favorites__places': isFavoritesScreen,
+        'places__list': !isFavoritesScreen,
+        'near-places__list': isOfferScreen,
+        'cities__places-list tabs__content': !isFavoritesScreen && !isOfferScreen,
+      })}
+      data-testid="offers-list"
     >
       {offers.map((offer) => (
         <OfferCard

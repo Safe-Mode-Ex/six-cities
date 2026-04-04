@@ -12,11 +12,6 @@ export const getSortType = createSelector(
   (state) => state[NameSpace.Offers].sortType
 );
 
-export const getCity = createSelector(
-  (state: Pick<State, NameSpace.Offers>) => state,
-  (state) => state[NameSpace.Offers].city
-);
-
 export const getIsOffersDataLoading = createSelector(
   (state: Pick<State, NameSpace.Offers>) => state,
   (state) => state[NameSpace.Offers].isOffersLoading

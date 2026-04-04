@@ -16,7 +16,7 @@ const activeCustomUrl = new Icon({
 });
 
 function useMapMarkers(
-  {latitude, longitude}: OfferLocation,
+  { latitude, longitude }: OfferLocation,
   points: OfferMapPoint[],
   map: Map | null,
   activeOfferId: string | null

@@ -1,26 +1,35 @@
 import Locations from '../../components/locations/locations';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import cn from 'classnames';
-import useDispatchCity from '../../hooks/use-dispatch-city';
 import Header from '../../components/header/header';
 import Places from '../../components/places/places';
-import { getCity, getIsOffersDataLoading, getOffers } from '../../store/offers-process/selectors';
+import { getIsOffersDataLoading, getOffers } from '../../store/offers-process/selectors';
 import useCityOffers from '../../hooks/use-city-offers';
 import useDispatchOffers from '../../hooks/use-dispatch-offers';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
+import { CITIES } from '../../const';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+import { getCapitalizedString } from '../../utils/helpers';
 
 function MainScreen(): JSX.Element {
-  //TODO: сделать навигацию по городам через роутер
-  const activeCityName = useAppSelector(getCity);
+  const { cityName } = useParams();
+  const currentCity = getCapitalizedString(cityName);
+  const isValidCity = CITIES.some((city) => city === currentCity);
+
+  const activeCityName = currentCity || CITIES[0];
   const offers = useAppSelector(getOffers);
   const isLoading = useAppSelector(getIsOffersDataLoading);
 
   const cityOffers = useCityOffers(offers, activeCityName);
   const hasOffers = !!cityOffers?.length;
 
-  useDispatchCity();
   useDispatchOffers();
+
+  if (!isValidCity) {
+    return <NotFoundScreen />;
+  }
 
   return isLoading ?
     <LoadingScreen /> :
@@ -39,13 +48,9 @@ function MainScreen(): JSX.Element {
         >
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
-            <Locations activeCity={activeCityName} />
+            <Locations />
           </div>
-          <Places
-            activeCityName={activeCityName}
-            cityOffers={cityOffers}
-            hasOffers={hasOffers}
-          />
+          <Places activeCityName={activeCityName} cityOffers={cityOffers}/>
         </main>
       </div>
     );

@@ -17,7 +17,7 @@ function Reviews({offerId, reviews}: ReviewsProps): JSX.Element {
       <h2 className="reviews__title">
         Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
       </h2>
-      <ul className="reviews__list">
+      <ul className="reviews__list" data-testid="reviews-list">
         {reviews.map((review) => (
           <ReviewItem key={review.id} review={review} />
         ))}

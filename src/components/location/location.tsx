@@ -1,30 +1,26 @@
-import { memo } from 'react';
 import { CITIES } from '../../const';
+import { NavLink } from 'react-router-dom';
+import cn from 'classnames';
 
 type LocationProps = {
     city: typeof CITIES[number];
-    isActive: boolean;
-    onCityClick: (city: string) => void;
 }
 
-function Location({ city, isActive, onCityClick }: LocationProps): JSX.Element {
-  const handleCityClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
-    evt.preventDefault();
-    onCityClick(city);
-  };
+function Location({ city }: LocationProps): JSX.Element {
 
   return (
     <li className="locations__item" key={city}>
-      <a
-        className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`}
-        onClick={handleCityClick}
+      <NavLink
+        to={`/${city.toLowerCase()}`}
+        className={({ isActive }) => cn(
+          'locations__item-link tabs__item',
+          { 'tabs__item--active': isActive }
+        )}
       >
         <span>{city}</span>
-      </a>
+      </NavLink>
     </li>
   );
 }
 
-const MemoizedLocation = memo(Location);
-
-export default MemoizedLocation;
+export default Location;

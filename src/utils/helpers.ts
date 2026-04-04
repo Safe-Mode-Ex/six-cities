@@ -31,3 +31,6 @@ export const getGroupedByCityOffers = (offers: Offer[]): CityOffersGroup => offe
 
     return groupedOffers;
   }, {});
+
+export const getCapitalizedString = (string?: string): string =>
+  `${string?.[0].toUpperCase()}${string?.slice(1, string.length)}` || '';

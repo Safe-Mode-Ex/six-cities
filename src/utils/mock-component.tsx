@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { State } from '../types/app-state';
 import { createApi } from '../services/api';
 import { AppThunkDispatch } from './mocks';
+import { HelmetProvider } from 'react-helmet-async';
 
 type ComponentWithMockStore = {
   withStoreComponent: JSX.Element;
@@ -15,12 +16,14 @@ type ComponentWithMockStore = {
   mockAxiosAdapter: MockAdapter;
 }
 
-export function withHistory(component: JSX.Element, history?: MemoryHistory) {
+export function withHistory(component: JSX.Element, history?: MemoryHistory): JSX.Element {
   const memoryHistory = history ?? createMemoryHistory();
 
   return (
     <HistoryRouter history={memoryHistory}>
-      {component}
+      <HelmetProvider>
+        {component}
+      </HelmetProvider>
     </HistoryRouter>
   );
 }

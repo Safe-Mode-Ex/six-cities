@@ -3,6 +3,8 @@ import { OfferLocation, OfferMapPoint } from '../../types/offer';
 import { useRef } from 'react';
 import useMap from '../../hooks/use-map';
 import useMapMarkers from '../../hooks/use-map-markers';
+import styles from './map.module.css';
+import cn from 'classnames';
 
 type MapProps = {
   location: OfferLocation;
@@ -19,9 +21,13 @@ function Map({ location, points, activeOfferId, extraClass }: MapProps): JSX.Ele
 
   return (
     <section
-      className={`${extraClass || ''} map`}
+      className={cn(
+        'map',
+        extraClass,
+        styles.map
+      )}
       ref={mapRef}
-      style={{maxWidth: '1144px', marginLeft: 'auto', marginRight: 'auto'}}
+      data-testid="map-container"
     >
     </section>
   );
