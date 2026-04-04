@@ -16,7 +16,10 @@ export const offersProcess = createSlice({
   reducers: {
     setSortType: (state, action: PayloadAction<SortType>) => {
       state.sortType = action.payload;
-    }
+    },
+    setOffersLoading: (state, action: PayloadAction<boolean>) => {
+      state.isOffersLoading = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -43,4 +46,4 @@ export const offersProcess = createSlice({
   },
 });
 
-export const { setSortType } = offersProcess.actions;
+export const { setSortType, setOffersLoading } = offersProcess.actions;

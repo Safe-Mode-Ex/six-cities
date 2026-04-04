@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from './use-app-selector';
 import { fetchOffersAction } from '../store/api-actions';
+import { setOffersLoading } from '../store/offers-process/offers-process';
 
 function useDispatchOffers() {
   const dispatch = useAppDispatch();
@@ -14,6 +15,7 @@ function useDispatchOffers() {
 
     return () => {
       isMounted = false;
+      dispatch(setOffersLoading(true));
     };
   }, [dispatch]);
 }
