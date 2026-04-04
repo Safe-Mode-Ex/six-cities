@@ -163,7 +163,6 @@ describe('Component: Header', () => {
     it('should log in if Sign in button has been clicked', async () => {
       stateMock.offers = {
         offers: getFakeOffers(),
-        city: CITIES[0],
         sortType: getDefaultSortTypes()[0],
         isOffersLoading: false,
       };

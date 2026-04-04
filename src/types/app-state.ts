@@ -11,7 +11,6 @@ export type UserProcessState = {
 };
 
 export type OffersState = {
-  city: string;
   offers: Offer[];
   sortType: SortType;
   isOffersLoading: boolean;

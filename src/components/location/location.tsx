@@ -4,13 +4,9 @@ import cn from 'classnames';
 
 type LocationProps = {
     city: typeof CITIES[number];
-    onCityClick: (city: string) => void;
 }
 
-function Location({ city, onCityClick }: LocationProps): JSX.Element {
-  const handleCityClick = () => {
-    onCityClick(city);
-  };
+function Location({ city }: LocationProps): JSX.Element {
 
   return (
     <li className="locations__item" key={city}>
@@ -20,7 +16,6 @@ function Location({ city, onCityClick }: LocationProps): JSX.Element {
           'locations__item-link tabs__item',
           { 'tabs__item--active': isActive }
         )}
-        onClick={handleCityClick}
       >
         <span>{city}</span>
       </NavLink>

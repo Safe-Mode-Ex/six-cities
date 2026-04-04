@@ -2,13 +2,12 @@ import { OfferDetails } from '../../types/offer';
 import { getDefaultSortTypes } from '../../utils/helpers';
 import { getFakeOffers } from '../../utils/mocks';
 import { changeFavoriteStateAction, fetchOffersAction, logoutAction } from '../api-actions';
-import { offersProcess, selectCity, setSortType } from './offers-process';
+import { offersProcess, setSortType } from './offers-process';
 
 describe('OffersProcess Slice', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };
     const expectedState = {
-      city: '',
       offers: [],
       sortType: getDefaultSortTypes()[0],
       isOffersLoading: false,
@@ -22,10 +21,9 @@ describe('OffersProcess Slice', () => {
   it('should return default initial state with empty action and undefined state', () => {
     const emptyAction = { type: '' };
     const expectedState = {
-      city: '',
       offers: [],
       sortType: getDefaultSortTypes()[0],
-      isOffersLoading: false,
+      isOffersLoading: true,
     };
 
     const result = offersProcess.reducer(undefined, emptyAction);
@@ -33,17 +31,8 @@ describe('OffersProcess Slice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('should change city with selectCity action', () => {
-    const expectedCity = 'Amsterdam';
-
-    const { city } = offersProcess.reducer(undefined, selectCity(expectedCity));
-
-    expect(city).toEqual(expectedCity);
-  });
-
   it('should change sortType with setSorttype action', () => {
     const initialState = {
-      city: '',
       offers: [],
       sortType: getDefaultSortTypes()[0],
       isOffersLoading: false,
@@ -57,7 +46,6 @@ describe('OffersProcess Slice', () => {
 
   it('should set isOffersLoading to true with fetchOffersAction.pending', () => {
     const expectedState = {
-      city: '',
       offers: [],
       sortType: getDefaultSortTypes()[0],
       isOffersLoading: true,
@@ -70,7 +58,6 @@ describe('OffersProcess Slice', () => {
 
   it('should set isOffersLoading to false with fetchOffersAction.rejected', () => {
     const expectedState = {
-      city: '',
       offers: [],
       sortType: getDefaultSortTypes()[0],
       isOffersLoading: false,
@@ -85,7 +72,6 @@ describe('OffersProcess Slice', () => {
     () => {
       const offersMock = getFakeOffers();
       const expectedState = {
-        city: '',
         sortType: getDefaultSortTypes()[0],
         offers: offersMock,
         isOffersLoading: false,
