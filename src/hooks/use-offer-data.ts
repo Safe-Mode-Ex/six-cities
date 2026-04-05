@@ -11,14 +11,10 @@ function useOfferData(
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    let isMounted = true;
-
-    if (isMounted) {
-      dispatch(fetchOfferByIdAction(activeOfferId));
-    }
+    const abortController = dispatch(fetchOfferByIdAction(activeOfferId));
 
     return () => {
-      isMounted = false;
+      abortController.abort();
       dispatch(setOfferDetails(null));
     };
   }, [activeOfferId, dispatch]);

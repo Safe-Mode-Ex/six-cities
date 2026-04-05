@@ -3,7 +3,7 @@ import useOfferData from './use-offer-data';
 import { OfferDetails } from '../types/offer';
 
 const mocks = vi.hoisted(() => ({
-  dispatchMock: vi.fn(),
+  dispatchMock: vi.fn(() => ({ abort: vi.fn() })),
   fetchOfferByIdActionMock: vi.fn(),
   fetchCommentsActionMock: vi.fn(),
   fetchNearbyOffersActionMock: vi.fn(),
