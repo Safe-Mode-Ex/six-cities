@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import useReviewFormSubmit from './use-review-form-submit';
-import { INITIAL_REVIEW_FORM_SATE } from '../const';
+import { INITIAL_REVIEW_FORM_STATE } from '../const';
 
 const mocks = vi.hoisted(() => ({
   setReviewForm: vi.fn(),
@@ -61,7 +61,7 @@ describe('Hook: useReviewFormSubmit', () => {
       result.current(eventMock);
 
       mocks.dispatchMock().then(() => {
-        expect(mocks.setReviewForm).toHaveBeenCalledWith(INITIAL_REVIEW_FORM_SATE);
+        expect(mocks.setReviewForm).toHaveBeenCalledWith(INITIAL_REVIEW_FORM_STATE);
         expect(mocks.setCommentSending).toHaveBeenCalledWith(false);
       });
     });

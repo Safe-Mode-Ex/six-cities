@@ -16,14 +16,14 @@ describe('Component: ReviewForm', () => {
   const { withStoreComponent } = withStore(<ReviewForm offerId={offerId} />);
 
   it('should render properly', () => {
-    const reviewLlabelText = 'Your review';
+    const reviewLabelText = 'Your review';
     const textAreaPlaceholderText = 'Tell how was your stay, what you like and what can be improved';
     const reviewHelpText = /To submit review please make sure to set/i;
     const submitButtonText = 'Submit';
 
     render(withStoreComponent);
 
-    expect(screen.getByText(reviewLlabelText)).toBeInTheDocument();
+    expect(screen.getByText(reviewLabelText)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(textAreaPlaceholderText)).toBeInTheDocument();
     expect(screen.getByText(reviewHelpText)).toBeInTheDocument();
     expect(screen.getByText(submitButtonText)).toBeInTheDocument();

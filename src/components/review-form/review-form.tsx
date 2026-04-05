@@ -2,14 +2,14 @@ import { ChangeEvent, Fragment, useState } from 'react';
 import { NewReview } from '../../types/review';
 import { Rating, ReviewText } from '../../enums';
 import useReviewFormSubmit from '../../hooks/use-review-form-submit';
-import { INITIAL_REVIEW_FORM_SATE } from '../../const';
+import { INITIAL_REVIEW_FORM_STATE } from '../../const';
 
 type ReviewFormProps = {
   offerId: string;
 };
 
 function ReviewForm({ offerId }: ReviewFormProps): JSX.Element {
-  const [formData, setReviewForm] = useState<NewReview>(INITIAL_REVIEW_FORM_SATE);
+  const [formData, setReviewForm] = useState<NewReview>(INITIAL_REVIEW_FORM_STATE);
   const [isCommentSending, setCommentSending] = useState(false);
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
