@@ -1,6 +1,8 @@
+import styles from './no-favorites.module.css';
+
 function NoFavorites(): JSX.Element {
   return (
-    <section className="favorites favorites--empty">
+    <section className={`favorites favorites--empty ${styles.favorites}`}>
       <h1 className="visually-hidden">Favorites (empty)</h1>
       <div className="favorites__status-wrapper">
         <b className="favorites__status">Nothing yet saved.</b>
