@@ -41,7 +41,7 @@ function useMapMarkers(
         pannedMap.removeLayer(markerLayer);
       };
     }
-  }, [activeOfferId, latitude, longitude, map, points]);
+  }, [activeOfferId, latitude, longitude, map, points, zoom]);
 }
 
 export default useMapMarkers;
