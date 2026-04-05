@@ -7,7 +7,6 @@ type LocationProps = {
 }
 
 function Location({ city }: LocationProps): JSX.Element {
-
   return (
     <li className="locations__item" key={city}>
       <NavLink
