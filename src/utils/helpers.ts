@@ -34,3 +34,6 @@ export const getGroupedByCityOffers = (offers: Offer[]): CityOffersGroup => offe
 
 export const getCapitalizedString = (string?: string): string =>
   `${string?.[0].toUpperCase()}${string?.slice(1, string.length)}` || '';
+
+export const getRandomInRange = (min: number, max: number): number =>
+  Math.floor(Math.random() * (max - min)) + min;
