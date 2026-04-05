@@ -8,15 +8,13 @@ function useFetchFavoriteOffers(): void {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    let isMounted = true;
+    if (isAuthorized) {
+      const abortController = dispatch(fetchFavoriteOffersAction());
 
-    if (isAuthorized && isMounted) {
-      dispatch(fetchFavoriteOffersAction());
+      return () => {
+        abortController.abort();
+      };
     }
-
-    return () => {
-      isMounted = false;
-    };
   }, [dispatch, isAuthorized]);
 }
 

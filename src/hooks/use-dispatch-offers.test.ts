@@ -3,7 +3,7 @@ import useDispatchOffers from './use-dispatch-offers';
 import { fetchOffersAction } from '../store/api-actions';
 import { setOffersLoading } from '../store/offers-process/offers-process';
 
-const dispatchMock = vi.fn();
+const dispatchMock = vi.fn(() => ({ abort: vi.fn() }));
 
 vi.mock('../store/api-actions', () => ({
   fetchOffersAction: vi.fn(),

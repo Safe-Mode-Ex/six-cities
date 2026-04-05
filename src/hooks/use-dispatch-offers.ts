@@ -7,14 +7,10 @@ function useDispatchOffers() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    let isMounted = true;
-
-    if (isMounted) {
-      dispatch(fetchOffersAction());
-    }
+    const abortController = dispatch(fetchOffersAction());
 
     return () => {
-      isMounted = false;
+      abortController.abort();
       dispatch(setOffersLoading(true));
     };
   }, [dispatch]);

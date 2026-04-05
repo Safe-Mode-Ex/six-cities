@@ -20,16 +20,15 @@ function useOfferData(
   }, [activeOfferId, dispatch]);
 
   useEffect(() => {
-    let isMounted = true;
+    if (offerDetails) {
+      const commentsAbortController = dispatch(fetchCommentsAction(activeOfferId));
+      const nearbyAbortController = dispatch(fetchNearbyOffersAction(activeOfferId));
 
-    if (offerDetails && isMounted) {
-      dispatch(fetchCommentsAction(activeOfferId));
-      dispatch(fetchNearbyOffersAction(activeOfferId));
+      return () => {
+        commentsAbortController.abort();
+        nearbyAbortController.abort();
+      };
     }
-
-    return () => {
-      isMounted = false;
-    };
   }, [activeOfferId, dispatch, offerDetails]);
 }
 
