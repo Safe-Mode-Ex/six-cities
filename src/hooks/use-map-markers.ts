@@ -16,14 +16,14 @@ const activeCustomUrl = new Icon({
 });
 
 function useMapMarkers(
-  { latitude, longitude }: OfferLocation,
+  { latitude, longitude, zoom }: OfferLocation,
   points: OfferMapPoint[],
   map: Map | null,
   activeOfferId: string | null
 ): void {
   useEffect(() => {
     if (map) {
-      const pannedMap = map.flyTo([latitude, longitude]);
+      const pannedMap = map.flyTo([latitude, longitude], zoom);
       const markerLayer = layerGroup().addTo(pannedMap);
 
       points.forEach(({ id, location }) => {
