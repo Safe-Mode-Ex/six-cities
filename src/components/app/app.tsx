@@ -9,12 +9,12 @@ import PrivateRoute from '../private-route/private-route';
 import { AppRoute } from '../../types/app-route';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import { getAuthCheckedStatus } from '../../store/user-process/selector';
+import { selectAuthCheckedStatus } from '../../store/user-process/selector';
 import { CITIES } from '../../const';
 import useFetchFavoriteOffers from '../../hooks/use-fetch-favorite-offers';
 
 function App(): JSX.Element {
-  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const isAuthChecked = useAppSelector(selectAuthCheckedStatus);
 
   useFetchFavoriteOffers();
 

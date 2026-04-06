@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { fetchFavoriteOffersAction } from '../store/api-actions';
-import { getAuthorizedStatus } from '../store/user-process/selector';
+import { selectAuthorizedStatus } from '../store/user-process/selector';
 import { useAppSelector, useAppDispatch } from './use-app-selector';
 
 function useFetchFavoriteOffers(): void {
-  const isAuthorized = useAppSelector(getAuthorizedStatus);
+  const isAuthorized = useAppSelector(selectAuthorizedStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

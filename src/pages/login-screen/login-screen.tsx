@@ -2,13 +2,13 @@ import Header from '../../components/header/header';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { AppRoute } from '../../types/app-route';
 import { Navigate } from 'react-router-dom';
-import { getAuthorizedStatus } from '../../store/user-process/selector';
+import { selectAuthorizedStatus } from '../../store/user-process/selector';
 import LoginForm from '../../components/login-form/login-form';
 import { Helmet } from 'react-helmet-async';
 import RandomLocation from '../../components/random-location/random-location';
 
 function LoginScreen(): JSX.Element {
-  const isAuthorized = useAppSelector(getAuthorizedStatus);
+  const isAuthorized = useAppSelector(selectAuthorizedStatus);
 
   return isAuthorized ? <Navigate to={AppRoute.Main} /> : (
     <div className="page page--gray page--login">
