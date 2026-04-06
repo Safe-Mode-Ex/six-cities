@@ -56,6 +56,7 @@ function OfferCard({
         >
           <img
             className="place-card__image"
+            style={isFavoritesScreen ? {height: `${PlaceImageSize.HeightSmall}px`} : {}}
             src={offer.previewImage}
             width={isFavoritesScreen ? PlaceImageSize.WidthSmall : PlaceImageSize.WidtDefault}
             height={isFavoritesScreen ? PlaceImageSize.HeightSmall : PlaceImageSize.HeightDefault}
