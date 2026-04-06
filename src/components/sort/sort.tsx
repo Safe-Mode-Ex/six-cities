@@ -3,13 +3,13 @@ import { memo, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { SortType } from '../../enums';
 import useCloseSort from '../../hooks/use-close-sort';
-import { getSortType } from '../../store/offers-process/selectors';
+import { selectSortType } from '../../store/offers-process/selectors';
 import { setSortType } from '../../store/offers-process/offers-process';
 import { getDefaultSortTypes } from '../../utils/helpers';
 
 function Sort(): JSX.Element {
   const [isOpened, setOpenedState] = useState(false);
-  const sortType = useAppSelector(getSortType);
+  const sortType = useAppSelector(selectSortType);
   const sortRef = useRef<HTMLElement>(null);
   const dispatch = useAppDispatch();
 
