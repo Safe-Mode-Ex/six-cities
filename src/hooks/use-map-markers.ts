@@ -23,8 +23,7 @@ function useMapMarkers(
 ): void {
   useEffect(() => {
     if (map) {
-      const pannedMap = map.flyTo([latitude, longitude], zoom);
-      const markerLayer = layerGroup().addTo(pannedMap);
+      const markerLayer = layerGroup().addTo(map);
 
       points.forEach(({ id, location }) => {
         const marker = new Marker({
@@ -38,7 +37,7 @@ function useMapMarkers(
       });
 
       return () => {
-        pannedMap.removeLayer(markerLayer);
+        map.removeLayer(markerLayer);
       };
     }
   }, [activeOfferId, latitude, longitude, map, points, zoom]);

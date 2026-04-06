@@ -11,27 +11,25 @@ function useMap(
   const isRenderedRef = useRef(false);
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current && location) {
-      const instance = new Map(mapRef.current, {
-        center: {
-          lat: location.latitude,
-          lng: location.longitude,
-        },
-        zoom: location.zoom,
-      });
+    if (mapRef.current && !isRenderedRef.current && !map) {
+      const instance = new Map(mapRef.current);
 
       const tileLayer = new TileLayer(
         Leaflet.Template,
-        {
-          attribution: Leaflet.Attribution,
-        },
+        { attribution: Leaflet.Attribution },
       );
 
       instance.addLayer(tileLayer);
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, location]);
+  }, [mapRef, map]);
+
+  useEffect(() => {
+    if (location && map) {
+      map.setView([location.latitude, location.longitude], location.zoom);
+    }
+  }, [location, map]);
 
   return map;
 }
