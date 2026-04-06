@@ -30,9 +30,8 @@ describe('Component: MainScreen', () => {
         user: null,
       },
       [NameSpace.Favorite]: {
-        favorite: { 'Paris': [] },
+        favorites: [],
         isFavoriteLoading: false,
-        favoriteOffersCount: 0,
       },
     };
 

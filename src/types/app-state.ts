@@ -1,7 +1,7 @@
 import { SortType } from '../enums';
 import { store } from '../store/store';
 import { AuthorizationStatus } from './authorization-status';
-import { CityOffersGroup, Offer, OfferDetails } from './offer';
+import { Offer, OfferDetails } from './offer';
 import { Review } from './review';
 import { UserData } from './user-data';
 
@@ -23,8 +23,7 @@ export type OfferDetailsState = {
 }
 
 export type FavoriteState = {
-  favorite: CityOffersGroup;
-  favoriteOffersCount: number;
+  favorites: Offer[];
   isFavoriteLoading: boolean;
 }
 

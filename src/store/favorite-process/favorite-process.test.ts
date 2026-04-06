@@ -1,24 +1,19 @@
 import { getFakeFavorite } from '../../utils/mocks';
 import { fetchFavoriteOffersAction } from '../api-actions';
 import { favoriteProcess } from './favorite-process';
-import * as helpers from '../../utils/helpers';
 
 describe('FavoriteProcess Slice', () => {
-  it('should call getGroupedByCityOffers once changing state with fetchFavoriteOffersAction.fulfilled',
+  it('should set favorites with fetchFavoriteOffersAction.fulfilled',
     () => {
       const favoriteOffers = [getFakeFavorite()[0]];
-      const favorite = { [favoriteOffers[0].city.name]: favoriteOffers };
       const expectedState = {
-        favorite,
-        favoriteOffersCount: favoriteOffers.length,
+        favorites: favoriteOffers,
         isFavoriteLoading: false,
       };
-      const mockGetGroupedByCityOffers = vi.spyOn(helpers, 'getGroupedByCityOffers');
 
       const result = favoriteProcess
         .reducer(undefined, fetchFavoriteOffersAction.fulfilled(favoriteOffers, '', undefined));
 
-      expect(mockGetGroupedByCityOffers).toBeCalledTimes(1);
       expect(result).toEqual(expectedState);
     });
 

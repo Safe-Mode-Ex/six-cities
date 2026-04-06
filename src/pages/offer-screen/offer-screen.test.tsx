@@ -31,8 +31,7 @@ describe('Component: OfferScreen', () => {
         nearbyOffers: [],
       },
       [NameSpace.Favorite]: {
-        favorite: {},
-        favoriteOffersCount: 0,
+        favorites: [],
         isFavoriteLoading: false,
       }
     };

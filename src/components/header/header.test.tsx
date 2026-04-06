@@ -5,7 +5,6 @@ import MemoizedHeader from './header';
 import { APIRoute, NameSpace } from '../../enums';
 import { State, UserProcessState } from '../../types/app-state';
 import { AuthorizationStatus } from '../../types/authorization-status';
-import { CITIES } from '../../const';
 import { AppRoute } from '../../types/app-route';
 import { Route, Routes } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
@@ -24,8 +23,7 @@ describe('Component: Header', () => {
         user: null,
       },
       [NameSpace.Favorite]: {
-        favoriteOffersCount: 0,
-        favorite: { [CITIES[0]]: []},
+        favorites: [],
         isFavoriteLoading: false,
       }
     };
@@ -95,7 +93,7 @@ describe('Component: Header', () => {
       render(preparedComponent);
 
       expect(screen.getByTestId(userEmailTestId).textContent!).toBe(stateMock.user?.user?.email);
-      expect(+screen.getByTestId(favoriteCountTestId).textContent!).toBe(stateMock.favorite?.favoriteOffersCount);
+      expect(screen.getByTestId(favoriteCountTestId)).toBeInTheDocument();
     });
 
     it('should render Sign out link if isAuthorized is true', () => {

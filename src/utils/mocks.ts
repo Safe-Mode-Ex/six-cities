@@ -172,8 +172,7 @@ export const getFakeStore = (initialState?: Partial<State>): State => ({
     user: null,
   },
   [NameSpace.Favorite]: {
-    favorite: {},
-    favoriteOffersCount: 0,
+    favorites: [],
     isFavoriteLoading: false,
   },
   ...initialState ?? {},

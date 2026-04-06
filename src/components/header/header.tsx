@@ -5,7 +5,7 @@ import { AppRoute } from '../../types/app-route';
 import { logoutAction } from '../../store/api-actions';
 import { memo, MouseEvent } from 'react';
 import { getAuthorizedStatus, getUser } from '../../store/user-process/selector';
-import { getFavoriteOffersCount } from '../../store/favorite-process/selectors';
+import { selectFavoriteOffersCount } from '../../store/favorite-process/selectors';
 
 type HeaderProps = {
     hasUserMenu?: boolean;
@@ -14,7 +14,7 @@ type HeaderProps = {
 function Header({ hasUserMenu = true }: HeaderProps): JSX.Element {
   const isAuthorized = useAppSelector(getAuthorizedStatus);
   const user = useAppSelector(getUser);
-  const favoriteOffersCount = useAppSelector(getFavoriteOffersCount);
+  const favoriteOffersCount = useAppSelector(selectFavoriteOffersCount);
   const dispatch = useAppDispatch();
 
   const handleLogoutClick = (evt: MouseEvent) => {

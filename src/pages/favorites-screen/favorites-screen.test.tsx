@@ -18,8 +18,7 @@ describe('Component: FavoritesScreen', () => {
         user: null,
       },
       [NameSpace.Favorite]: {
-        favorite: {},
-        favoriteOffersCount: 0,
+        favorites: [],
         isFavoriteLoading: false,
       }
     };
@@ -51,7 +50,7 @@ describe('Component: FavoritesScreen', () => {
   });
 
   it('should show Favorites if favorite offers is gotten', () => {
-    (stateMock.favorite as FavoriteState).favorite = { 'Amsterdam': getFakeFavorite() };
+    (stateMock.favorite as FavoriteState).favorites = getFakeFavorite();
     const { withStoreComponent } = withStore(withHistoryComponent, stateMock);
 
     render(withStoreComponent);

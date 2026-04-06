@@ -16,9 +16,8 @@ describe('Component: LoginScreen', () => {
         user: null,
       },
       [NameSpace.Favorite]: {
-        favoriteOffersCount: 0,
         isFavoriteLoading: false,
-        favorite: {},
+        favorites: [],
       },
     };
   });
