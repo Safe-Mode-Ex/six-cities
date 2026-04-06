@@ -11,7 +11,7 @@ function useMap(
   const isRenderedRef = useRef(false);
 
   useEffect(() => {
-    if (mapRef.current && !isRenderedRef.current && !map) {
+    if (mapRef.current && !isRenderedRef.current) {
       const instance = new Map(mapRef.current);
 
       const tileLayer = new TileLayer(
@@ -23,7 +23,7 @@ function useMap(
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, map]);
+  }, [mapRef]);
 
   useEffect(() => {
     if (location && map) {
