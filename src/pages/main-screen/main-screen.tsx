@@ -3,8 +3,7 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import cn from 'classnames';
 import Header from '../../components/header/header';
 import Places from '../../components/places/places';
-import { selectIsOffersDataLoading, selectOffers } from '../../store/offers-process/selectors';
-import useCityOffers from '../../hooks/use-city-offers';
+import { selectCityOffers, selectIsOffersDataLoading } from '../../store/offers-process/selectors';
 import useDispatchOffers from '../../hooks/use-dispatch-offers';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { Helmet } from 'react-helmet-async';
@@ -17,12 +16,10 @@ function MainScreen(): JSX.Element {
   const { cityName } = useParams();
   const currentCity = getCapitalizedString(cityName);
   const isValidCity = CITIES.some((city) => city === currentCity);
-
   const activeCityName = currentCity || CITIES[0];
-  const offers = useAppSelector(selectOffers);
-  const isLoading = useAppSelector(selectIsOffersDataLoading);
 
-  const cityOffers = useCityOffers(offers, activeCityName);
+  const isLoading = useAppSelector(selectIsOffersDataLoading);
+  const cityOffers = useAppSelector((state) => selectCityOffers(state, activeCityName));
   const hasOffers = !!cityOffers?.length;
 
   useDispatchOffers();

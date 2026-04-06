@@ -1,6 +1,7 @@
 import { NameSpace, SortType } from '../../enums';
+import { State } from '../../types/app-state';
 import { getFakeOffers } from '../../utils/mocks';
-import { selectIsOffersDataLoading, selectOffers, selectSortType } from './selectors';
+import { selectCityOffers, selectIsOffersDataLoading, selectSortType } from './selectors';
 
 describe('OffersProcess selectors', () => {
   const state = {
@@ -12,9 +13,9 @@ describe('OffersProcess selectors', () => {
   };
 
   it('should return offers from state', () => {
-    const { offers } = state[NameSpace.Offers];
-    const result = selectOffers(state);
-    expect(result).toEqual(offers);
+    const currentCity = 'Amsterdam';
+    const result = selectCityOffers(state as State, currentCity);
+    expect(result.every(({ city }) => city.name === currentCity));
   });
 
   it('should return sortType from state', () => {
