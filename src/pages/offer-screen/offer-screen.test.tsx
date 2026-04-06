@@ -75,7 +75,7 @@ describe('Component: OfferScreen', () => {
   it('should show Premium and Pro labels if has corresponding data', () => {
     ((stateMock[NameSpace.Offer] as OfferDetailsState).offerDetails as OfferDetails).isPremium = true;
     ((stateMock[NameSpace.Offer] as OfferDetailsState).offerDetails as OfferDetails).host.isPro = true;
-    const proText = /Pro/i;
+    const proText = 'Pro';
     const premiumText = /Premium/i;
 
     render(preparedComponent);

@@ -4,7 +4,7 @@ import Map from '../../components/map/map';
 import Reviews from '../../components/reviews/reviews';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { MAX_MAP_NEARBY_OFFERS } from '../../const';
-import { getNearbyOffers, getOfferDetails, getOfferReviews } from '../../store/offer-process/selectors';
+import { selectNearbyOffers, selectOfferReviews, selectOfferDetails } from '../../store/offer-process/selectors';
 import LoadingScreen from '../loading-screen/loading-screen';
 import useOfferData from '../../hooks/use-offer-data';
 import NearbyOffers from '../../components/nearby-offers/nearby-offers';
@@ -17,9 +17,9 @@ import { Helmet } from 'react-helmet-async';
 
 function OfferScreen(): JSX.Element {
   const activeOfferId = useParams().id as string;
-  const offerDetails = useAppSelector(getOfferDetails);
-  const offerReviews = useAppSelector(getOfferReviews);
-  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const offerDetails = useAppSelector(selectOfferDetails);
+  const offerReviews = useAppSelector(selectOfferReviews);
+  const nearbyOffers = useAppSelector(selectNearbyOffers);
 
   useOfferData(activeOfferId, offerDetails);
 
