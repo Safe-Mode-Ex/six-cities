@@ -3,6 +3,30 @@ import { fetchFavoriteOffersAction } from '../api-actions/api-actions';
 import { favoriteProcess } from './favorite-process';
 
 describe('FavoriteProcess Slice', () => {
+  it('should return initial state with empty action', () => {
+    const emptyAction = { type: '' };
+    const expectedState = {
+      favorites: [],
+      isFavoriteLoading: false,
+    };
+
+    const result = favoriteProcess.reducer(expectedState, emptyAction);
+
+    expect(result).toEqual(expectedState);
+  });
+
+  it('should return default initial state with empty action and undefined state', () => {
+    const emptyAction = { type: '' };
+    const expectedState = {
+      favorites: [],
+      isFavoriteLoading: false,
+    };
+
+    const result = favoriteProcess.reducer(undefined, emptyAction);
+
+    expect(result).toEqual(expectedState);
+  });
+
   it('should set favorites with fetchFavoriteOffersAction.fulfilled',
     () => {
       const favoriteOffers = [getFakeFavorite()[0]];
