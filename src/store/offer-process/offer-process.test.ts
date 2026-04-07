@@ -1,6 +1,12 @@
-import { OfferDetails } from '../../types/offer';
-import { getFakeOfferDetails, getFakeOffers, getFakeReviews } from '../../utils/mocks';
-import { changeFavoriteStateAction, fetchCommentsAction, fetchNearbyOffersAction, fetchOfferByIdAction, logoutAction } from '../api-actions';
+import { OfferDetails } from '../../types';
+import { getFakeOfferDetails, getFakeOffers, getFakeReviews } from '../../utils';
+import {
+  changeFavoriteStateAction,
+  fetchCommentsAction,
+  fetchNearbyOffersAction,
+  fetchOfferByIdAction,
+  logoutAction
+} from '../api-actions';
 import { offerProcess, setOfferDetails } from './offer-process';
 
 describe('OfferProcess Slice', () => {

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Offer } from '../../types/offer';
+import { Offer } from '../../types';
 import { memo } from 'react';
 import cn from 'classnames';
 import { AppRoute, PlaceImageSize, Rating } from '../../enums';

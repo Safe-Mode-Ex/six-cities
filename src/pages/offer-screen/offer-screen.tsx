@@ -10,7 +10,7 @@ import OfferNameWrapper from '../../components/offer-name-wrapper/offer-name-wra
 import OfferInside from '../../components/offer-inside/offer-inside';
 import OfferRating from '../../components/offer-rating/offer-rating';
 import OfferGalleryContainer from '../../components/offer-gallery-container/offer-gallery-container';
-import { getCityPoints } from '../../utils/helpers';
+import { getCityPoints } from '../../utils';
 import { Helmet } from 'react-helmet-async';
 import useOfferData from '../../hooks/use-offer-data/use-offer-data';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';

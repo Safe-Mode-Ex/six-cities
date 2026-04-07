@@ -1,6 +1,6 @@
 import { ISO_DATE_TIME_DIVIDER } from '../../const';
 import { Rating } from '../../enums';
-import { Review } from '../../types/review';
+import { Review } from '../../types';
 
 type ReviewProps = {
     review: Review;

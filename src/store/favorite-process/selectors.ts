@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { State } from '../../types/app-state';
+import { State } from '../../types';
 import { NameSpace } from '../../enums';
-import { getGroupedByCityOffers } from '../../utils/helpers';
+import { getGroupedByCityOffers } from '../../utils';
 
 export const selectFavorite = createSelector(
   (state: Pick<State, NameSpace.Favorite>) => state.favorite,

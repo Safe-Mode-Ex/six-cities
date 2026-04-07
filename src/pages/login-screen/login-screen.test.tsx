@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory, withStore } from '../../utils';
 import LoginScreen from './login-screen';
 import { NameSpace } from '../../enums';
-import { AuthorizationStatus } from '../../types/authorization-status';
+import { AuthorizationStatus } from '../../types';
 import { createMemoryHistory } from 'history';
-import { State, UserProcessState } from '../../types/app-state';
+import { State, UserProcessState } from '../../types';
 
 describe('Component: LoginScreen', () => {
   let stateMock: Partial<State>;

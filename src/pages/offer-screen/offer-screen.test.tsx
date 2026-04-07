@@ -1,12 +1,12 @@
 import { createMemoryHistory, MemoryHistory } from 'history';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory, withStore } from '../../utils';
 import OfferScreen from './offer-screen';
 import { render, screen } from '@testing-library/react';
-import { OfferDetailsState, State } from '../../types/app-state';
+import { OfferDetailsState, State } from '../../types';
 import { NameSpace } from '../../enums';
-import { getFakeOfferDetails } from '../../utils/mocks';
-import { AuthorizationStatus } from '../../types/authorization-status';
-import { OfferDetails } from '../../types/offer';
+import { getFakeOfferDetails } from '../../utils';
+import { AuthorizationStatus } from '../../types';
+import { OfferDetails } from '../../types';
 
 const useOfferDataMock = vi.hoisted(() => vi.fn());
 

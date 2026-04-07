@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet-async';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import useDispatchOffers from '../../hooks/use-dispatch-offers/use-dispatch-offers';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
-import { getActiveCityParams } from '../../utils/helpers';
+import { getActiveCityParams } from '../../utils';
 import { useParams } from 'react-router-dom';
 
 function MainScreen(): JSX.Element {

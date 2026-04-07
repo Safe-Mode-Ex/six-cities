@@ -1,7 +1,7 @@
-import { State } from '../../types/app-state';
-import { AuthorizationStatus } from '../../types/authorization-status';
+import { State } from '../../types';
+import { AuthorizationStatus } from '../../types';
 import { NameSpace } from '../../enums';
-import { UserData } from '../../types/user-data';
+import { UserData } from '../../types';
 
 export const selectAuthCheckedStatus = (state: Pick<State, NameSpace.User>) =>
   state[NameSpace.User].authorizationStatus !== AuthorizationStatus.Unknown;

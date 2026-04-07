@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { getFakeOffers } from '../../utils/mocks';
+import { getFakeOffers } from '../../utils';
 import NearbyOffers from './nearby-offers';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory, withStore } from '../../utils';
 import { NameSpace } from '../../enums';
-import { AuthorizationStatus } from '../../types/authorization-status';
+import { AuthorizationStatus } from '../../types';
 
 describe('Component: Nearbyoffers', () => {
   const state = {

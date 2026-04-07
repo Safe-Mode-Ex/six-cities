@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import Logo from './logo';
-import { withHistory } from '../../utils/mock-component';
+import { withHistory } from '../../utils';
 
 describe('Component: Logo', () => {
   beforeEach(() => {

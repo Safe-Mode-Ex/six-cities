@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import Reviews from './reviews';
-import { getFakeComments } from '../../utils/mocks';
-import { withStore } from '../../utils/mock-component';
+import { getFakeComments } from '../../utils';
+import { withStore } from '../../utils';
 import { NameSpace } from '../../enums';
-import { AuthorizationStatus } from '../../types/authorization-status';
+import { AuthorizationStatus } from '../../types';
 
 describe('Component: Reviews', () => {
   const expectedHeadingText = /Reviews/i;

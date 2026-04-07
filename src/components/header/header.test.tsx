@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory, withStore } from '../../utils';
 import MemoizedHeader from './header';
 import { APIRoute, AppRoute, NameSpace } from '../../enums';
-import { AuthorizationStatus } from '../../types/authorization-status';
+import { AuthorizationStatus } from '../../types';
 import { Route, Routes } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { extractActionsTypes, getFakeOffers } from '../../utils/mocks';
+import { extractActionsTypes, getFakeOffers } from '../../utils';
 import { logoutAction } from '../../store/api-actions';
 import MainScreen from '../../pages/main-screen/main-screen';
-import { getDefaultSortTypes } from '../../utils/helpers';
+import { getDefaultSortTypes } from '../../utils';
 import { State, UserProcessState } from '../../types';
 
 describe('Component: Header', () => {

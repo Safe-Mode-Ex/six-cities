@@ -1,5 +1,5 @@
 import 'leaflet/dist/leaflet.css';
-import { OfferLocation, OfferMapPoint } from '../../types/offer';
+import { OfferLocation, OfferMapPoint } from '../../types';
 import { useRef } from 'react';
 import styles from './map.module.css';
 import cn from 'classnames';

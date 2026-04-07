@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { CITIES } from '../../const';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory, withStore } from '../../utils';
 import Location from './location';
 
 describe('Component: Location', () => {

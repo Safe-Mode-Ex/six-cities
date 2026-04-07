@@ -1,13 +1,29 @@
-import { createApi } from '../services/api';
+import { createApi } from '../services';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import { State } from '../types/app-state';
+import { State } from '../types';
 import { Action } from 'redux';
-import { AppThunkDispatch, extractActionsTypes, getFakeFavorite, getFakeOfferDetails, getFakeOffers, getFakeReviews } from '../utils/mocks';
+import {
+  AppThunkDispatch,
+  extractActionsTypes,
+  getFakeFavorite,
+  getFakeOfferDetails,
+  getFakeOffers,
+  getFakeReviews
+} from '../utils';
 import { APIRoute, FavoriteStatus, NameSpace } from '../enums';
 import { StatusCodes } from 'http-status-codes';
-import { changeFavoriteStateAction, checkAuthAction, fetchCommentsAction, fetchFavoriteOffersAction, fetchNearbyOffersAction, fetchOfferByIdAction, fetchOffersAction, sendOfferReviewAction } from './api-actions';
+import {
+  changeFavoriteStateAction,
+  checkAuthAction,
+  fetchCommentsAction,
+  fetchFavoriteOffersAction,
+  fetchNearbyOffersAction,
+  fetchOfferByIdAction,
+  fetchOffersAction,
+  sendOfferReviewAction
+} from './api-actions';
 import { redirectToRoute } from './action';
 
 describe('Async actions', () => {

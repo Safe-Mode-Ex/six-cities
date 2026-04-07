@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { CITIES } from '../../const';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory, withStore } from '../../utils';
 import Places from './places';
-import { getFakeOffers } from '../../utils/mocks';
+import { getFakeOffers } from '../../utils';
 import { NameSpace, SortType } from '../../enums';
-import { AuthorizationStatus } from '../../types/authorization-status';
+import { AuthorizationStatus } from '../../types';
 
 describe('Component: Places', () => {
   const placesContainerTestId = 'places-container';

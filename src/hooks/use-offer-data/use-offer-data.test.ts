@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import useOfferData from './use-offer-data';
-import { OfferDetails } from '../../types/offer';
+import { OfferDetails } from '../../types';
 
 const mocks = vi.hoisted(() => ({
   dispatchMock: vi.fn(() => ({ abort: vi.fn() })),

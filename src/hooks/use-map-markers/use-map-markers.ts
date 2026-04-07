@@ -1,7 +1,7 @@
 import { Icon, layerGroup, Map, Marker } from 'leaflet';
 import { useEffect } from 'react';
 import { MarkerUrl } from '../../enums';
-import { OfferLocation, OfferMapPoint } from '../../types/offer';
+import { OfferLocation, OfferMapPoint } from '../../types';
 
 const defaultCustomIcon = new Icon({
   iconUrl: MarkerUrl.Default,

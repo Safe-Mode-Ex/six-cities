@@ -1,4 +1,4 @@
-import { getFakeFavorite } from '../../utils/mocks';
+import { getFakeFavorite } from '../../utils';
 import { fetchFavoriteOffersAction } from '../api-actions';
 import { favoriteProcess } from './favorite-process';
 

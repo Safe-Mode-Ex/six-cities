@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { withStore } from '../../utils/mock-component';
+import { withStore } from '../../utils';
 import ReviewForm from './review-form';
 import userEvent from '@testing-library/user-event';
 

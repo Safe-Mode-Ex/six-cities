@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { fetchOfferByIdAction, fetchCommentsAction, fetchNearbyOffersAction } from '../../store/api-actions';
 import { setOfferDetails } from '../../store/offer-process/offer-process';
-import { OfferDetails } from '../../types/offer';
+import { OfferDetails } from '../../types';
 import { useAppDispatch } from '../use-app-selector/use-app-selector';
 
 function useOfferData(

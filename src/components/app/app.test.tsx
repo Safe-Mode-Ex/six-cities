@@ -1,7 +1,7 @@
 import { createMemoryHistory, MemoryHistory } from 'history';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory, withStore } from '../../utils';
 import App from './app';
-import { getFakeOfferDetails, getFakeStore } from '../../utils/mocks';
+import { getFakeOfferDetails, getFakeStore } from '../../utils';
 import { render, screen } from '@testing-library/react';
 import { AppRoute, NameSpace } from '../../enums';
 import { UserProcessState, AuthorizationStatus } from '../../types';

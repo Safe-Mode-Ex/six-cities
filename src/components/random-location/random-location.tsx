@@ -1,5 +1,5 @@
 import { CITIES } from '../../const';
-import { getRandomInRange } from '../../utils/helpers';
+import { getRandomInRange } from '../../utils';
 import Location from '../location/location.tsx';
 
 function RandomLocation(): JSX.Element {

@@ -1,6 +1,6 @@
 import { NameSpace } from '../../enums';
-import { AuthorizationStatus } from '../../types/authorization-status';
-import { getFakeUser } from '../../utils/mocks';
+import { AuthorizationStatus } from '../../types';
+import { getFakeUser } from '../../utils';
 import { selectAuthCheckedStatus, selectAuthorizedStatus, selectUser } from './selector';
 
 describe('UserProcess selectors', () => {

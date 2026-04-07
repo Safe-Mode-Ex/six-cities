@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { withStore } from '../../utils/mock-component';
-import { getFakeOfferDetails } from '../../utils/mocks';
+import { withStore } from '../../utils';
+import { getFakeOfferDetails } from '../../utils';
 import OfferNameWrapper from './offer-name-wrapper';
 import { NameSpace } from '../../enums';
-import { AuthorizationStatus } from '../../types/authorization-status';
+import { AuthorizationStatus } from '../../types';
 import userEvent from '@testing-library/user-event';
 
 const mocks = vi.hoisted(() => ({

@@ -1,6 +1,6 @@
 import { NameSpace, SortType } from '../../enums';
-import { State } from '../../types/app-state';
-import { getFakeOffers } from '../../utils/mocks';
+import { State } from '../../types';
+import { getFakeOffers } from '../../utils';
 import { selectCityOffers, selectIsOffersDataLoading, selectSortType } from './selectors';
 
 describe('OffersProcess selectors', () => {

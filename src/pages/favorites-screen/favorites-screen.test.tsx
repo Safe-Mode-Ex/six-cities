@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory, withStore } from '../../utils';
 import FavoritesScreen from './favorites-screen';
 import { NameSpace } from '../../enums';
-import { AuthorizationStatus } from '../../types/authorization-status';
-import { FavoriteState, State } from '../../types/app-state';
-import { getFakeFavorite } from '../../utils/mocks';
+import { AuthorizationStatus } from '../../types';
+import { FavoriteState, State } from '../../types';
+import { getFakeFavorite } from '../../utils';
 
 describe('Component: FavoritesScreen', () => {
   const pageTestId = 'page-favorites';

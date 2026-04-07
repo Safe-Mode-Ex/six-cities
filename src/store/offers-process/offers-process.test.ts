@@ -1,6 +1,6 @@
-import { OfferDetails } from '../../types/offer';
-import { getDefaultSortTypes } from '../../utils/helpers';
-import { getFakeOffers } from '../../utils/mocks';
+import { OfferDetails } from '../../types';
+import { getDefaultSortTypes } from '../../utils';
+import { getFakeOffers } from '../../utils';
 import { changeFavoriteStateAction, fetchOffersAction, logoutAction } from '../api-actions';
 import { offersProcess, setSortType } from './offers-process';
 

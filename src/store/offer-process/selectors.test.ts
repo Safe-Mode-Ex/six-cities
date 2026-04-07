@@ -1,5 +1,5 @@
 import { NameSpace } from '../../enums';
-import { getFakeOfferDetails, getFakeOffers, getFakeReviews } from '../../utils/mocks';
+import { getFakeOfferDetails, getFakeOffers, getFakeReviews } from '../../utils';
 import { selectNearbyOffers, selectOfferDetails, selectOfferReviews } from './selectors';
 
 describe('OfferProcess selectors', () => {

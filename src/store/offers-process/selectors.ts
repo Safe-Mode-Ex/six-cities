@@ -1,4 +1,4 @@
-import { State } from '../../types/app-state';
+import { State } from '../../types';
 import { NameSpace, SortType } from '../../enums';
 import { createSelector } from '@reduxjs/toolkit';
 

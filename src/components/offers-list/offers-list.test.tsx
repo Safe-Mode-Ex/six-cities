@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { withHistory, withStore } from '../../utils/mock-component';
-import { getFakeOffers } from '../../utils/mocks';
+import { withHistory, withStore } from '../../utils';
+import { getFakeOffers } from '../../utils';
 import OffersList from './offers-list';
 import { NameSpace } from '../../enums';
-import { AuthorizationStatus } from '../../types/authorization-status';
+import { AuthorizationStatus } from '../../types';
 
 describe('Component: OffersList', () => {
   const offersListTestId = 'offers-list';

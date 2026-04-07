@@ -1,5 +1,5 @@
-import { AuthorizationStatus } from '../../types/authorization-status';
-import { getFakeUser } from '../../utils/mocks';
+import { AuthorizationStatus } from '../../types';
+import { getFakeUser } from '../../utils';
 import { checkAuthAction, loginAction, logoutAction } from '../api-actions';
 import { userProcess } from './user-process';
 

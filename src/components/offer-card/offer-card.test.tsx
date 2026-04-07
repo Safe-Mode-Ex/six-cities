@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { getFakeOffers } from '../../utils/mocks';
+import { getFakeOffers } from '../../utils';
 import MemoizedOfferCard from './offer-card';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory, withStore } from '../../utils';
 import { NameSpace, PlaceImageSize, Rating } from '../../enums';
-import { AuthorizationStatus } from '../../types/authorization-status';
+import { AuthorizationStatus } from '../../types';
 import userEvent from '@testing-library/user-event';
 
 describe('Component: OfferCard', () => {

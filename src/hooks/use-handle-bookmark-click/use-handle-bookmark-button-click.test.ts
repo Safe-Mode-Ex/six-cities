@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
-import { State } from '../../types/app-state';
+import { State } from '../../types';
 import useHandleBookmarkButtonClick from './use-handle-bookmark-button-click';
 import { AppRoute } from '../../enums';
 

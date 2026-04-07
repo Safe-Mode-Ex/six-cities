@@ -5,8 +5,8 @@ import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import { Action } from 'redux';
 import { Provider } from 'react-redux';
-import { State } from '../types/app-state';
-import { createApi } from '../services/api';
+import { State } from '../types';
+import { createApi } from '../services';
 import { AppThunkDispatch } from './mocks';
 import { HelmetProvider } from 'react-helmet-async';
 

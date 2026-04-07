@@ -1,4 +1,4 @@
-import { State } from '../../types/app-state';
+import { State } from '../../types';
 import { NameSpace } from '../../enums';
 
 export const selectOfferDetails = (state: Pick<State, NameSpace.Offer>) =>

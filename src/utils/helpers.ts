@@ -1,6 +1,6 @@
 import { CITIES } from '../const';
 import { SortType } from '../enums';
-import { CityOffersGroup, Offer, OfferMapPoint } from '../types/offer';
+import { CityOffersGroup, Offer, OfferMapPoint } from '../types';
 
 export const sortOffersBy = (sortType: SortType, offers: Offer[]): Offer[] => [...offers].sort((prev, next) => {
   switch (sortType) {

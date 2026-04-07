@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../enums';
-import { FavoriteState } from '../../types/app-state';
+import { FavoriteState } from '../../types';
 import { fetchFavoriteOffersAction } from '../api-actions';
 
 const initialState: FavoriteState = {

@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { withHistory, withStore } from '../../utils/mock-component';
-import { getFakeOffers } from '../../utils/mocks';
+import { withHistory, withStore } from '../../utils';
+import { getFakeOffers } from '../../utils';
 import MemoizedOffers from './offers';
 import { NameSpace, SortType } from '../../enums';
-import { AuthorizationStatus } from '../../types/authorization-status';
+import { AuthorizationStatus } from '../../types';
 
 describe('Component: Offers', () => {
   const state = {

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { Rating } from '../../enums';
-import { getFakeReviews } from '../../utils/mocks';
+import { getFakeReviews } from '../../utils';
 import Review from './review';
 import { ISO_DATE_TIME_DIVIDER } from '../../const';
 

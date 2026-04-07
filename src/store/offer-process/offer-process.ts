@@ -1,8 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../enums';
-import { OfferDetailsState } from '../../types/app-state';
-import { changeFavoriteStateAction, fetchCommentsAction, fetchNearbyOffersAction, fetchOfferByIdAction, logoutAction } from '../api-actions';
-import { OfferDetails } from '../../types/offer';
+import { OfferDetailsState } from '../../types';
+import {
+  changeFavoriteStateAction,
+  fetchCommentsAction,
+  fetchNearbyOffersAction,
+  fetchOfferByIdAction,
+  logoutAction
+} from '../api-actions';
+import { OfferDetails } from '../../types';
 
 const initialState: OfferDetailsState = {
   offerDetails: null,

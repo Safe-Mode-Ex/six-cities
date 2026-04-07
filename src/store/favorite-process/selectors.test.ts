@@ -1,6 +1,6 @@
 import { NameSpace } from '../../enums';
-import { getGroupedByCityOffers } from '../../utils/helpers';
-import { getFakeFavorite } from '../../utils/mocks';
+import { getGroupedByCityOffers } from '../../utils';
+import { getFakeFavorite } from '../../utils';
 import { selectFavorite, selectFavoriteOffersCount, selectIsFavoriteLoading } from './selectors';
 
 describe('FavoriteProcess selectors', () => {
