@@ -1,7 +1,11 @@
 import { OfferDetails } from '../../types';
 import { getDefaultSortTypes } from '../../utils';
 import { getFakeOffers } from '../../utils';
-import { changeFavoriteStateAction, fetchOffersAction, logoutAction } from '../api-actions';
+import {
+  changeFavoriteStateAction,
+  fetchOffersAction,
+  logoutAction
+} from '../api-actions/api-actions';
 import { offersProcess, setOffersLoading, setSortType } from './offers-process';
 
 describe('OffersProcess Slice', () => {

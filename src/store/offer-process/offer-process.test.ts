@@ -6,7 +6,7 @@ import {
   fetchNearbyOffersAction,
   fetchOfferByIdAction,
   logoutAction
-} from '../api-actions';
+} from '../api-actions/api-actions';
 import { offerProcess, setOfferDetails } from './offer-process';
 
 describe('OfferProcess Slice', () => {

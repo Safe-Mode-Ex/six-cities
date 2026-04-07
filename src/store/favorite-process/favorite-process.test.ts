@@ -1,5 +1,5 @@
 import { getFakeFavorite } from '../../utils';
-import { fetchFavoriteOffersAction } from '../api-actions';
+import { fetchFavoriteOffersAction } from '../api-actions/api-actions';
 import { favoriteProcess } from './favorite-process';
 
 describe('FavoriteProcess Slice', () => {

@@ -1,6 +1,6 @@
 import { AppRoute } from '../../enums';
 import { redirectToRoute } from '../../store/action';
-import { changeFavoriteStateAction } from '../../store/api-actions';
+import { changeFavoriteStateAction } from '../../store/api-actions/api-actions';
 import { selectAuthorizedStatus } from '../../store/user-process/selector';
 import { useAppDispatch, useAppSelector } from '../use-app-selector/use-app-selector';
 

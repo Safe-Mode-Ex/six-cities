@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { fetchOffersAction } from '../../store/api-actions';
+import { fetchOffersAction } from '../../store/api-actions/api-actions';
 import { setOffersLoading } from '../../store/offers-process/offers-process';
 import { useAppDispatch } from '../use-app-selector/use-app-selector';
 

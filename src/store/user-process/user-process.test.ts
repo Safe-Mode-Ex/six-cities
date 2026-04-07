@@ -1,6 +1,6 @@
 import { AuthorizationStatus } from '../../types';
 import { getFakeUser } from '../../utils';
-import { checkAuthAction, loginAction, logoutAction } from '../api-actions';
+import { checkAuthAction, loginAction, logoutAction } from '../api-actions/api-actions';
 import { userProcess } from './user-process';
 
 describe('UserProcess Slice', () => {

@@ -1,5 +1,9 @@
 import { useEffect } from 'react';
-import { fetchOfferByIdAction, fetchCommentsAction, fetchNearbyOffersAction } from '../../store/api-actions';
+import {
+  fetchOfferByIdAction,
+  fetchCommentsAction,
+  fetchNearbyOffersAction
+} from '../../store/api-actions/api-actions';
 import { setOfferDetails } from '../../store/offer-process/offer-process';
 import { OfferDetails } from '../../types';
 import { useAppDispatch } from '../use-app-selector/use-app-selector';

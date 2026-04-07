@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace, SortType } from '../../enums';
 import { OffersState } from '../../types';
-import { changeFavoriteStateAction, fetchOffersAction, logoutAction } from '../api-actions';
+import { changeFavoriteStateAction, fetchOffersAction, logoutAction } from '../api-actions/api-actions';
 import { getDefaultSortTypes } from '../../utils';
 
 const initialState: OffersState = {

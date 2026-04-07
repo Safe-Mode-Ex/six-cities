@@ -1,14 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch, State } from '../types';
 import { AxiosError, AxiosInstance } from 'axios';
-import { Offer, OfferDetails } from '../types';
-import { APIRoute, AppRoute, FavoriteStatus } from '../enums';
-import { redirectToRoute } from './action';
-import { AuthData } from '../types';
-import { UserData } from '../types';
-import { NewReview, Review } from '../types';
 import { StatusCodes } from 'http-status-codes';
-import { saveToken, dropToken } from '../services';
+import { APIRoute, AppRoute, FavoriteStatus } from '../../enums';
+import { saveToken, dropToken } from '../../services';
+import {
+  AppDispatch,
+  Offer,
+  OfferDetails,
+  Review,
+  NewReview,
+  UserData,
+  AuthData,
+  State
+} from '../../types';
+import { redirectToRoute } from '../action';
 
 export type ActionConfig = {
     dispatch: AppDispatch;

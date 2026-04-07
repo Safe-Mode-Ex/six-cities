@@ -7,7 +7,7 @@ import {
   fetchNearbyOffersAction,
   fetchOfferByIdAction,
   logoutAction
-} from '../api-actions';
+} from '../api-actions/api-actions';
 import { OfferDetails } from '../../types';
 
 const initialState: OfferDetailsState = {

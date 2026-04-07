@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 import { INITIAL_REVIEW_FORM_STATE } from '../../const';
-import { sendOfferReviewAction } from '../../store/api-actions';
+import { sendOfferReviewAction } from '../../store/api-actions/api-actions';
 import { NewReview } from '../../types';
 import { useAppDispatch } from '../use-app-selector/use-app-selector';
 

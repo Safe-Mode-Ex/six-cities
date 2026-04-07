@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
-import { checkAuthAction } from './store/api-actions';
+import { checkAuthAction } from './store/api-actions/api-actions';
 import { ToastContainer } from 'react-toastify';
 import HistoryRouter from './components/history-router/history-router';
 import browserHistory from './browser-history';

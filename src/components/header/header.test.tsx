@@ -7,7 +7,7 @@ import { AuthorizationStatus } from '../../types';
 import { Route, Routes } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { extractActionsTypes, getFakeOffers } from '../../utils';
-import { logoutAction } from '../../store/api-actions';
+import { logoutAction } from '../../store/api-actions/api-actions';
 import MainScreen from '../../pages/main-screen/main-screen';
 import { getDefaultSortTypes } from '../../utils';
 import { State, UserProcessState } from '../../types';

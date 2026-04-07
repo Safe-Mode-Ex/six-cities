@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/use-app-selector/use-app-selector';
 import Logo from '../logo/logo';
-import { logoutAction } from '../../store/api-actions';
+import { logoutAction } from '../../store/api-actions/api-actions';
 import { memo, MouseEvent } from 'react';
 import { selectAuthorizedStatus, selectUser } from '../../store/user-process/selector';
 import { selectFavoriteOffersCount } from '../../store/favorite-process/selectors';
