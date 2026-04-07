@@ -13,7 +13,7 @@ const mocks = vi.hoisted(() => ({
 vi.mock('../use-app-selector/use-app-selector', () => ({
   useAppDispatch: () => mocks.dispatchMock,
 }));
-vi.mock('../../store/api-actions', () => ({
+vi.mock('../../store/api-actions/api-actions', () => ({
   fetchOfferByIdAction: mocks.fetchOfferByIdActionMock,
   fetchCommentsAction: mocks.fetchCommentsActionMock,
   fetchNearbyOffersAction: mocks.fetchNearbyOffersActionMock,

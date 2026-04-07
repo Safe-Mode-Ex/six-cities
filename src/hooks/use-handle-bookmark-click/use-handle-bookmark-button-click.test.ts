@@ -15,7 +15,7 @@ vi.mock('../use-app-selector/use-app-selector', () => ({
   useAppSelector: () => mocks.useAppSelectorMock() as State,
 }));
 
-vi.mock('../../store/api-actions', () => ({
+vi.mock('../../store/api-actions/api-actions', () => ({
   changeFavoriteStateAction: mocks.changeFavoriteStateActionMock,
 }));
 

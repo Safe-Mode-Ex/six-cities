@@ -6,7 +6,7 @@ const mocks = vi.hoisted(() => ({
   fetchFavoriteOffersAction: vi.fn(),
 }));
 
-vi.mock('../../store/api-actions', () => ({
+vi.mock('../../store/api-actions/api-actions', () => ({
   fetchFavoriteOffersAction: mocks.fetchFavoriteOffersAction,
 }));
 
