@@ -1,3 +1,4 @@
+import { CITIES } from '../const';
 import { SortType } from '../enums';
 import { CityOffersGroup, Offer, OfferMapPoint } from '../types/offer';
 
@@ -33,7 +34,15 @@ export const getGroupedByCityOffers = (offers: Offer[]): CityOffersGroup => offe
   }, {});
 
 export const getCapitalizedString = (string?: string): string =>
-  `${string?.[0].toUpperCase()}${string?.slice(1, string.length)}` || '';
+  string ? `${string?.[0].toUpperCase()}${string?.slice(1, string.length)}` : '';
 
 export const getRandomInRange = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min)) + min;
+
+export const getActiveCityParams = (cityName = ''): [boolean, string] => {
+  const currentCity = getCapitalizedString(cityName);
+  const isValidCity = CITIES.some((city) => city === currentCity);
+  const activeCityName = currentCity || CITIES[0];
+
+  return [isValidCity, activeCityName];
+};

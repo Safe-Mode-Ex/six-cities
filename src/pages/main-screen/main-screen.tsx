@@ -5,18 +5,15 @@ import Places from '../../components/places/places';
 import { selectCityOffers, selectIsOffersDataLoading } from '../../store/offers-process/selectors';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
-import { CITIES } from '../../const';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
-import { getCapitalizedString } from '../../utils/helpers';
 import useDispatchOffers from '../../hooks/use-dispatch-offers/use-dispatch-offers';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
+import { getActiveCityParams } from '../../utils/helpers';
+import { useParams } from 'react-router-dom';
 
 function MainScreen(): JSX.Element {
   const { cityName } = useParams();
-  const currentCity = getCapitalizedString(cityName);
-  const isValidCity = CITIES.some((city) => city === currentCity);
-  const activeCityName = currentCity || CITIES[0];
+  const [isValidCity, activeCityName] = getActiveCityParams(cityName);
 
   const isLoading = useAppSelector(selectIsOffersDataLoading);
   const cityOffers = useAppSelector((state) => selectCityOffers(state, activeCityName));
