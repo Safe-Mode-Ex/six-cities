@@ -14,7 +14,7 @@ function useCloseSort(sortRef: RefObject<HTMLElement>, setOpenedState: (isOpened
     return () => {
       document.removeEventListener(CLICK_EVENT_NAME, handleOutsideClick);
     };
-  });
+  }, [sortRef, setOpenedState]);
 }
 
 export default useCloseSort;
