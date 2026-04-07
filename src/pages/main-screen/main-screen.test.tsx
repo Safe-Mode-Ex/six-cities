@@ -23,7 +23,7 @@ describe('Component: MainScreen', () => {
       [NameSpace.Offers]: {
         offers: [],
         isOffersLoading: false,
-        sortType: SortType.POPULAR,
+        sortType: SortType.Popular,
       },
       [NameSpace.User]: {
         authorizationStatus: AuthorizationStatus.Unknown,

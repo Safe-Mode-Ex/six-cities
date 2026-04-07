@@ -4,11 +4,11 @@ import { CityOffersGroup, Offer, OfferMapPoint } from '../types';
 
 export const sortOffersBy = (sortType: SortType, offers: Offer[]): Offer[] => [...offers].sort((prev, next) => {
   switch (sortType) {
-    case SortType.PRICE_LOW_TO_HIGH:
+    case SortType.PriceLowToHigh:
       return prev.price - next.price;
-    case SortType.PRICE_HIGH_TO_LOW:
+    case SortType.PriceHighToLow:
       return next.price - prev.price;
-    case SortType.TOP_RATED_FIRST:
+    case SortType.TopRatedFirst:
       return next.rating - prev.rating;
     default:
       return 0;

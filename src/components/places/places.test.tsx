@@ -12,7 +12,7 @@ describe('Component: Places', () => {
   const state = {
     [NameSpace.Offers]: {
       offers: [],
-      sortType: SortType.POPULAR,
+      sortType: SortType.Popular,
       isOffersLoading: true,
     },
     [NameSpace.User]: {

@@ -7,7 +7,7 @@ describe('OffersProcess selectors', () => {
   const state = {
     [NameSpace.Offers]: {
       offers: getFakeOffers(),
-      sortType: SortType.POPULAR,
+      sortType: SortType.Popular,
       isOffersLoading: true,
     }
   };

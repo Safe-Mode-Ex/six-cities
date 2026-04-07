@@ -7,10 +7,10 @@ export enum AppRoute {
 }
 
 export enum SortType {
-    POPULAR = 'Popular',
-    PRICE_LOW_TO_HIGH = 'Price: low to high',
-    PRICE_HIGH_TO_LOW = 'Price: high to low',
-    TOP_RATED_FIRST = 'Top rated first',
+    Popular = 'Popular',
+    PriceLowToHigh = 'Price: low to high',
+    PriceHighToLow = 'Price: high to low',
+    TopRatedFirst = 'Top rated first',
 }
 
 export enum APIRoute {
