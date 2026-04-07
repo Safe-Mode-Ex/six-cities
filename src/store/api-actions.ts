@@ -6,10 +6,10 @@ import { APIRoute, FavoriteStatus } from '../enums';
 import { redirectToRoute } from './action';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
-import { dropToken, saveToken } from '../services/token';
 import { AppRoute } from '../types/app-route';
 import { NewReview, Review } from '../types/review';
 import { StatusCodes } from 'http-status-codes';
+import { saveToken, dropToken } from '../services';
 
 export type ActionConfig = {
     dispatch: AppDispatch;
