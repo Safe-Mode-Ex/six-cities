@@ -1,5 +1,5 @@
 import { RefObject, useEffect } from 'react';
-import { CLICK_EVENT_NAME } from '../const';
+import { CLICK_EVENT_NAME } from '../../const';
 
 function useCloseSort(sortRef: RefObject<HTMLElement>, setOpenedState: (isOpened: boolean) => void) {
   useEffect(() => {

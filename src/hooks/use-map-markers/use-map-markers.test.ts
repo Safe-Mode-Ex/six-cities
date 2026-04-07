@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import useMapMarkers from './use-map-markers';
-import useMap from './use-map';
+import useMap from '../use-map/use-map';
 
 describe('Hook: useMapMarkers', () => {
   it('should add markers to the map', () => {

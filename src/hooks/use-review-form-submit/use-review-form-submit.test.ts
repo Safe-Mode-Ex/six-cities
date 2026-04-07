@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import useReviewFormSubmit from './use-review-form-submit';
-import { INITIAL_REVIEW_FORM_STATE } from '../const';
+import { INITIAL_REVIEW_FORM_STATE } from '../../const';
 
 const mocks = vi.hoisted(() => ({
   setReviewForm: vi.fn(),
@@ -9,10 +9,10 @@ const mocks = vi.hoisted(() => ({
   sendOfferReviewAction: vi.fn(),
 }));
 
-vi.mock('./use-app-selector', () => ({
+vi.mock('../use-app-selector/use-app-selector', () => ({
   useAppDispatch: () => mocks.dispatchMock,
 }));
-vi.mock('../store/api-actions', () => ({
+vi.mock('../../store/api-actions', () => ({
   sendOfferReviewAction: mocks.sendOfferReviewAction,
 }));
 

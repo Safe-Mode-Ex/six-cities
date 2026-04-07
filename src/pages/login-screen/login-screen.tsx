@@ -1,5 +1,5 @@
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import Header from '../../components/header/header';
-import { useAppSelector } from '../../hooks/use-app-selector';
 import { AppRoute } from '../../types/app-route';
 import { Navigate } from 'react-router-dom';
 import { selectAuthorizedStatus } from '../../store/user-process/selector';

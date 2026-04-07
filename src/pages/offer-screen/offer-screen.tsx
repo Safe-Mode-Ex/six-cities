@@ -2,11 +2,9 @@ import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Reviews from '../../components/reviews/reviews';
-import { useAppSelector } from '../../hooks/use-app-selector';
 import { MAX_MAP_NEARBY_OFFERS } from '../../const';
 import { selectNearbyOffers, selectOfferReviews, selectOfferDetails } from '../../store/offer-process/selectors';
 import LoadingScreen from '../loading-screen/loading-screen';
-import useOfferData from '../../hooks/use-offer-data';
 import NearbyOffers from '../../components/nearby-offers/nearby-offers';
 import OfferNameWrapper from '../../components/offer-name-wrapper/offer-name-wrapper';
 import OfferInside from '../../components/offer-inside/offer-inside';
@@ -14,6 +12,8 @@ import OfferRating from '../../components/offer-rating/offer-rating';
 import OfferGalleryContainer from '../../components/offer-gallery-container/offer-gallery-container';
 import { getCityPoints } from '../../utils/helpers';
 import { Helmet } from 'react-helmet-async';
+import useOfferData from '../../hooks/use-offer-data/use-offer-data';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 
 function OfferScreen(): JSX.Element {
   const activeOfferId = useParams().id as string;

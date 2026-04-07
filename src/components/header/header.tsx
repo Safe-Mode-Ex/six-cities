@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
+import { useAppSelector, useAppDispatch } from '../../hooks/use-app-selector/use-app-selector';
 import Logo from '../logo/logo';
 import { AppRoute } from '../../types/app-route';
 import { logoutAction } from '../../store/api-actions';

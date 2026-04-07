@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
+import { AppRoute } from '../../types/app-route';
+import { State } from '../../types/app-state';
 import useHandleBookmarkButtonClick from './use-handle-bookmark-button-click';
-import { AppRoute } from '../types/app-route';
-import { State } from '../types/app-state';
 
 const mocks = vi.hoisted(() => ({
   dispatchMock: vi.fn(),
@@ -10,16 +10,16 @@ const mocks = vi.hoisted(() => ({
   redirectToRouteMock: vi.fn(),
 }));
 
-vi.mock('./use-app-selector', () => ({
+vi.mock('../use-app-selector/use-app-selector', () => ({
   useAppDispatch: () => mocks.dispatchMock,
   useAppSelector: () => mocks.useAppSelectorMock() as State,
 }));
 
-vi.mock('../store/api-actions', () => ({
+vi.mock('../../store/api-actions', () => ({
   changeFavoriteStateAction: mocks.changeFavoriteStateActionMock,
 }));
 
-vi.mock('../store/action', () => ({
+vi.mock('../../store/action', () => ({
   redirectToRoute: mocks.redirectToRouteMock,
 }));
 

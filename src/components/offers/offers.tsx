@@ -1,10 +1,10 @@
 import Sort from '../sort/sort';
 import OffersList from '../offers-list/offers-list';
-import { useAppSelector } from '../../hooks/use-app-selector';
 import { Offer } from '../../types/offer';
 import { memo } from 'react';
 import { selectSortType } from '../../store/offers-process/selectors';
 import { sortOffersBy } from '../../utils/helpers';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 
 type PlacesProps = {
   offers: Offer[];

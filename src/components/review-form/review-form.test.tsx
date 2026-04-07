@@ -7,7 +7,7 @@ const mocks = vi.hoisted(() => ({
   handleFormSubmit: vi.fn(),
 }));
 
-vi.mock('../../hooks/use-review-form-submit', () => ({
+vi.mock('../../hooks/use-review-form-submit/use-review-form-submit', () => ({
   default: vi.fn(() => mocks.handleFormSubmit),
 }));
 

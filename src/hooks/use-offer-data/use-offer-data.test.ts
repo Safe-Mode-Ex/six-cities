@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import useOfferData from './use-offer-data';
-import { OfferDetails } from '../types/offer';
+import { OfferDetails } from '../../types/offer';
 
 const mocks = vi.hoisted(() => ({
   dispatchMock: vi.fn(() => ({ abort: vi.fn() })),
@@ -10,15 +10,15 @@ const mocks = vi.hoisted(() => ({
   setOfferDetails: vi.fn(),
 }));
 
-vi.mock('./use-app-selector', () => ({
+vi.mock('../use-app-selector/use-app-selector', () => ({
   useAppDispatch: () => mocks.dispatchMock,
 }));
-vi.mock('../store/api-actions', () => ({
+vi.mock('../../store/api-actions', () => ({
   fetchOfferByIdAction: mocks.fetchOfferByIdActionMock,
   fetchCommentsAction: mocks.fetchCommentsActionMock,
   fetchNearbyOffersAction: mocks.fetchNearbyOffersActionMock,
 }));
-vi.mock('../store/offer-process/offer-process', () => ({
+vi.mock('../../store/offer-process/offer-process', () => ({
   setOfferDetails: mocks.setOfferDetails,
 }));
 

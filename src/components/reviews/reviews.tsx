@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../hooks/use-app-selector';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import { selectAuthorizedStatus } from '../../store/user-process/selector';
 import { Review } from '../../types/review';
 import ReviewForm from '../review-form/review-form';

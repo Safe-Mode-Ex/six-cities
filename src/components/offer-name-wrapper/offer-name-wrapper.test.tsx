@@ -10,7 +10,7 @@ const mocks = vi.hoisted(() => ({
   handleBookmarkButtonClickFactory: vi.fn(() => vi.fn())
 }));
 
-vi.mock('../../hooks/use-handle-bookmark-button-click', () => ({
+vi.mock('../../hooks/use-handle-bookmark-click/use-handle-bookmark-button-click', () => ({
   default: vi.fn(() => mocks.handleBookmarkButtonClickFactory),
 }));
 

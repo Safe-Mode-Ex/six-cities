@@ -10,7 +10,7 @@ import { OfferDetails } from '../../types/offer';
 
 const useOfferDataMock = vi.hoisted(() => vi.fn());
 
-vi.mock('../../hooks/use-offer-data.ts', () => ({
+vi.mock('../../hooks/use-offer-data/use-offer-data', () => ({
   default: useOfferDataMock,
 }));
 

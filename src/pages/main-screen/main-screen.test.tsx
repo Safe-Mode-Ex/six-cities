@@ -9,7 +9,7 @@ import { AuthorizationStatus } from '../../types/authorization-status';
 
 const useDispatchOffersMock = vi.hoisted(() => vi.fn());
 
-vi.mock('../../hooks/use-dispatch-offers.ts', () => ({
+vi.mock('../../hooks/use-dispatch-offers/use-dispatch-offers.ts', () => ({
   default: useDispatchOffersMock,
 }));
 

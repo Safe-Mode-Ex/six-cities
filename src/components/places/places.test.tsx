@@ -1,28 +1,39 @@
 import { render, screen } from '@testing-library/react';
 import { CITIES } from '../../const';
-import { withHistory } from '../../utils/mock-component';
+import { withHistory, withStore } from '../../utils/mock-component';
 import Places from './places';
 import { getFakeOffers } from '../../utils/mocks';
-
-vi.mock('../../hooks/use-app-selector', () => ({
-  useAppDispatch: vi.fn(),
-  useAppSelector: vi.fn(),
-}));
+import { NameSpace, SortType } from '../../enums';
+import { AuthorizationStatus } from '../../types/authorization-status';
 
 describe('Component: Places', () => {
   const placesContainerTestId = 'places-container';
   const expectedCityName = CITIES[0];
+  const state = {
+    [NameSpace.Offers]: {
+      offers: [],
+      sortType: SortType.POPULAR,
+      isOffersLoading: true,
+    },
+    [NameSpace.User]: {
+      authorizationStatus: AuthorizationStatus.NoAuth,
+      user: null,
+    },
+  };
 
   it('should render properly', () => {
     const noPlacesStatusText = /No places to stay available/i;
     const noPlacesStatusDesc = /We could not find any property available at the moment in /i;
-    const preparedComponent = withHistory(
-      <Places
-        activeCityName={expectedCityName}
-        cityOffers={[]}
-      />);
+    const { withStoreComponent } = withStore(
+      withHistory(
+        <Places
+          activeCityName={expectedCityName}
+          cityOffers={[]}
+        />),
+      state,
+    );
 
-    render(preparedComponent);
+    render(withStoreComponent);
     const placesContainer = screen.getByTestId(placesContainerTestId);
 
     expect(placesContainer).toBeInTheDocument();
@@ -35,11 +46,14 @@ describe('Component: Places', () => {
     const expectedText = 'Places';
     const mapContainerTestId = 'map-container';
     const offersMock = getFakeOffers();
-    const preparedComponent = withHistory(
-      <Places activeCityName={expectedCityName} cityOffers={offersMock} />
+    const { withStoreComponent } = withStore(
+      withHistory(
+        <Places activeCityName={expectedCityName} cityOffers={offersMock} />
+      ),
+      state,
     );
 
-    render(preparedComponent);
+    render(withStoreComponent);
 
     expect(screen.getByText(expectedText)).toBeInTheDocument();
     expect(screen.getByTestId(mapContainerTestId)).toBeInTheDocument();

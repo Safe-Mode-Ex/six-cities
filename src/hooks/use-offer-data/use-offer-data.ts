@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferByIdAction } from '../store/api-actions';
-import { OfferDetails } from '../types/offer';
-import { useAppDispatch } from './use-app-selector';
-import { setOfferDetails } from '../store/offer-process/offer-process';
+import { fetchOfferByIdAction, fetchCommentsAction, fetchNearbyOffersAction } from '../../store/api-actions';
+import { setOfferDetails } from '../../store/offer-process/offer-process';
+import { OfferDetails } from '../../types/offer';
+import { useAppDispatch } from '../use-app-selector/use-app-selector';
 
 function useOfferData(
   activeOfferId: string,

@@ -1,5 +1,5 @@
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import Header from '../../components/header/header';
-import { useAppSelector } from '../../hooks/use-app-selector';
 import { selectFavorite, selectIsFavoriteLoading } from '../../store/favorite-process/selectors';
 import NoFavorites from '../../components/no-favorites/no-favorites';
 import cn from 'classnames';

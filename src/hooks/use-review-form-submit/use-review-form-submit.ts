@@ -1,8 +1,9 @@
 import { FormEvent } from 'react';
-import { INITIAL_REVIEW_FORM_STATE } from '../const';
-import { sendOfferReviewAction } from '../store/api-actions';
-import { NewReview } from '../types/review';
-import { useAppDispatch } from './use-app-selector';
+import { INITIAL_REVIEW_FORM_STATE } from '../../const';
+import { sendOfferReviewAction } from '../../store/api-actions';
+import { NewReview } from '../../types/review';
+import { useAppDispatch } from '../use-app-selector/use-app-selector';
+
 
 function useReviewFormSubmit(
   offerId: string,
