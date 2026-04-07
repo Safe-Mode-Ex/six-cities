@@ -1,3 +1,11 @@
+export enum AppRoute {
+    Main = '/',
+    Login = '/login',
+    Favorites = '/favorites',
+    Offer = '/offer',
+    NotFound = '/not-found',
+}
+
 export enum SortType {
     POPULAR = 'Popular',
     PRICE_LOW_TO_HIGH = 'Price: low to high',

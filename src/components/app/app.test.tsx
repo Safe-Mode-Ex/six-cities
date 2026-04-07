@@ -2,11 +2,9 @@ import { createMemoryHistory, MemoryHistory } from 'history';
 import { withHistory, withStore } from '../../utils/mock-component';
 import App from './app';
 import { getFakeOfferDetails, getFakeStore } from '../../utils/mocks';
-import { AppRoute } from '../../types/app-route';
 import { render, screen } from '@testing-library/react';
-import { AuthorizationStatus } from '../../types/authorization-status';
-import { NameSpace } from '../../enums';
-import { UserProcessState } from '../../types/app-state';
+import { AppRoute, NameSpace } from '../../enums';
+import { UserProcessState, AuthorizationStatus } from '../../types';
 
 describe('Application Routing', () => {
   let mockHistory: MemoryHistory;

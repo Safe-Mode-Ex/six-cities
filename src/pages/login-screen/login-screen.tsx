@@ -1,11 +1,11 @@
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import Header from '../../components/header/header';
-import { AppRoute } from '../../types/app-route';
 import { Navigate } from 'react-router-dom';
 import { selectAuthorizedStatus } from '../../store/user-process/selector';
 import LoginForm from '../../components/login-form/login-form';
 import { Helmet } from 'react-helmet-async';
 import RandomLocation from '../../components/random-location/random-location';
+import { AppRoute } from '../../enums';
 
 function LoginScreen(): JSX.Element {
   const isAuthorized = useAppSelector(selectAuthorizedStatus);

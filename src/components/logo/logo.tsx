@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
-import { AppRoute } from '../../types/app-route';
 import { memo } from 'react';
 import cn from 'classnames';
+import { AppRoute } from '../../enums';
 
 const HEADER_LOGO_LINK_CLASS_NAME = 'header__logo-link';
 

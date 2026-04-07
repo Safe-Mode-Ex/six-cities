@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
-import { AppRoute } from '../../types/app-route';
 import { State } from '../../types/app-state';
 import useHandleBookmarkButtonClick from './use-handle-bookmark-button-click';
+import { AppRoute } from '../../enums';
 
 const mocks = vi.hoisted(() => ({
   dispatchMock: vi.fn(),

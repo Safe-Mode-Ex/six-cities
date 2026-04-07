@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/use-app-selector/use-app-selector';
 import Logo from '../logo/logo';
-import { AppRoute } from '../../types/app-route';
 import { logoutAction } from '../../store/api-actions';
 import { memo, MouseEvent } from 'react';
 import { selectAuthorizedStatus, selectUser } from '../../store/user-process/selector';
 import { selectFavoriteOffersCount } from '../../store/favorite-process/selectors';
+import { AppRoute } from '../../enums';
 
 type HeaderProps = {
     hasUserMenu?: boolean;

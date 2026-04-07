@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../types/app-route';
+import { AppRoute } from '../../enums';
 
 function Footer(): JSX.Element {
-  // TODO: переиспользовать Logo
   return (
     <footer className="footer container">
       <Link className="footer__logo-link" to={AppRoute.Main}>

@@ -1,7 +1,7 @@
+import { AppRoute } from '../../enums';
 import { redirectToRoute } from '../../store/action';
 import { changeFavoriteStateAction } from '../../store/api-actions';
 import { selectAuthorizedStatus } from '../../store/user-process/selector';
-import { AppRoute } from '../../types/app-route';
 import { useAppDispatch, useAppSelector } from '../use-app-selector/use-app-selector';
 
 function useHandleBookmarkButtonClick() {

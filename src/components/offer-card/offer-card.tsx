@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/offer';
-import { AppRoute } from '../../types/app-route';
 import { memo } from 'react';
 import cn from 'classnames';
-import { PlaceImageSize, Rating } from '../../enums';
+import { AppRoute, PlaceImageSize, Rating } from '../../enums';
 import useHandleBookmarkButtonClick from '../../hooks/use-handle-bookmark-click/use-handle-bookmark-button-click';
 
 type OfferCardProps = {

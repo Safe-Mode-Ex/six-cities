@@ -2,16 +2,15 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { withHistory, withStore } from '../../utils/mock-component';
 import MemoizedHeader from './header';
-import { APIRoute, NameSpace } from '../../enums';
-import { State, UserProcessState } from '../../types/app-state';
+import { APIRoute, AppRoute, NameSpace } from '../../enums';
 import { AuthorizationStatus } from '../../types/authorization-status';
-import { AppRoute } from '../../types/app-route';
 import { Route, Routes } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { extractActionsTypes, getFakeOffers } from '../../utils/mocks';
 import { logoutAction } from '../../store/api-actions';
 import MainScreen from '../../pages/main-screen/main-screen';
 import { getDefaultSortTypes } from '../../utils/helpers';
+import { State, UserProcessState } from '../../types';
 
 describe('Component: Header', () => {
   let stateMock: Partial<State>;
