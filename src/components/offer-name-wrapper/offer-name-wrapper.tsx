@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import useHandleBookmarkButtonClick from '../../hooks/use-handle-bookmark-button-click';
+import useHandleBookmarkButtonClick from '../../hooks/use-handle-bookmark-click/use-handle-bookmark-button-click';
 
 export type OfferNameWrapperProps = {
     offerId: string;

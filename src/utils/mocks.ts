@@ -1,15 +1,15 @@
 import { CITIES } from '../const';
-import { Offer, OfferDetails } from '../types/offer';
+import { Offer, OfferDetails } from '../types';
 import { name, datatype, lorem, commerce, internet, image } from 'faker';
-import { Review } from '../types/review';
-import { UserData } from '../types/user-data';
+import { Review } from '../types';
+import { UserData } from '../types';
 import { Action } from 'redux';
-import { createApi } from '../services/api';
-import { State } from '../types/app-state';
+import { createApi } from '../services';
+import { State } from '../types';
 import { ThunkDispatch } from 'redux-thunk';
 import { NameSpace } from '../enums';
 import { getDefaultSortTypes } from './helpers';
-import { AuthorizationStatus } from '../types/authorization-status';
+import { AuthorizationStatus } from '../types';
 
 export const getFakeOfferDetails = (): OfferDetails => ({
   id: datatype.uuid(),
@@ -172,8 +172,7 @@ export const getFakeStore = (initialState?: Partial<State>): State => ({
     user: null,
   },
   [NameSpace.Favorite]: {
-    favorite: {},
-    favoriteOffersCount: 0,
+    favorites: [],
     isFavoriteLoading: false,
   },
   ...initialState ?? {},

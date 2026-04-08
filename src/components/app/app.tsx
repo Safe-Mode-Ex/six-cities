@@ -6,15 +6,15 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import PrivateRoute from '../private-route/private-route';
-import { AppRoute } from '../../types/app-route';
-import { useAppSelector } from '../../hooks/use-app-selector';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import { getAuthCheckedStatus } from '../../store/user-process/selector';
+import { selectAuthCheckedStatus } from '../../store/user-process/selector';
 import { CITIES } from '../../const';
-import useFetchFavoriteOffers from '../../hooks/use-fetch-favorite-offers';
+import useFetchFavoriteOffers from '../../hooks/use-fetch-favorite-offers/use-fetch-favorite-offers';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
+import { AppRoute } from '../../enums';
 
 function App(): JSX.Element {
-  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const isAuthChecked = useAppSelector(selectAuthCheckedStatus);
 
   useFetchFavoriteOffers();
 

@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { Offer } from '../../types/offer';
+import { Offer } from '../../types';
 import OfferCard from '../offer-card/offer-card';
 
 type OffersListProps = {

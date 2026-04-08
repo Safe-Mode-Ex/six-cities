@@ -1,10 +1,10 @@
 import 'leaflet/dist/leaflet.css';
-import { OfferLocation, OfferMapPoint } from '../../types/offer';
+import { OfferLocation, OfferMapPoint } from '../../types';
 import { useRef } from 'react';
-import useMap from '../../hooks/use-map';
-import useMapMarkers from '../../hooks/use-map-markers';
 import styles from './map.module.css';
 import cn from 'classnames';
+import useMapMarkers from '../../hooks/use-map-markers/use-map-markers';
+import useMap from '../../hooks/use-map/use-map';
 
 type MapProps = {
   location: OfferLocation;

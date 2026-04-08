@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { CITIES } from '../../const';
 import Locations from './locations';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory, withStore } from '../../utils';
 
 vi.mock('../../hooks/use-app-selector', () => ({
   useAppDispatch: () => vi.fn(),

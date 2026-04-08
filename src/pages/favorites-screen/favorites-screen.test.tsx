@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory, withStore } from '../../utils';
 import FavoritesScreen from './favorites-screen';
 import { NameSpace } from '../../enums';
-import { AuthorizationStatus } from '../../types/authorization-status';
-import { FavoriteState, State } from '../../types/app-state';
-import { getFakeFavorite } from '../../utils/mocks';
+import { AuthorizationStatus } from '../../types';
+import { FavoriteState, State } from '../../types';
+import { getFakeFavorite } from '../../utils';
 
 describe('Component: FavoritesScreen', () => {
   const pageTestId = 'page-favorites';
@@ -18,8 +18,7 @@ describe('Component: FavoritesScreen', () => {
         user: null,
       },
       [NameSpace.Favorite]: {
-        favorite: {},
-        favoriteOffersCount: 0,
+        favorites: [],
         isFavoriteLoading: false,
       }
     };
@@ -51,7 +50,7 @@ describe('Component: FavoritesScreen', () => {
   });
 
   it('should show Favorites if favorite offers is gotten', () => {
-    (stateMock.favorite as FavoriteState).favorite = { 'Amsterdam': getFakeFavorite() };
+    (stateMock.favorite as FavoriteState).favorites = getFakeFavorite();
     const { withStoreComponent } = withStore(withHistoryComponent, stateMock);
 
     render(withStoreComponent);

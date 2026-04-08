@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory, withStore } from '../../utils';
 import MainScreen from './main-screen';
-import { OffersState, State } from '../../types/app-state';
+import { OffersState, State } from '../../types';
 import { NameSpace, SortType } from '../../enums';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { Routes, Route } from 'react-router-dom';
-import { AuthorizationStatus } from '../../types/authorization-status';
+import { AuthorizationStatus } from '../../types';
 
 const useDispatchOffersMock = vi.hoisted(() => vi.fn());
 
-vi.mock('../../hooks/use-dispatch-offers.ts', () => ({
+vi.mock('../../hooks/use-dispatch-offers/use-dispatch-offers.ts', () => ({
   default: useDispatchOffersMock,
 }));
 
@@ -23,16 +23,15 @@ describe('Component: MainScreen', () => {
       [NameSpace.Offers]: {
         offers: [],
         isOffersLoading: false,
-        sortType: SortType.POPULAR,
+        sortType: SortType.Popular,
       },
       [NameSpace.User]: {
         authorizationStatus: AuthorizationStatus.Unknown,
         user: null,
       },
       [NameSpace.Favorite]: {
-        favorite: { 'Paris': [] },
+        favorites: [],
         isFavoriteLoading: false,
-        favoriteOffersCount: 0,
       },
     };
 

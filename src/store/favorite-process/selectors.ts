@@ -1,18 +1,15 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { State } from '../../types/app-state';
+import { State } from '../../types';
 import { NameSpace } from '../../enums';
+import { getGroupedByCityOffers } from '../../utils';
 
-export const getFavorite = createSelector(
-  (state: Pick<State, NameSpace.Favorite>) => state,
-  (state) => state[NameSpace.Favorite].favorite,
+export const selectFavorite = createSelector(
+  (state: Pick<State, NameSpace.Favorite>) => state.favorite,
+  (state) => getGroupedByCityOffers(state.favorites),
 );
 
-export const getFavoriteOffersCount = createSelector(
-  (state: Pick<State, NameSpace.Favorite>) => state,
-  (state) => state[NameSpace.Favorite].favoriteOffersCount,
-);
+export const selectIsFavoriteLoading = (state: Pick<State, NameSpace.Favorite>): boolean =>
+  state[NameSpace.Favorite].isFavoriteLoading;
 
-export const getIsFavoriteLoading = createSelector(
-  (state: Pick<State, NameSpace.Favorite>) => state,
-  (state) => state[NameSpace.Favorite].isFavoriteLoading,
-);
+export const selectFavoriteOffersCount = (state: Pick<State, NameSpace.Favorite>): number =>
+  state[NameSpace.Favorite].favorites.length;

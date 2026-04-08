@@ -1,6 +1,6 @@
-import { useAppSelector } from '../../hooks/use-app-selector';
-import { getAuthorizedStatus } from '../../store/user-process/selector';
-import { Review } from '../../types/review';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
+import { selectAuthorizedStatus } from '../../store/user-process/selector';
+import { Review } from '../../types';
 import ReviewForm from '../review-form/review-form';
 import ReviewItem from '../review/review';
 
@@ -10,7 +10,7 @@ type ReviewsProps = {
 }
 
 function Reviews({offerId, reviews}: ReviewsProps): JSX.Element {
-  const isAuthorized = useAppSelector(getAuthorizedStatus);
+  const isAuthorized = useAppSelector(selectAuthorizedStatus);
 
   return (
     <section className="offer__reviews reviews">

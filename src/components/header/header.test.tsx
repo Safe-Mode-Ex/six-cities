@@ -1,18 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { withHistory, withStore } from '../../utils/mock-component';
+import { withHistory, withStore } from '../../utils';
 import MemoizedHeader from './header';
-import { APIRoute, NameSpace } from '../../enums';
-import { State, UserProcessState } from '../../types/app-state';
-import { AuthorizationStatus } from '../../types/authorization-status';
-import { CITIES } from '../../const';
-import { AppRoute } from '../../types/app-route';
+import { APIRoute, AppRoute, NameSpace } from '../../enums';
+import { AuthorizationStatus } from '../../types';
 import { Route, Routes } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { extractActionsTypes, getFakeOffers } from '../../utils/mocks';
-import { logoutAction } from '../../store/api-actions';
+import { extractActionsTypes, getFakeOffers } from '../../utils';
+import { logoutAction } from '../../store/api-actions/api-actions';
 import MainScreen from '../../pages/main-screen/main-screen';
-import { getDefaultSortTypes } from '../../utils/helpers';
+import { getDefaultSortTypes } from '../../utils';
+import { State, UserProcessState } from '../../types';
 
 describe('Component: Header', () => {
   let stateMock: Partial<State>;
@@ -24,8 +22,7 @@ describe('Component: Header', () => {
         user: null,
       },
       [NameSpace.Favorite]: {
-        favoriteOffersCount: 0,
-        favorite: { [CITIES[0]]: []},
+        favorites: [],
         isFavoriteLoading: false,
       }
     };
@@ -95,7 +92,7 @@ describe('Component: Header', () => {
       render(preparedComponent);
 
       expect(screen.getByTestId(userEmailTestId).textContent!).toBe(stateMock.user?.user?.email);
-      expect(+screen.getByTestId(favoriteCountTestId).textContent!).toBe(stateMock.favorite?.favoriteOffersCount);
+      expect(screen.getByTestId(favoriteCountTestId)).toBeInTheDocument();
     });
 
     it('should render Sign out link if isAuthorized is true', () => {

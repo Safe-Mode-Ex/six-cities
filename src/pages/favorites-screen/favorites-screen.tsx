@@ -1,6 +1,6 @@
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import Header from '../../components/header/header';
-import { useAppSelector } from '../../hooks/use-app-selector';
-import { getFavorite, getIsFavoriteLoading } from '../../store/favorite-process/selectors';
+import { selectFavorite, selectIsFavoriteLoading } from '../../store/favorite-process/selectors';
 import NoFavorites from '../../components/no-favorites/no-favorites';
 import cn from 'classnames';
 import Footer from '../../components/footer/footer';
@@ -10,8 +10,8 @@ import { Helmet } from 'react-helmet-async';
 import styles from './favorites-screen.module.css';
 
 function FavoritesScreen(): JSX.Element {
-  const favorite = useAppSelector(getFavorite);
-  const isLoading = useAppSelector(getIsFavoriteLoading);
+  const favorite = useAppSelector(selectFavorite);
+  const isLoading = useAppSelector(selectIsFavoriteLoading);
   const favoriteEntries = Object.entries(favorite);
   const hasFavorites = favoriteEntries.length;
 

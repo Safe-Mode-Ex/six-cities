@@ -1,0 +1,31 @@
+import { FormEvent } from 'react';
+import { INITIAL_REVIEW_FORM_STATE } from '../../const';
+import { sendOfferReviewAction } from '../../store/api-actions/api-actions';
+import { NewReview } from '../../types';
+import { useAppDispatch } from '../use-app-selector/use-app-selector';
+
+function useReviewFormSubmit(
+  offerId: string,
+  formData: NewReview,
+  setReviewForm: React.Dispatch<React.SetStateAction<NewReview>>,
+  setCommentSending: React.Dispatch<React.SetStateAction<boolean>>
+) {
+  const dispatch = useAppDispatch();
+
+  return (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    setCommentSending(true);
+    dispatch(sendOfferReviewAction({
+      offerId,
+      formData,
+    })).then(() => {
+      setReviewForm(INITIAL_REVIEW_FORM_STATE);
+      setCommentSending(false);
+    }, () => {
+      setCommentSending(false);
+    });
+  };
+}
+
+export default useReviewFormSubmit;

@@ -1,20 +1,20 @@
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
+import { useAppSelector, useAppDispatch } from '../../hooks/use-app-selector/use-app-selector';
 import Logo from '../logo/logo';
-import { AppRoute } from '../../types/app-route';
-import { logoutAction } from '../../store/api-actions';
+import { logoutAction } from '../../store/api-actions/api-actions';
 import { memo, MouseEvent } from 'react';
-import { getAuthorizedStatus, getUser } from '../../store/user-process/selector';
-import { getFavoriteOffersCount } from '../../store/favorite-process/selectors';
+import { selectAuthorizedStatus, selectUser } from '../../store/user-process/selector';
+import { selectFavoriteOffersCount } from '../../store/favorite-process/selectors';
+import { AppRoute } from '../../enums';
 
 type HeaderProps = {
     hasUserMenu?: boolean;
 }
 
 function Header({ hasUserMenu = true }: HeaderProps): JSX.Element {
-  const isAuthorized = useAppSelector(getAuthorizedStatus);
-  const user = useAppSelector(getUser);
-  const favoriteOffersCount = useAppSelector(getFavoriteOffersCount);
+  const isAuthorized = useAppSelector(selectAuthorizedStatus);
+  const user = useAppSelector(selectUser);
+  const favoriteOffersCount = useAppSelector(selectFavoriteOffersCount);
   const dispatch = useAppDispatch();
 
   const handleLogoutClick = (evt: MouseEvent) => {

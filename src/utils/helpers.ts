@@ -1,13 +1,14 @@
+import { CITIES } from '../const';
 import { SortType } from '../enums';
-import { CityOffersGroup, Offer, OfferMapPoint } from '../types/offer';
+import { CityOffersGroup, Offer, OfferMapPoint } from '../types';
 
 export const sortOffersBy = (sortType: SortType, offers: Offer[]): Offer[] => [...offers].sort((prev, next) => {
   switch (sortType) {
-    case SortType.PRICE_LOW_TO_HIGH:
+    case SortType.PriceLowToHigh:
       return prev.price - next.price;
-    case SortType.PRICE_HIGH_TO_LOW:
+    case SortType.PriceHighToLow:
       return next.price - prev.price;
-    case SortType.TOP_RATED_FIRST:
+    case SortType.TopRatedFirst:
       return next.rating - prev.rating;
     default:
       return 0;
@@ -33,4 +34,15 @@ export const getGroupedByCityOffers = (offers: Offer[]): CityOffersGroup => offe
   }, {});
 
 export const getCapitalizedString = (string?: string): string =>
-  `${string?.[0].toUpperCase()}${string?.slice(1, string.length)}` || '';
+  string ? `${string?.[0].toUpperCase()}${string?.slice(1, string.length)}` : '';
+
+export const getRandomInRange = (min: number, max: number): number =>
+  Math.floor(Math.random() * (max - min)) + min;
+
+export const getActiveCityParams = (cityName = ''): [boolean, string] => {
+  const currentCity = getCapitalizedString(cityName);
+  const isValidCity = CITIES.some((city) => city === currentCity);
+  const activeCityName = currentCity || CITIES[0];
+
+  return [isValidCity, activeCityName];
+};

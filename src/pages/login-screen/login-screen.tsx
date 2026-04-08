@@ -1,13 +1,14 @@
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 import Header from '../../components/header/header';
-import { useAppSelector } from '../../hooks/use-app-selector';
-import { AppRoute } from '../../types/app-route';
 import { Navigate } from 'react-router-dom';
-import { getAuthorizedStatus } from '../../store/user-process/selector';
+import { selectAuthorizedStatus } from '../../store/user-process/selector';
 import LoginForm from '../../components/login-form/login-form';
 import { Helmet } from 'react-helmet-async';
+import RandomLocation from '../../components/random-location/random-location';
+import { AppRoute } from '../../enums';
 
 function LoginScreen(): JSX.Element {
-  const isAuthorized = useAppSelector(getAuthorizedStatus);
+  const isAuthorized = useAppSelector(selectAuthorizedStatus);
 
   return isAuthorized ? <Navigate to={AppRoute.Main} /> : (
     <div className="page page--gray page--login">
@@ -22,13 +23,7 @@ function LoginScreen(): JSX.Element {
             <h1 className="login__title" data-testid="login-title">Sign in</h1>
             <LoginForm />
           </section>
-          <section className="locations locations--login locations--current">
-            <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
-            </div>
-          </section>
+          <RandomLocation />
         </div>
       </main>
     </div>

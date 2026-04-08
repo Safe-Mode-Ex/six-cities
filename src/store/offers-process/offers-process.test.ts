@@ -1,8 +1,12 @@
-import { OfferDetails } from '../../types/offer';
-import { getDefaultSortTypes } from '../../utils/helpers';
-import { getFakeOffers } from '../../utils/mocks';
-import { changeFavoriteStateAction, fetchOffersAction, logoutAction } from '../api-actions';
-import { offersProcess, setSortType } from './offers-process';
+import { OfferDetails } from '../../types';
+import { getDefaultSortTypes } from '../../utils';
+import { getFakeOffers } from '../../utils';
+import {
+  changeFavoriteStateAction,
+  fetchOffersAction,
+  logoutAction
+} from '../api-actions/api-actions';
+import { offersProcess, setOffersLoading, setSortType } from './offers-process';
 
 describe('OffersProcess Slice', () => {
   it('should return initial state with empty action', () => {
@@ -41,7 +45,17 @@ describe('OffersProcess Slice', () => {
 
     const result = offersProcess.reducer(initialState, setSortType(expectedSortType));
 
-    expect(result.sortType).toEqual(expectedSortType);
+    expect(result.sortType).toBe(expectedSortType);
+  });
+
+  it('should change isOffersLoading with setOffersLoading action', () => {
+    const initialState = {
+      offers: [],
+      sortType: getDefaultSortTypes()[0],
+      isOffersLoading: false,
+    };
+    const result = offersProcess.reducer(initialState, setOffersLoading(true));
+    expect(result.isOffersLoading).toBe(true);
   });
 
   it('should set isOffersLoading to true with fetchOffersAction.pending', () => {

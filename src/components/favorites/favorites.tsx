@@ -1,4 +1,4 @@
-import { Offer } from '../../types/offer';
+import { Offer } from '../../types';
 import FavoritesLocation from '../favorites-location/favorites-location';
 import styles from './favorites.module.css';
 

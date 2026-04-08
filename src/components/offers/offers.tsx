@@ -1,10 +1,10 @@
 import Sort from '../sort/sort';
 import OffersList from '../offers-list/offers-list';
-import { useAppSelector } from '../../hooks/use-app-selector';
-import { Offer } from '../../types/offer';
+import { Offer } from '../../types';
 import { memo } from 'react';
-import { getSortType } from '../../store/offers-process/selectors';
-import { sortOffersBy } from '../../utils/helpers';
+import { selectSortType } from '../../store/offers-process/selectors';
+import { sortOffersBy } from '../../utils';
+import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
 
 type PlacesProps = {
   offers: Offer[];
@@ -12,7 +12,7 @@ type PlacesProps = {
 }
 
 function Offers({ offers, handleOfferHover }: PlacesProps): JSX.Element {
-  const sortType = useAppSelector(getSortType);
+  const sortType = useAppSelector(selectSortType);
   const sortedOffers = sortOffersBy(sortType, offers);
 
   return (

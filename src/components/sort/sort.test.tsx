@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import { getDefaultSortTypes } from '../../utils/helpers';
+import { getDefaultSortTypes } from '../../utils';
 import MemoizedSort from './sort';
-import { withStore } from '../../utils/mock-component';
+import { withStore } from '../../utils';
 import { NameSpace } from '../../enums';
 import userEvent from '@testing-library/user-event';
-import { extractActionsTypes } from '../../utils/mocks';
+import { extractActionsTypes } from '../../utils';
 
 describe('Component: Sort', () => {
   const stateMock = {

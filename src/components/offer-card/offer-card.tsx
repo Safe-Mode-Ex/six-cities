@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
-import { Offer } from '../../types/offer';
-import { AppRoute } from '../../types/app-route';
+import { Offer } from '../../types';
 import { memo } from 'react';
 import cn from 'classnames';
-import { PlaceImageSize, Rating } from '../../enums';
-import useHandleBookmarkButtonClick from '../../hooks/use-handle-bookmark-button-click';
+import { AppRoute, PlaceImageSize, Rating } from '../../enums';
+import useHandleBookmarkButtonClick from '../../hooks/use-handle-bookmark-click/use-handle-bookmark-button-click';
 
 type OfferCardProps = {
   offer: Offer;
@@ -56,6 +55,7 @@ function OfferCard({
         >
           <img
             className="place-card__image"
+            style={isFavoritesScreen ? {height: `${PlaceImageSize.HeightSmall}px`} : {}}
             src={offer.previewImage}
             width={isFavoritesScreen ? PlaceImageSize.WidthSmall : PlaceImageSize.WidtDefault}
             height={isFavoritesScreen ? PlaceImageSize.HeightSmall : PlaceImageSize.HeightDefault}

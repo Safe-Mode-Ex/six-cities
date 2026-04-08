@@ -1,18 +1,19 @@
+import { State } from '../../types';
+import { NameSpace, SortType } from '../../enums';
 import { createSelector } from '@reduxjs/toolkit';
-import { State } from '../../types/app-state';
-import { NameSpace } from '../../enums';
 
-export const getOffers = createSelector(
-  (state: Pick<State, NameSpace.Offers>) => state,
-  (state) => state[NameSpace.Offers].offers
+export const selectCityOffers = createSelector(
+  [
+    (state: Pick<State, NameSpace.Offers>) => state[NameSpace.Offers],
+    (_: State, currentCity: string) => currentCity,
+  ],
+  (state, currentCity) =>
+    state.offers.filter(({ city }) => city.name === currentCity)
 );
 
-export const getSortType = createSelector(
-  (state: Pick<State, NameSpace.Offers>) => state,
-  (state) => state[NameSpace.Offers].sortType
-);
 
-export const getIsOffersDataLoading = createSelector(
-  (state: Pick<State, NameSpace.Offers>) => state,
-  (state) => state[NameSpace.Offers].isOffersLoading
-);
+export const selectSortType = (state: Pick<State, NameSpace.Offers>): SortType =>
+  state[NameSpace.Offers].sortType;
+
+export const selectIsOffersDataLoading = (state: Pick<State, NameSpace.Offers>): boolean =>
+  state[NameSpace.Offers].isOffersLoading;
