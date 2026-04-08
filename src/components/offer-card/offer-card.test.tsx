@@ -2,9 +2,10 @@ import { render, screen } from '@testing-library/react';
 import { getFakeOffers } from '../../utils';
 import MemoizedOfferCard from './offer-card';
 import { withHistory, withStore } from '../../utils';
-import { NameSpace, PlaceImageSize, Rating } from '../../enums';
+import { NameSpace, PlaceImageSize } from '../../enums';
 import { AuthorizationStatus } from '../../types';
 import userEvent from '@testing-library/user-event';
+import { getStarsFillingWith } from '../../utils/helpers';
 
 describe('Component: OfferCard', () => {
   const stateMock = {
@@ -58,7 +59,7 @@ describe('Component: OfferCard', () => {
     expect(screen.getByTestId(offerPriceTestId).textContent).toContain(offerCardDataMock.price);
     expect(screen.getByTestId(bookmarkButtonTestId)).toHaveClass('place-card__bookmark-button--active');
     expect(screen.getByTestId(ratingStarsTestId).getAttribute('style'))
-      .toBe(`width: ${offerCardDataMock.rating * Rating.StarsWidth}%;`);
+      .toBe(`width: ${getStarsFillingWith(offerCardDataMock.rating)};`);
     expect(screen.getByTestId(cardNameTestId).textContent).toBe(offerCardDataMock.title);
     expect(screen.getByTestId(offerTypeTestId).textContent).toBe(offerCardDataMock.type);
   });

@@ -1,12 +1,16 @@
-import { renderHook } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 import useReviewFormSubmit from './use-review-form-submit';
 import { INITIAL_REVIEW_FORM_STATE } from '../../const';
 
 const mocks = vi.hoisted(() => ({
   setReviewForm: vi.fn(),
   setCommentSending: vi.fn(),
-  dispatchMock: vi.fn(() => Promise.resolve()),
-  sendOfferReviewAction: vi.fn(),
+  dispatchMock: vi.fn((action) => Promise.resolve(action)),
+  sendOfferReviewAction: Object.assign(
+    vi.fn(() => ({ type: 'data/sendOfferReview/pending' })),
+    {
+      rejected: { type: 'data/sendOfferReview/rejected' },
+    }),
 }));
 
 vi.mock('../use-app-selector/use-app-selector', () => ({
@@ -54,29 +58,29 @@ describe('Hook: useReviewFormSubmit', () => {
   });
 
   it('should set review form to initial state and set comment sending to false on dispatch success',
-    () => {
+    async () => {
       const { result } = renderHook(() =>
         useReviewFormSubmit(offerId, formData, mocks.setReviewForm, mocks.setCommentSending)
       );
-      result.current(eventMock);
 
-      mocks.dispatchMock().then(() => {
+      result.current(eventMock);
+      mocks.dispatchMock.mockResolvedValue({ type: 'data/sendOfferReview/fulfilled' });
+
+      await waitFor(() => {
         expect(mocks.setReviewForm).toHaveBeenCalledWith(INITIAL_REVIEW_FORM_STATE);
         expect(mocks.setCommentSending).toHaveBeenCalledWith(false);
       });
     });
 
-  it('should set comment sending to false on dispatch failure', () => {
-
-
-    mocks.dispatchMock.mockImplementationOnce((): Promise<void> => Promise.reject());
+  it('should set comment sending to false on dispatch failure', async () => {
+    mocks.dispatchMock.mockResolvedValue({ type: 'data/sendOfferReview/rejected' });
 
     const { result } = renderHook(() =>
       useReviewFormSubmit(offerId, formData, mocks.setReviewForm, mocks.setCommentSending)
     );
     result.current(eventMock);
 
-    mocks.dispatchMock().catch(() => {
+    await waitFor(() => {
       expect(mocks.setCommentSending).toHaveBeenCalledWith(false);
     });
   });

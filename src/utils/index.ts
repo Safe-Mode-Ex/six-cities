@@ -6,6 +6,8 @@ export {
   getCapitalizedString,
   getRandomInRange,
   getActiveCityParams,
+  getStarsFillingWith,
+  getStringWithRightEnding,
 } from './helpers';
 export { withHistory, withStore } from './mock-component';
 export {

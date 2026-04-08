@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom';
 import { Offer } from '../../types';
 import { memo } from 'react';
 import cn from 'classnames';
-import { AppRoute, PlaceImageSize, Rating } from '../../enums';
+import { AppRoute, PlaceImageSize } from '../../enums';
 import useHandleBookmarkButtonClick from '../../hooks/use-handle-bookmark-click/use-handle-bookmark-button-click';
+import { getStarsFillingWith } from '../../utils/helpers';
 
 type OfferCardProps = {
   offer: Offer;
@@ -20,6 +21,7 @@ function OfferCard({
 }: OfferCardProps): JSX.Element {
   const handleBookmarkButtonClick = useHandleBookmarkButtonClick();
   const handleCardHover = (offerId: string | null) => () => onHover(offerId);
+  const starsFillingWidth = getStarsFillingWith(offer.rating);
 
   return (
     <article
@@ -94,7 +96,7 @@ function OfferCard({
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
             <span
-              style={{ width: `${offer.rating * Rating.StarsWidth}%` }}
+              style={{ width: starsFillingWidth }}
               data-testid="rating-stars"
             >
             </span>

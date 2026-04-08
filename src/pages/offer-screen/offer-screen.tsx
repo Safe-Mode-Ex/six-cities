@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Reviews from '../../components/reviews/reviews';
-import { MAX_MAP_NEARBY_OFFERS } from '../../const';
 import { selectNearbyOffers, selectOfferReviews, selectOfferDetails } from '../../store/offer-process/selectors';
 import LoadingScreen from '../loading-screen/loading-screen';
 import NearbyOffers from '../../components/nearby-offers/nearby-offers';
@@ -10,10 +9,12 @@ import OfferNameWrapper from '../../components/offer-name-wrapper/offer-name-wra
 import OfferInside from '../../components/offer-inside/offer-inside';
 import OfferRating from '../../components/offer-rating/offer-rating';
 import OfferGalleryContainer from '../../components/offer-gallery-container/offer-gallery-container';
-import { getCityPoints } from '../../utils';
+import { getCityPoints, getStringWithRightEnding } from '../../utils';
 import { Helmet } from 'react-helmet-async';
 import useOfferData from '../../hooks/use-offer-data/use-offer-data';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
+import cn from 'classnames';
+import { OfferDetailsMaxCount } from '../../enums';
 
 function OfferScreen(): JSX.Element {
   const activeOfferId = useParams().id as string;
@@ -27,10 +28,12 @@ function OfferScreen(): JSX.Element {
     return <LoadingScreen />;
   }
 
-  const mapPoints = [...getCityPoints(nearbyOffers.slice(0, MAX_MAP_NEARBY_OFFERS)), {
-    id: offerDetails?.id,
-    location: offerDetails?.location,
-  }];
+  const mapPoints = [
+    ...getCityPoints(nearbyOffers.slice(0, OfferDetailsMaxCount.NearbyOffers)),
+    {
+      id: offerDetails?.id,
+      location: offerDetails?.location,
+    }];
   const cityLocation = offerDetails.city.location;
 
   return (
@@ -61,10 +64,10 @@ function OfferScreen(): JSX.Element {
                   {offerDetails.type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {offerDetails.bedrooms} Bedrooms
+                  {getStringWithRightEnding(offerDetails.bedrooms, 'Bedroom')}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                        Max {offerDetails.maxAdults} adults
+                  Max {getStringWithRightEnding(offerDetails.maxAdults, 'adult')}
                 </li>
               </ul>
               <div className="offer__price">
@@ -75,7 +78,11 @@ function OfferScreen(): JSX.Element {
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={cn(
+                    'offer__avatar-wrapper user__avatar-wrapper',
+                    { 'offer__avatar-wrapper--pro': offerDetails.host.isPro }
+                  )}
+                  >
                     <img
                       className="offer__avatar user__avatar"
                       src={offerDetails.host.avatarUrl}

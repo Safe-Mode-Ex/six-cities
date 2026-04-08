@@ -19,10 +19,11 @@ function useReviewFormSubmit(
     dispatch(sendOfferReviewAction({
       offerId,
       formData,
-    })).then(() => {
-      setReviewForm(INITIAL_REVIEW_FORM_STATE);
-      setCommentSending(false);
-    }, () => {
+    })).then(({ type }) => {
+      if (type !== sendOfferReviewAction.rejected.type) {
+        setReviewForm(INITIAL_REVIEW_FORM_STATE);
+      }
+
       setCommentSending(false);
     });
   };

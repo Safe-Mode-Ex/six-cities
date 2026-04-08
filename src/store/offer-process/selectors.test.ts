@@ -1,4 +1,4 @@
-import { NameSpace } from '../../enums';
+import { NameSpace, OfferDetailsMaxCount } from '../../enums';
 import { getFakeOfferDetails, getFakeOffers, getFakeReviews } from '../../utils';
 import { selectNearbyOffers, selectOfferDetails, selectOfferReviews } from './selectors';
 
@@ -13,14 +13,24 @@ describe('OfferProcess selectors', () => {
 
   it('should return offer details from state', () => {
     const { offerDetails } = state[NameSpace.Offer];
+    const expectedOfferDetails = {
+      ...offerDetails,
+      images: offerDetails.images.slice(0, OfferDetailsMaxCount.Images),
+    };
+
     const result = selectOfferDetails(state);
-    expect(result).toEqual(offerDetails);
+
+    expect(result).toEqual(expectedOfferDetails);
   });
 
   it('should return offer details from state', () => {
     const { offerReviews } = state[NameSpace.Offer];
+    const expectedOfferReviews = offerReviews.slice(0, OfferDetailsMaxCount.Reviews)
+      .sort((reviewA, reviewB) => Date.parse(reviewB.date) - Date.parse(reviewA.date));
+
     const result = selectOfferReviews(state);
-    expect(result).toEqual(offerReviews);
+
+    expect(result).toEqual(expectedOfferReviews);
   });
 
   it('should return offer details from state', () => {

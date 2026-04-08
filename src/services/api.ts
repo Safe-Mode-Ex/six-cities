@@ -14,7 +14,7 @@ type DetailMessageType = {
 const BASE_URL = 'https://16.design.htmlacademy.pro/six-cities';
 const REQUEST_TIMEOUT = 5000;
 const REQUEST_TIMEOUT_ERROR_MESSAGE = 'There was a problem with your connection. Please try again.';
-const REQUEST_SERVER_UNAVAILABE_MESSAGE = 'Server is unavaileble';
+const REQUEST_SERVER_UNAVAILABE_MESSAGE = 'Server is unavailable';
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,

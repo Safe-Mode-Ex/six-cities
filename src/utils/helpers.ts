@@ -1,5 +1,5 @@
 import { CITIES } from '../const';
-import { SortType } from '../enums';
+import { Rating, SortType } from '../enums';
 import { CityOffersGroup, Offer, OfferMapPoint } from '../types';
 
 export const sortOffersBy = (sortType: SortType, offers: Offer[]): Offer[] => [...offers].sort((prev, next) => {
@@ -46,3 +46,9 @@ export const getActiveCityParams = (cityName = ''): [boolean, string] => {
 
   return [isValidCity, activeCityName];
 };
+
+export const getStarsFillingWith = (rating: number) =>
+  `${Math.round(rating) * Rating.StarsWidth}%`;
+
+export const getStringWithRightEnding = (count: number, string: string): string =>
+  `${count} ${string}${count === 1 ? '' : 's'}`;
