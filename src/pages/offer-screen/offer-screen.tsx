@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import cn from 'classnames';
 import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import Reviews from '../../components/reviews/reviews';
@@ -9,12 +10,10 @@ import OfferNameWrapper from '../../components/offer-name-wrapper/offer-name-wra
 import OfferInside from '../../components/offer-inside/offer-inside';
 import OfferRating from '../../components/offer-rating/offer-rating';
 import OfferGalleryContainer from '../../components/offer-gallery-container/offer-gallery-container';
-import { getCityPoints, getStringWithRightEnding } from '../../utils';
+import { getCapitalizedString, getCityPoints, getStringWithRightEnding } from '../../utils';
 import { Helmet } from 'react-helmet-async';
 import useOfferData from '../../hooks/use-offer-data/use-offer-data';
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
-import cn from 'classnames';
-import { OfferDetailsMaxCount } from '../../enums';
 
 function OfferScreen(): JSX.Element {
   const activeOfferId = useParams().id as string;
@@ -29,7 +28,7 @@ function OfferScreen(): JSX.Element {
   }
 
   const mapPoints = [
-    ...getCityPoints(nearbyOffers.slice(0, OfferDetailsMaxCount.NearbyOffers)),
+    ...getCityPoints(nearbyOffers),
     {
       id: offerDetails?.id,
       location: offerDetails?.location,
@@ -61,7 +60,7 @@ function OfferScreen(): JSX.Element {
               <OfferRating rating={offerDetails.rating} />
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  {offerDetails.type}
+                  {getCapitalizedString(offerDetails.type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
                   {getStringWithRightEnding(offerDetails.bedrooms, 'Bedroom')}

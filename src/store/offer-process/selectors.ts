@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { OfferDetails, Review, State } from '../../types';
+import { Offer, OfferDetails, Review, State } from '../../types';
 import { NameSpace, OfferDetailsMaxCount } from '../../enums';
 
 export const selectOfferDetails = createSelector(
@@ -12,10 +12,15 @@ export const selectOfferDetails = createSelector(
 
 export const selectOfferReviews = createSelector(
   (state: Pick<State, NameSpace.Offer>) => state[NameSpace.Offer].offerReviews,
-  (offerReviews: Review[]) => offerReviews
-    .slice(0, OfferDetailsMaxCount.Reviews)
+  (offerReviews: Review[]) => [...offerReviews]
     .sort((reviewA, reviewB) => Date.parse(reviewB.date) - Date.parse(reviewA.date))
+    .slice(0, OfferDetailsMaxCount.Reviews),
 );
 
-export const selectNearbyOffers = (state: Pick<State, NameSpace.Offer>) =>
-  state[NameSpace.Offer].nearbyOffers;
+export const selectNearbyOffers = createSelector(
+  (state: Pick<State, NameSpace.Offer>) => state[NameSpace.Offer].nearbyOffers,
+  (nearbyOffers: Offer[]) => nearbyOffers.slice(0, OfferDetailsMaxCount.NearbyOffers)
+);
+
+export const selectOfferReviewsCount = (state: Pick<State, NameSpace.Offer>) =>
+  state[NameSpace.Offer].offerReviews.length;
