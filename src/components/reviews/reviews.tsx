@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../hooks/use-app-selector/use-app-selector';
+import { selectOfferReviewsCount } from '../../store/offer-process/selectors';
 import { selectAuthorizedStatus } from '../../store/user-process/selector';
 import { Review } from '../../types';
 import ReviewForm from '../review-form/review-form';
@@ -11,11 +12,12 @@ type ReviewsProps = {
 
 function Reviews({offerId, reviews}: ReviewsProps): JSX.Element {
   const isAuthorized = useAppSelector(selectAuthorizedStatus);
+  const reviewCount = useAppSelector(selectOfferReviewsCount);
 
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
-        Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
+        Reviews &middot; <span className="reviews__amount">{reviewCount}</span>
       </h2>
       <ul className="reviews__list" data-testid="reviews-list">
         {reviews.map((review) => (

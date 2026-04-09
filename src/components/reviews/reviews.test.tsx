@@ -2,17 +2,22 @@ import { render, screen } from '@testing-library/react';
 import Reviews from './reviews';
 import { getFakeComments } from '../../utils';
 import { withStore } from '../../utils';
-import { NameSpace } from '../../enums';
+import { NameSpace, OfferDetailsMaxCount } from '../../enums';
 import { AuthorizationStatus } from '../../types';
 
 describe('Component: Reviews', () => {
   const expectedHeadingText = /Reviews/i;
   const offerId = '1';
-  const expectedReviewsMock = getFakeComments();
+  const expectedReviewsMock = getFakeComments().slice(0, OfferDetailsMaxCount.Reviews);
   const state = {
     [NameSpace.User]: {
       authorizationStatus: AuthorizationStatus.Unknown,
       user: null,
+    },
+    [NameSpace.Offer]: {
+      offerDetails: null,
+      offerReviews: getFakeComments(),
+      nearbyOffers: [],
     }
   };
   const { withStoreComponent } = withStore(
@@ -26,7 +31,7 @@ describe('Component: Reviews', () => {
 
     expect(headingText).toBeInTheDocument();
     expect(headingText.getElementsByClassName('reviews__amount')[0].textContent)
-      .toBe(expectedReviewsMock.length.toString());
+      .toBe(state[NameSpace.Offer].offerReviews.length.toString());
   });
 
   it('should render reviews list', () => {

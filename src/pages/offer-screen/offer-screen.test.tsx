@@ -42,8 +42,8 @@ describe('Component: OfferScreen', () => {
   });
 
   it('should render properly', () => {
-    const bedroomsText = /Bedrooms/i;
-    const adultsText = /adults/i;
+    const bedroomsText = /Bedroom/i;
+    const adultsText = /adult/i;
     const nightText = /night/i;
     const hostText = /Meet the host/i;
     const hostAvatarAltText = /Host avatar/i;

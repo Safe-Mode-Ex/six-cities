@@ -126,7 +126,18 @@ export const getFakeReviews = (): Review[] => ([
       avatarUrl: image.avatar(),
     },
     comment: lorem.sentence(),
-    rating: datatype.number(),
+    rating: datatype.float({ min: 0, max: 5 }),
+  },
+  {
+    id: datatype.uuid(),
+    date: datatype.datetime().toISOString(),
+    user: {
+      name: name.firstName(),
+      isPro: datatype.boolean(),
+      avatarUrl: image.avatar(),
+    },
+    comment: lorem.sentence(),
+    rating: datatype.float({ min: 0, max: 5 }),
   }
 ]);
 

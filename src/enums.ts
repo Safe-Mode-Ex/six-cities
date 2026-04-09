@@ -59,3 +59,9 @@ export enum FavoriteStatus {
   Disabled = 0,
   Enabled = 1,
 }
+
+export enum OfferDetailsMaxCount {
+  Images = 6,
+  Reviews = 10,
+  NearbyOffers = 3,
+}
