@@ -49,8 +49,8 @@ function OfferCard({
         }
         data-testid="card-image-wrapper"
       >
-        <a
-          href="#"
+        <Link
+          to={`${AppRoute.Offer}/${offer.id}`}
           onMouseEnter={handleCardHover(offer.id)}
           onMouseLeave={handleCardHover(null)}
           data-testid="image-link"
@@ -63,7 +63,7 @@ function OfferCard({
             height={isFavoritesScreen ? PlaceImageSize.HeightSmall : PlaceImageSize.HeightDefault}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div
         className={`${isFavoritesScreen && 'favorites__card-info '}place-card__info`}
