@@ -1,3 +1,5 @@
+import { BASE_URL } from './const';
+
 export enum AppRoute {
     Main = '/',
     Login = '/login',
@@ -32,8 +34,8 @@ export const ReviewText = {
 } as const;
 
 export const MarkerUrl = {
-  Default: '/img/pin.svg',
-  Active: '/img/pin-active.svg',
+  Default: `${BASE_URL}img/pin.svg`,
+  Active: `${BASE_URL}img/pin-active.svg`,
 } as const;
 
 export const PlaceImageSize = {

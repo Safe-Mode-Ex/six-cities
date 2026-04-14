@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { memo } from 'react';
 import cn from 'classnames';
 import { AppRoute } from '../../enums';
+import { LOGO_IMAGE_URL } from '../../const';
 
 const HEADER_LOGO_LINK_CLASS_NAME = 'header__logo-link';
 
@@ -17,7 +18,7 @@ function Logo(): JSX.Element {
     >
       <img
         className="header__logo"
-        src="img/logo.svg"
+        src={LOGO_IMAGE_URL}
         alt="6 cities logo"
         width="81"
         height="41"

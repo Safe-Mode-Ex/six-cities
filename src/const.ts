@@ -6,3 +6,5 @@ export const INITIAL_REVIEW_FORM_STATE = {
   rating: 0,
   comment: '',
 };
+export const BASE_URL = import.meta.env.MODE === 'production' ? '/six-cities/' : '/';
+export const LOGO_IMAGE_URL = `${BASE_URL}img/logo.svg`;
