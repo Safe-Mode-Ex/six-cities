@@ -7,7 +7,8 @@ import { checkAuthAction } from './store/api-actions/api-actions';
 import { ToastContainer } from 'react-toastify';
 import HistoryRouter from './components/history-router/history-router';
 import browserHistory from './browser-history';
-import { BASE_URL } from './const';
+
+const { BASE_URL } = import.meta.env;
 
 store.dispatch(checkAuthAction());
 
