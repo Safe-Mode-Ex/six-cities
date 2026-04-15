@@ -1,7 +1,6 @@
 import { AnyAction } from '@reduxjs/toolkit';
 import { configureMockStore, MockStore } from '@jedmao/redux-mock-store';
 import browserHistory from '../../../browser-history';
-import { redirect } from './redirect';
 import { AppRoute } from '../../../enums';
 import { redirectToRoute } from '../../action';
 import { State } from '../../../types';
@@ -18,7 +17,9 @@ vi.mock('../../browser-history', () => ({
 describe('Redirect middleware', () => {
   let store: MockStore;
 
-  beforeAll(() => {
+  beforeAll(async () => {
+    vi.stubEnv('VITE_BASE_URL', '');
+    const { redirect } = await import('./redirect');
     const middleware = [redirect];
     const mockStoreCreator = configureMockStore<State, AnyAction>(middleware);
     store = mockStoreCreator();
