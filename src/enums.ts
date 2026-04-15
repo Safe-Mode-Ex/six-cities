@@ -1,4 +1,4 @@
-import { BASE_URL } from './const';
+const { VITE_BASE_URL } = import.meta.env;
 
 export enum AppRoute {
     Main = '/',
@@ -34,8 +34,8 @@ export const ReviewText = {
 } as const;
 
 export const MarkerUrl = {
-  Default: `${BASE_URL}img/pin.svg`,
-  Active: `${BASE_URL}img/pin-active.svg`,
+  Default: `${VITE_BASE_URL}/img/pin.svg`,
+  Active: `${VITE_BASE_URL}/img/pin-active.svg`,
 } as const;
 
 export const PlaceImageSize = {
